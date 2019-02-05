@@ -8,5 +8,5 @@ node_js:
   - "6"
 before_install:
   - export NODE_ENV=TravisCI
-  - Install-Package Microsoft.Office.Interop.Excel
+  - dotnet add package Microsoft.Office.Interop.Excel --version 15.0.4795.1000
   - dotnet restore
