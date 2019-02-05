@@ -7,6 +7,6 @@ node_js:
   - "7"
   - "6"
 before_install:
-  export NODE_ENV=TravisCI &&
-  Install-Package Microsoft.Office.Interop.Excel &&
-  dotnet restore &&
+  - export NODE_ENV=TravisCI
+  - Install-Package Microsoft.Office.Interop.Excel
+  - dotnet restore
