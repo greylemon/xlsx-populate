@@ -60,18 +60,18 @@
       "text": "foo",
       "visible": false,
       "topLeftCell": "B2",
-      "top": 16.5,
-      "left": 59.25,
-      "height": 59.25,
+      "top": 15.600000381469727,
+      "left": 58.79999923706055,
+      "height": 57,
       "width": 108
     },
     "visible": {
       "text": "bar",
       "visible": true,
       "topLeftCell": "C9",
-      "top": 125.25,
-      "left": 131.25,
-      "height": 131.25,
+      "top": 120,
+      "left": 130.8000030517578,
+      "height": 126,
       "width": 141
     }
   },
@@ -145,17 +145,17 @@
   },
   "image": {
     "topLeftCell": "A2",
-    "top": 21.75,
+    "top": 21.149999618530273,
     "left": 20.25,
-    "height": 111,
+    "height": 106.80000305175781,
     "width": 447.73126220703125
   },
   "chart": {
     "type": "xlColumnClustered",
     "topLeftCell": "D2",
-    "top": 29.62495994567871,
+    "top": 29.024961471557617,
     "left": 149.6249542236328,
-    "height": 216,
+    "height": 207,
     "width": 360
   }
 }
