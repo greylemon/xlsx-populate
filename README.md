@@ -373,20 +373,15 @@ You can also look up the desired format code in Excel:
 ### Rich Texts
 You can read/write rich texts to cells.
 ```js
+const RichTexts = require('xlsx-Populate').RichTexts;
+
 const cell = workbook.sheet(0).cell('A1');
-// transform exsisting string cell to rich text
-cell.richText();
-cell.value() instanceof RichTexts // true
-
-// you can use both cell.richText() or cell.value() to set rich text
-cell.richText() === cell.value() // true
-
-// reset a rich text cell
-cell.value('string');
-cell.value(new Date());
+// set value to rich text
+const richtext = new RichTexts(cell);
+cell.value(richtext)
 
 // create new cell with rich text
-workbook.sheet(0).cell('B1').richText()
+richtext
     // support all line separators
     .add('123\n', { italic: true, fontColor: '123456' })
     .add('456\r', { italic: true, fontColor: '654321' })
@@ -395,16 +390,24 @@ workbook.sheet(0).cell('B1').richText()
 // remember to set height to show the whole row
 workbook.sheet(0).row(1).height(100);
 
+// add to the first
+richtext.add('to the first!', {italic: true, fontColor: 'FF123456'}, 0);
+
+// add to the second
+richtext.add('to the second!', {}, 1);
+
+// get concatenate text
+// returns 'to the first!123\r\n456\r\n789\r\n10\r\n11\r\n12to the last!'
+richtext.text;
+
 // modify a rich text cell
 cell.value().get(0).style('fontFamily', 'Calibri')
-// or
-cell.richText().get(0).style('fontFamily', 'Calibri')
 
 // read multiple styles
-cell.richText().get(0).style(['fontFamily', 'italic', 'bold'])
+cell.value().get(0).style(['fontFamily', 'italic', 'bold'])
 
-// delete
-cell.richText().remove(0);
+// delete rich text fragment
+cell.value().remove(0);
 ```
 
 ### Dates
@@ -895,6 +898,12 @@ An object representing a gradient fill.
 <dt><a href="#Range">Range</a></dt>
 <dd><p>A range of cells.</p>
 </dd>
+<dt><a href="#RichTextFragment">RichTextFragment</a></dt>
+<dd><p>A Rich text fragment.</p>
+</dd>
+<dt><a href="#RichTexts">RichTexts</a></dt>
+<dd><p>A RichTexts class that contains many <a href="#RichTextFragment">RichTextFragment</a>.</p>
+</dd>
 <dt><a href="#Row">Row</a></dt>
 <dd><p>A row.</p>
 </dd>
@@ -965,7 +974,6 @@ A cell
         * [.value(value)](#Cell+value) ⇒ [<code>Cell</code>](#Cell)
         * [.value()](#Cell+value) ⇒ [<code>Range</code>](#Range)
         * [.workbook()](#Cell+workbook) ⇒ [<code>Workbook</code>](#Workbook)
-        * [.richText()](#Cell+richText) ⇒ <code>RichTexts</code>
     * _inner_
         * [~tapCallback](#Cell..tapCallback) ⇒ <code>undefined</code>
         * [~thruCallback](#Cell..thruCallback) ⇒ <code>\*</code>
@@ -1301,13 +1309,6 @@ Gets the parent workbook.
 
 **Kind**: instance method of [<code>Cell</code>](#Cell)  
 **Returns**: [<code>Workbook</code>](#Workbook) - The parent workbook.  
-<a name="Cell+richText"></a>
-
-#### cell.richText() ⇒ <code>RichTexts</code>
-Convert current cell to rich text, if the cell exists some string,the string will add to rich text. otherwise the cell value will becleared. It will simply return RichTexts Object if the cell is already rich text.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>RichTexts</code> - RichTexts object, you can call add(text, styles).  
 <a name="Cell..tapCallback"></a>
 
 #### Cell~tapCallback ⇒ <code>undefined</code>
@@ -2019,6 +2020,209 @@ Callback used by thru.
 | --- | --- | --- |
 | range | [<code>Range</code>](#Range) | The range. |
 
+<a name="RichTextFragment"></a>
+
+### RichTextFragment
+A Rich text fragment.
+
+**Kind**: global class  
+
+* [RichTextFragment](#RichTextFragment)
+    * [new RichTextFragment(value, [styles], [cell])](#new_RichTextFragment_new)
+    * [.value()](#RichTextFragment+value) ⇒ <code>string</code>
+    * [.value(text)](#RichTextFragment+value) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+    * [.style(name)](#RichTextFragment+style) ⇒ <code>\*</code>
+    * [.style(names)](#RichTextFragment+style) ⇒ <code>object.&lt;string, \*&gt;</code>
+    * [.style(name, value)](#RichTextFragment+style) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+    * [.style(styles)](#RichTextFragment+style) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+
+<a name="new_RichTextFragment_new"></a>
+
+#### new RichTextFragment(value, [styles], [cell])
+Creates a new instance of RichTextFragment.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>string</code> | text value |
+| [styles] | <code>object</code> \| <code>undefined</code> \| <code>null</code> | multiple styles |
+| [cell] | [<code>Cell</code>](#Cell) \| <code>undefined</code> \| <code>null</code> | the cell that display the rich text |
+
+<a name="RichTextFragment+value"></a>
+
+#### richTextFragment.value() ⇒ <code>string</code>
+Gets the value of this part of rich text
+
+**Kind**: instance method of [<code>RichTextFragment</code>](#RichTextFragment)  
+**Returns**: <code>string</code> - text  
+<a name="RichTextFragment+value"></a>
+
+#### richTextFragment.value(text) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+Sets the value of this part of rich text
+
+**Kind**: instance method of [<code>RichTextFragment</code>](#RichTextFragment)  
+**Returns**: [<code>RichTextFragment</code>](#RichTextFragment) - - RichTextFragment  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| text | <code>string</code> | the text to set |
+
+<a name="RichTextFragment+style"></a>
+
+#### richTextFragment.style(name) ⇒ <code>\*</code>
+Gets an individual style.
+
+**Kind**: instance method of [<code>RichTextFragment</code>](#RichTextFragment)  
+**Returns**: <code>\*</code> - The style.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the style. |
+
+<a name="RichTextFragment+style"></a>
+
+#### richTextFragment.style(names) ⇒ <code>object.&lt;string, \*&gt;</code>
+Gets multiple styles.
+
+**Kind**: instance method of [<code>RichTextFragment</code>](#RichTextFragment)  
+**Returns**: <code>object.&lt;string, \*&gt;</code> - Object whose keys are the style names and values are the styles.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| names | <code>Array.&lt;string&gt;</code> | The names of the style. |
+
+<a name="RichTextFragment+style"></a>
+
+#### richTextFragment.style(name, value) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+Sets an individual style.
+
+**Kind**: instance method of [<code>RichTextFragment</code>](#RichTextFragment)  
+**Returns**: [<code>RichTextFragment</code>](#RichTextFragment) - This RichTextFragment.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the style. |
+| value | <code>\*</code> | The value to set. |
+
+<a name="RichTextFragment+style"></a>
+
+#### richTextFragment.style(styles) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+Sets multiple styles.
+
+**Kind**: instance method of [<code>RichTextFragment</code>](#RichTextFragment)  
+**Returns**: [<code>RichTextFragment</code>](#RichTextFragment) - This RichTextFragment.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| styles | <code>object.&lt;string, \*&gt;</code> | Object whose keys are the style names and values are the styles to set. |
+
+<a name="RichTexts"></a>
+
+### RichTexts
+A RichTexts class that contains many [RichTextFragment](#RichTextFragment).
+
+**Kind**: global class  
+
+* [RichTexts](#RichTexts)
+    * [new RichTexts([cell], [node])](#new_RichTexts_new)
+    * [.cell](#RichTexts+cell) ⇒ [<code>Cell</code>](#Cell)
+    * [.cell](#RichTexts+cell)
+    * [.length](#RichTexts+length) ⇒ <code>number</code>
+    * [.text](#RichTexts+text) ⇒ <code>string</code>
+    * [.get(index)](#RichTexts+get) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+    * [.remove(index)](#RichTexts+remove) ⇒ [<code>RichTexts</code>](#RichTexts)
+    * [.add(text, [styles], [index])](#RichTexts+add) ⇒ [<code>RichTexts</code>](#RichTexts)
+    * [.clear()](#RichTexts+clear) ⇒ [<code>RichTexts</code>](#RichTexts)
+
+<a name="new_RichTexts_new"></a>
+
+#### new RichTexts([cell], [node])
+Creates a new instance of RichTexts. If cell is provided, adding a [RichTextFragment](#RichTextFragment) withtext contains line separator will trigger [Cell.style](Cell.style)('wrapText', true), whichwill make MS Excel show the new line. i.e. In MS Excel, Tap "alt+Enter" in a cell, the cellwill set wrap text to true automatically. You need to manually set wrapText=true if cellis not provided.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [cell] | [<code>Cell</code>](#Cell) \| <code>undefined</code> | The cell that contains this rich text |
+| [node] | <code>undefined</code> \| <code>null</code> \| <code>Object</code> | The node stored in the shared string |
+
+<a name="RichTexts+cell"></a>
+
+#### richTexts.cell ⇒ [<code>Cell</code>](#Cell)
+Gets which cell this [RichTexts](#RichTexts) instance belongs to.
+
+**Kind**: instance property of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: [<code>Cell</code>](#Cell) - The cell this instance belongs to.  
+<a name="RichTexts+cell"></a>
+
+#### richTexts.cell
+Sets which cell this [RichTexts](#RichTexts) instance belongs to.
+
+**Kind**: instance property of [<code>RichTexts</code>](#RichTexts)  
+**See**: [RichTexts](#RichTexts)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cell | [<code>Cell</code>](#Cell) | The cell this instance should belong to. |
+
+<a name="RichTexts+length"></a>
+
+#### richTexts.length ⇒ <code>number</code>
+Gets the how many rich text fragment this [RichTexts](#RichTexts) instance contains
+
+**Kind**: instance property of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: <code>number</code> - The number of fragments this [RichTexts](#RichTexts) instance has.  
+<a name="RichTexts+text"></a>
+
+#### richTexts.text ⇒ <code>string</code>
+Gets concatenated text without styles.
+
+**Kind**: instance property of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: <code>string</code> - concatenated text  
+<a name="RichTexts+get"></a>
+
+#### richTexts.get(index) ⇒ [<code>RichTextFragment</code>](#RichTextFragment)
+Gets the ith fragment of this [RichTexts](#RichTexts) instance.
+
+**Kind**: instance method of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: [<code>RichTextFragment</code>](#RichTextFragment) - A rich text fragment  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>number</code> | The index |
+
+<a name="RichTexts+remove"></a>
+
+#### richTexts.remove(index) ⇒ [<code>RichTexts</code>](#RichTexts)
+Removes a rich text fragment. This instance will be mutated.
+
+**Kind**: instance method of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: [<code>RichTexts</code>](#RichTexts) - the rich text instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>number</code> | the index of the fragment to remove |
+
+<a name="RichTexts+add"></a>
+
+#### richTexts.add(text, [styles], [index]) ⇒ [<code>RichTexts</code>](#RichTexts)
+Adds a rich text fragment to the last or after the given index. This instance will be mutated.
+
+**Kind**: instance method of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: [<code>RichTexts</code>](#RichTexts) - the rich text instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| text | <code>string</code> | the text |
+| [styles] | <code>Object</code> | the styles js object, i.e. {fontSize: 12} |
+| [index] | <code>number</code> \| <code>undefined</code> \| <code>null</code> | the index of the fragment to add |
+
+<a name="RichTexts+clear"></a>
+
+#### richTexts.clear() ⇒ [<code>RichTexts</code>](#RichTexts)
+Clears this rich text
+
+**Kind**: instance method of [<code>RichTexts</code>](#RichTexts)  
+**Returns**: [<code>RichTexts</code>](#RichTexts) - the rich text instance  
 <a name="Row"></a>
 
 ### Row
@@ -2648,8 +2852,7 @@ Set the print option for the gridLines attribute value.
 <a name="Sheet+pageMargins"></a>
 
 #### sheet.pageMargins(attributeName) ⇒ <code>number</code>
-Get the page margin given a valid attribute name.
-If the value is not yet defined, then it will return the current preset value.
+Get the page margin given a valid attribute name.If the value is not yet defined, then it will return the current preset value.
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
 **Returns**: <code>number</code> - the attribute value.  
@@ -2674,13 +2877,7 @@ Set the page margin (or override the preset) given an attribute name and a value
 <a name="Sheet+pageMarginsPreset"></a>
 
 #### sheet.pageMarginsPreset() ⇒ <code>string</code>
-Page margins preset is a set of page margins associated with a name.
-The page margin preset acts as a fallback when not explicitly defined by `Sheet.pageMargins`.
-If a sheet already contains page margins, it attempts to auto-detect, otherwise they are defined as the template preset.
-If no page margins exist, then the preset is undefined and will not be included in the output of `Sheet.toXmls`.
-Available presets include: normal, wide, narrow, template.
-
-Get the page margins preset name. The registered name of a predefined set of attributes.
+Page margins preset is a set of page margins associated with a name.The page margin preset acts as a fallback when not explicitly defined by `Sheet.pageMargins`.If a sheet already contains page margins, it attempts to auto-detect, otherwise they are defined as the template preset.If no page margins exist, then the preset is undefined and will not be included in the output of `Sheet.toXmls`.Available presets include: normal, wide, narrow, template.Get the page margins preset name. The registered name of a predefined set of attributes.
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
 **Returns**: <code>string</code> - The preset name.  
@@ -2955,6 +3152,7 @@ Write the workbook to file. (Not supported in browsers.)
     * [.Promise](#XlsxPopulate.Promise) : <code>Promise</code>
     * [.MIME_TYPE](#XlsxPopulate.MIME_TYPE) : <code>string</code>
     * [.FormulaError](#XlsxPopulate.FormulaError) : [<code>FormulaError</code>](#FormulaError)
+    * [.RichTexts](#XlsxPopulate.RichTexts) : [<code>RichTexts</code>](#RichTexts)
     * [.dateToNumber(date)](#XlsxPopulate.dateToNumber) ⇒ <code>number</code>
     * [.fromBlankAsync()](#XlsxPopulate.fromBlankAsync) ⇒ [<code>Promise.&lt;Workbook&gt;</code>](#Workbook)
     * [.fromDataAsync(data, [opts])](#XlsxPopulate.fromDataAsync) ⇒ [<code>Promise.&lt;Workbook&gt;</code>](#Workbook)
@@ -2977,6 +3175,12 @@ The XLSX mime type.
 
 #### XlsxPopulate.FormulaError : [<code>FormulaError</code>](#FormulaError)
 Formula error class.
+
+**Kind**: static property of [<code>XlsxPopulate</code>](#XlsxPopulate)  
+<a name="XlsxPopulate.RichTexts"></a>
+
+#### XlsxPopulate.RichTexts : [<code>RichTexts</code>](#RichTexts)
+RichTexts class
 
 **Kind**: static property of [<code>XlsxPopulate</code>](#XlsxPopulate)  
 <a name="XlsxPopulate.dateToNumber"></a>
