@@ -26,6 +26,7 @@ Excel XLSX parser/generator written in JavaScript with Node.js and browser suppo
   * [Hyperlinks](#hyperlinks)
   * [Print Options](#print-options)
   * [Page Margins](#page-margins)
+  * [SheetView Panes](#sheetview-panes)
   * [Serving from Express](#serving-from-express)
   * [Browser Usage](#browser-usage)
   * [Promises](#promises)
@@ -580,6 +581,31 @@ sheet.pageMargins('top', 1.1);
 const topPageMarginInInches = sheet.pageMargins('top'); // Returns 1.1
 ```
 
+### SheetView Panes
+SheetView Panes are accessed using the [Sheet.panes](#Sheet+panes) method.
+For convenience, we have [Sheet.freezePanes](#Sheet+freezePanes),
+[Sheet.splitPanes](#Sheet+splitPanes), [Sheet.resetPanes](#Sheet+resetPanes),
+and type [PaneOptions](#paneoptions--object).
+```js
+// access Pane options
+sheet.panes(); // return PaneOptions Object
+
+// manually Set Pane options, WARNING: setting wrong options may result in excel fails to open.
+const paneOptions = { state: 'frozen', topLeftCell: 'B2', xSplit: 1, ySplit: 1, activePane: 'bottomRight' }
+sheet.panes(paneOptions); // return PaneOptions Object
+
+// freeze panes (freeze first column and first two rows)
+sheet.freezePanes(1, 2);
+// OR
+sheet.freezePanes('B3');
+
+// split panes (Horizontal Split Position: 1000 / 20 pt, Vertical Split Position: 2000 / 20 pt)
+sheet.splitPanes(1000, 2000);
+
+// reset to normal panes (no freeze panes and split panes)
+sheet.resetPanes();
+```
+
 ### Serving from Express
 You can serve the workbook from [express](http://expressjs.com/) or other web servers with something like this:
 ```js
@@ -895,6 +921,9 @@ An object representing a gradient fill.
 <dt><a href="#FormulaError">FormulaError</a></dt>
 <dd><p>A formula error (e.g. #DIV/0!).</p>
 </dd>
+<dt><a href="#PageBreaks">PageBreaks</a></dt>
+<dd><p>PageBreaks</p>
+</dd>
 <dt><a href="#Range">Range</a></dt>
 <dd><p>A range of cells.</p>
 </dd>
@@ -909,6 +938,9 @@ An object representing a gradient fill.
 </dd>
 <dt><a href="#Sheet">Sheet</a></dt>
 <dd><p>A worksheet.</p>
+</dd>
+<dt><a href="#Theme">Theme</a></dt>
+<dd><p>A readonly theme.</p>
 </dd>
 <dt><a href="#Workbook">Workbook</a></dt>
 <dd><p>A workbook.</p>
@@ -930,6 +962,14 @@ An object representing a gradient fill.
 <a href="https://msdn.microsoft.com/en-us/library/dd950165(v=office.12).aspx">https://msdn.microsoft.com/en-us/library/dd950165(v=office.12).aspx</a></p>
 <p>Helpful guidance also take from this Github project:
 <a href="https://github.com/nolze/ms-offcrypto-tool">https://github.com/nolze/ms-offcrypto-tool</a></p>
+</dd>
+</dl>
+
+### Typedefs
+
+<dl>
+<dt><a href="#PaneOptions">PaneOptions</a> : <code>Object</code></dt>
+<dd><p><a href="https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pane?view=openxml-2.8.1">https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pane?view=openxml-2.8.1</a></p>
 </dd>
 </dl>
 
@@ -974,6 +1014,7 @@ A cell
         * [.value(value)](#Cell+value) ⇒ [<code>Cell</code>](#Cell)
         * [.value()](#Cell+value) ⇒ [<code>Range</code>](#Range)
         * [.workbook()](#Cell+workbook) ⇒ [<code>Workbook</code>](#Workbook)
+        * [.addHorizontalPageBreak()](#Cell+addHorizontalPageBreak) ⇒ [<code>Cell</code>](#Cell)
     * _inner_
         * [~tapCallback](#Cell..tapCallback) ⇒ <code>undefined</code>
         * [~thruCallback](#Cell..thruCallback) ⇒ <code>\*</code>
@@ -1309,6 +1350,13 @@ Gets the parent workbook.
 
 **Kind**: instance method of [<code>Cell</code>](#Cell)  
 **Returns**: [<code>Workbook</code>](#Workbook) - The parent workbook.  
+<a name="Cell+addHorizontalPageBreak"></a>
+
+#### cell.addHorizontalPageBreak() ⇒ [<code>Cell</code>](#Cell)
+Append horizontal page break after the cell.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: [<code>Cell</code>](#Cell) - the cell.  
 <a name="Cell..tapCallback"></a>
 
 #### Cell~tapCallback ⇒ <code>undefined</code>
@@ -1355,6 +1403,7 @@ A column.
     * [.width()](#Column+width) ⇒ <code>undefined</code> \| <code>number</code>
     * [.width(width)](#Column+width) ⇒ [<code>Column</code>](#Column)
     * [.workbook()](#Column+workbook) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.addPageBreak()](#Column+addPageBreak) ⇒ [<code>Column</code>](#Column)
 
 <a name="Column+address"></a>
 
@@ -1509,6 +1558,13 @@ Get the parent workbook.
 
 **Kind**: instance method of [<code>Column</code>](#Column)  
 **Returns**: [<code>Workbook</code>](#Workbook) - The parent workbook.  
+<a name="Column+addPageBreak"></a>
+
+#### column.addPageBreak() ⇒ [<code>Column</code>](#Column)
+Append vertical page break after the column.
+
+**Kind**: instance method of [<code>Column</code>](#Column)  
+**Returns**: [<code>Column</code>](#Column) - the column.  
 <a name="FormulaError"></a>
 
 ### FormulaError
@@ -1577,6 +1633,57 @@ Get the error code.
 \#VALUE! error.
 
 **Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="PageBreaks"></a>
+
+### PageBreaks
+PageBreaks
+
+**Kind**: global class  
+
+* [PageBreaks](#PageBreaks)
+    * [.count](#PageBreaks+count) ⇒ <code>number</code>
+    * [.list](#PageBreaks+list) ⇒ <code>Array</code>
+    * [.add(id)](#PageBreaks+add) ⇒ [<code>PageBreaks</code>](#PageBreaks)
+    * [.remove(index)](#PageBreaks+remove) ⇒ [<code>PageBreaks</code>](#PageBreaks)
+
+<a name="PageBreaks+count"></a>
+
+#### pageBreaks.count ⇒ <code>number</code>
+get count of the page-breaks
+
+**Kind**: instance property of [<code>PageBreaks</code>](#PageBreaks)  
+**Returns**: <code>number</code> - the page-breaks' count  
+<a name="PageBreaks+list"></a>
+
+#### pageBreaks.list ⇒ <code>Array</code>
+get list of page-breaks
+
+**Kind**: instance property of [<code>PageBreaks</code>](#PageBreaks)  
+**Returns**: <code>Array</code> - list of the page-breaks  
+<a name="PageBreaks+add"></a>
+
+#### pageBreaks.add(id) ⇒ [<code>PageBreaks</code>](#PageBreaks)
+add page-breaks by row/column id
+
+**Kind**: instance method of [<code>PageBreaks</code>](#PageBreaks)  
+**Returns**: [<code>PageBreaks</code>](#PageBreaks) - the page-breaks  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>number</code> | row/column id (rowNumber/colNumber) |
+
+<a name="PageBreaks+remove"></a>
+
+#### pageBreaks.remove(index) ⇒ [<code>PageBreaks</code>](#PageBreaks)
+remove page-breaks by index
+
+**Kind**: instance method of [<code>PageBreaks</code>](#PageBreaks)  
+**Returns**: [<code>PageBreaks</code>](#PageBreaks) - the page-breaks  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>number</code> | index of list |
+
 <a name="Range"></a>
 
 ### Range
@@ -2245,6 +2352,7 @@ A row.
     * [.style(styles)](#Row+style) ⇒ [<code>Cell</code>](#Cell)
     * [.style(style)](#Row+style) ⇒ [<code>Cell</code>](#Cell)
     * [.workbook()](#Row+workbook) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.addPageBreak()](#Row+addPageBreak) ⇒ [<code>Row</code>](#Row)
 
 <a name="Row+address"></a>
 
@@ -2392,6 +2500,13 @@ Get the parent workbook.
 
 **Kind**: instance method of [<code>Row</code>](#Row)  
 **Returns**: [<code>Workbook</code>](#Workbook) - The parent workbook.  
+<a name="Row+addPageBreak"></a>
+
+#### row.addPageBreak() ⇒ [<code>Row</code>](#Row)
+Append horizontal page break after the row.
+
+**Kind**: instance method of [<code>Row</code>](#Row)  
+**Returns**: [<code>Row</code>](#Row) - the row.  
 <a name="Sheet"></a>
 
 ### Sheet
@@ -2431,6 +2546,9 @@ A worksheet.
     * [.tabSelected(selected)](#Sheet+tabSelected) ⇒ [<code>Sheet</code>](#Sheet)
     * [.usedRange()](#Sheet+usedRange) ⇒ [<code>Range</code>](#Range) \| <code>undefined</code>
     * [.workbook()](#Sheet+workbook) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.pageBreaks()](#Sheet+pageBreaks) ⇒ <code>Object</code>
+    * [.verticalPageBreaks()](#Sheet+verticalPageBreaks) ⇒ [<code>PageBreaks</code>](#PageBreaks)
+    * [.horizontalPageBreaks()](#Sheet+horizontalPageBreaks) ⇒ [<code>PageBreaks</code>](#PageBreaks)
     * [.hyperlink(address)](#Sheet+hyperlink) ⇒ <code>string</code> \| <code>undefined</code>
     * [.hyperlink(address, hyperlink, [internal])](#Sheet+hyperlink) ⇒ [<code>Sheet</code>](#Sheet)
     * [.hyperlink(address, opts)](#Sheet+hyperlink) ⇒ [<code>Sheet</code>](#Sheet)
@@ -2443,6 +2561,12 @@ A worksheet.
     * [.pageMarginsPreset()](#Sheet+pageMarginsPreset) ⇒ <code>string</code>
     * [.pageMarginsPreset(presetName)](#Sheet+pageMarginsPreset) ⇒ [<code>Sheet</code>](#Sheet)
     * [.pageMarginsPreset(presetName, presetAttributes)](#Sheet+pageMarginsPreset) ⇒ [<code>Sheet</code>](#Sheet)
+    * [.panes()](#Sheet+panes) ⇒ [<code>PaneOptions</code>](#PaneOptions)
+    * [.panes(paneOptions)](#Sheet+panes) ⇒ [<code>Sheet</code>](#Sheet)
+    * [.freezePanes(xSplit, ySplit)](#Sheet+freezePanes) ⇒ [<code>Sheet</code>](#Sheet)
+    * [.freezePanes(topLeftCell)](#Sheet+freezePanes) ⇒ [<code>Sheet</code>](#Sheet)
+    * [.splitPanes(xSplit, ySplit)](#Sheet+splitPanes) ⇒ [<code>Sheet</code>](#Sheet)
+    * [.resetPanes()](#Sheet+resetPanes) ⇒ [<code>Sheet</code>](#Sheet)
 
 <a name="Sheet+active"></a>
 
@@ -2764,6 +2888,27 @@ Gets the parent workbook.
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
 **Returns**: [<code>Workbook</code>](#Workbook) - The parent workbook.  
+<a name="Sheet+pageBreaks"></a>
+
+#### sheet.pageBreaks() ⇒ <code>Object</code>
+Gets all page breaks.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: <code>Object</code> - the object holds both vertical and horizontal PageBreaks.  
+<a name="Sheet+verticalPageBreaks"></a>
+
+#### sheet.verticalPageBreaks() ⇒ [<code>PageBreaks</code>](#PageBreaks)
+Gets the vertical page breaks.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>PageBreaks</code>](#PageBreaks) - vertical PageBreaks.  
+<a name="Sheet+horizontalPageBreaks"></a>
+
+#### sheet.horizontalPageBreaks() ⇒ [<code>PageBreaks</code>](#PageBreaks)
+Gets the horizontal page breaks.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>PageBreaks</code>](#PageBreaks) - horizontal PageBreaks.  
 <a name="Sheet+hyperlink"></a>
 
 #### sheet.hyperlink(address) ⇒ <code>string</code> \| <code>undefined</code>
@@ -2906,6 +3051,104 @@ Set a new page margins preset by name and attributes object.
 | presetName | <code>string</code> | The preset name. |
 | presetAttributes | <code>object</code> | The preset attributes. |
 
+<a name="Sheet+panes"></a>
+
+#### sheet.panes() ⇒ [<code>PaneOptions</code>](#PaneOptions)
+Gets sheet view pane options
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>PaneOptions</code>](#PaneOptions) - sheet view pane options  
+<a name="Sheet+panes"></a>
+
+#### sheet.panes(paneOptions) ⇒ [<code>Sheet</code>](#Sheet)
+Sets sheet view pane options
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| paneOptions | [<code>PaneOptions</code>](#PaneOptions) \| <code>null</code> \| <code>undefined</code> | sheet view pane options |
+
+<a name="Sheet+freezePanes"></a>
+
+#### sheet.freezePanes(xSplit, ySplit) ⇒ [<code>Sheet</code>](#Sheet)
+Freezes Panes for this sheet.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| xSplit | <code>number</code> | the number of columns visible in the top pane. 0 (zero) if none. |
+| ySplit | <code>number</code> | the number of rows visible in the left pane. 0 (zero) if none. |
+
+<a name="Sheet+freezePanes"></a>
+
+#### sheet.freezePanes(topLeftCell) ⇒ [<code>Sheet</code>](#Sheet)
+freezes Panes for this sheet.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| topLeftCell | <code>string</code> | Top Left Visible Cell. Location of the top left visible cell in the bottom right pane (when in Left-To-Right mode). |
+
+<a name="Sheet+splitPanes"></a>
+
+#### sheet.splitPanes(xSplit, ySplit) ⇒ [<code>Sheet</code>](#Sheet)
+Splits Panes for this sheet.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| xSplit | <code>number</code> | (Horizontal Split Position) Horizontal position of the split, in 1/20th of a point; 0 (zero) if none. |
+| ySplit | <code>number</code> | (Vertical Split Position) VVertical position of the split, in 1/20th of a point; 0 (zero) if none. |
+
+<a name="Sheet+resetPanes"></a>
+
+#### sheet.resetPanes() ⇒ [<code>Sheet</code>](#Sheet)
+resets to default sheet view panes.
+
+**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
+<a name="Theme"></a>
+
+### Theme
+A readonly theme.
+
+**Kind**: global class  
+
+* [Theme](#Theme)
+    * [new Theme(node)](#new_Theme_new)
+    * [.themeColor(index, tint)](#Theme+themeColor) ⇒ <code>string</code>
+
+<a name="new_Theme_new"></a>
+
+#### new Theme(node)
+Creates a new instance of Theme. (Read only)
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| node | <code>Object</code> | The node. |
+
+<a name="Theme+themeColor"></a>
+
+#### theme.themeColor(index, tint) ⇒ <code>string</code>
+Get the rgb theme color
+
+**Kind**: instance method of [<code>Theme</code>](#Theme)  
+**Returns**: <code>string</code> - color  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>number</code> | theme color index |
+| tint | <code>number</code> \| <code>undefined</code> \| <code>null</code> | tint value |
+
 <a name="Workbook"></a>
 
 ### Workbook
@@ -2932,6 +3175,8 @@ A workbook.
     * [.property(properties)](#Workbook+property) ⇒ [<code>Workbook</code>](#Workbook)
     * [.properties()](#Workbook+properties) ⇒ <code>CoreProperties</code>
     * [.toFileAsync(path, [opts])](#Workbook+toFileAsync) ⇒ <code>Promise.&lt;undefined&gt;</code>
+    * [.theme()](#Workbook+theme) ⇒ [<code>Theme</code>](#Theme)
+    * [.cloneSheet(from, name, [indexOrBeforeSheet])](#Workbook+cloneSheet) ⇒ [<code>Sheet</code>](#Sheet)
 
 <a name="Workbook+activeSheet"></a>
 
@@ -3143,6 +3388,27 @@ Write the workbook to file. (Not supported in browsers.)
 | [opts] | <code>Object</code> | Options |
 | [opts.password] | <code>string</code> | The password to encrypt the workbook. |
 
+<a name="Workbook+theme"></a>
+
+#### workbook.theme() ⇒ [<code>Theme</code>](#Theme)
+Get the theme of this workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Theme</code>](#Theme) - The theme object.  
+<a name="Workbook+cloneSheet"></a>
+
+#### workbook.cloneSheet(from, name, [indexOrBeforeSheet]) ⇒ [<code>Sheet</code>](#Sheet)
+Add a new sheet to the workbook.**WARN:** this function has limits:  if you clone a sheet with some images or other things link outside the Sheet object, these things in the cloned sheet will be locked when you open in MS Excel app.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The new sheet.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| from | [<code>Sheet</code>](#Sheet) | The sheet to be cloned. |
+| name | <code>string</code> | The name of the new sheet. Must be unique, less than 31 characters, and may not contain the following characters: \ / * [ ] : ? |
+| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
+
 <a name="XlsxPopulate"></a>
 
 ### XlsxPopulate : <code>object</code>
@@ -3248,4 +3514,20 @@ Convert an Excel number to a date.
 OOXML uses the CFB file format with Agile Encryption. The details of the encryption are here:https://msdn.microsoft.com/en-us/library/dd950165(v=office.12).aspxHelpful guidance also take from this Github project:https://github.com/nolze/ms-offcrypto-tool
 
 **Kind**: global constant  
+<a name="PaneOptions"></a>
+
+### PaneOptions : <code>Object</code>
+https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pane?view=openxml-2.8.1
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| activePane | <code>string</code> | <code>&quot;bottomRight&quot;</code> | Active Pane. The pane that is active. |
+| state | <code>string</code> |  | Split State. Indicates whether the pane has horizontal / vertical splits, and whether those splits are frozen. |
+| topLeftCell | <code>string</code> |  | Top Left Visible Cell. Location of the top left visible cell in the bottom right pane (when in Left-To-Right mode). |
+| xSplit | <code>number</code> |  | (Horizontal Split Position) Horizontal position of the split, in 1/20th of a point; 0 (zero) if none. If the pane is frozen, this value indicates the number of columns visible in the top pane. |
+| ySplit | <code>number</code> |  | (Vertical Split Position) Vertical position of the split, in 1/20th of a point; 0 (zero) if none. If the pane is frozen, this value indicates the number of rows visible in the left pane. |
+
 
