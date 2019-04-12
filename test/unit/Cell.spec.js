@@ -33,7 +33,8 @@ describe("Cell", () => {
 
         range = jasmine.createSpyObj('range', ['value', 'style']);
 
-        sheet = jasmine.createSpyObj('sheet', ['createStyle', 'activeCell', 'updateMaxSharedFormulaId', 'name', 'column', 'clearCellsUsingSharedFormula', 'cell', 'range', 'hyperlink', 'dataValidation', 'verticalPageBreaks']);
+        sheet = jasmine.createSpyObj('sheet', ['createStyle', 'activeCell', 'updateMaxSharedFormulaId', 'name', 'column',
+            'clearCellsUsingSharedFormula', 'cell', 'range', 'hyperlink', 'dataValidation', 'verticalPageBreaks', 'setSharedFormulaRefCell']);
         sheet.activeCell.and.returnValue("ACTIVE CELL");
         sheet.name.and.returnValue("NAME");
         sheet.column.and.returnValue("COLUMN");
@@ -162,12 +163,6 @@ describe("Cell", () => {
             cell._formulaType = "shared";
             cell._formulaRef = "REF";
             expect(cell.formula()).toBe("FORMULA");
-        });
-
-        it("should return 'SHARED' if shared formula set", () => {
-            cell._formula = "FORMULA";
-            cell._formulaType = "shared";
-            expect(cell.formula()).toBe("SHARED");
         });
 
         it("should clear the formula", () => {
@@ -459,7 +454,7 @@ describe("Cell", () => {
             expect(cell.workbook()).toBe(workbook);
         });
     });
-    
+
     describe('addHorizontalPageBreak', () => {
         it("should add a rowBreak and return the cell", () => {
             expect(cell.addHorizontalPageBreak()).toBe(cell);
@@ -553,18 +548,6 @@ describe("Cell", () => {
                     foo: 'foo'
                 },
                 children: ['FORMULA']
-            }]);
-        });
-
-        it("should not set the value if the formula is set", () => {
-            cell._formulaType = "TYPE";
-            cell._value = "VALUE";
-
-            expect(cell.toXml().children).toEqualJson([{
-                name: 'f',
-                attributes: {
-                    t: 'TYPE'
-                }
             }]);
         });
 

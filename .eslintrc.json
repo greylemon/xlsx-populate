@@ -48,7 +48,7 @@
     "default-case": 2,
     "dot-location": [2, "property"],
     "dot-notation": 2,
-    "eqeqeq": 2,
+//    "eqeqeq": [2, "smart"],
     "guard-for-in": 2,
     "no-alert": 2,
     "no-caller": 2,
@@ -56,7 +56,7 @@
     "no-div-regex": 2,
     //"no-else-return"
     "no-empty-pattern": 2,
-    "no-eq-null": 2,
+//    "no-eq-null": 2,
     "no-eval": 2,
     "no-extend-native": 2,
     "no-extra-bind": 2,
@@ -151,7 +151,7 @@
       "allowObjectStart": true,
       "allowArrayStart": true
     }],
-    "max-depth": 2,
+//    "max-depth": 2,
     //"max-len"
     "max-nested-callbacks": 2,
     //"max-params"
