@@ -8,6 +8,9 @@
     "Blob": true,
     "FileReader": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2016
+  },
   "rules": {
     /* Possible Errors */
     "comma-dangle": [2, "never"],
