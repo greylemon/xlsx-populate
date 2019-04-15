@@ -34,9 +34,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "fast-formula-parser": "git+https://github.com/LesterLyu/fast-formula-parser.git",
     "cfb": "^1.1.0",
-    "jszip": "^3.1.5",
+    "fast-formula-parser": "git+https://github.com/LesterLyu/fast-formula-parser.git",
+    "jszip": "^3.2.1",
     "lodash": "^4.17.11",
     "sax": "^1.2.4"
   },
@@ -55,9 +55,9 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.2",
     "gulp-rename": "^1.4.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.1",
-    "jasmine": "^3.3.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "jasmine": "^3.4.0",
     "jsdoc-to-markdown": "^4.0.1",
     "jsondiffpatch": "^0.3.11",
     "karma": "^2.0.5",
@@ -74,9 +74,9 @@
     "proxyquireify": "^3.2.1",
     "replacestream": "^4.0.3",
     "run-sequence": "^2.2.1",
-    "uglify-js": "^3.4.9",
+    "uglify-js": "^3.5.4",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
-    "watchify": "^3.11.0"
+    "watchify": "^3.11.1"
   }
 }
