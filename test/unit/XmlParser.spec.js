@@ -32,7 +32,7 @@ describe("XmlParser", () => {
     <G>-1.23</G>
   </child>bar</root>`;
 
-            return xmlParser.parseAsync(xml)
+            return XmlParser.parseAsync(xml)
                 .then(node => {
                     expect(node).toEqualJson({
                         name: 'root',
