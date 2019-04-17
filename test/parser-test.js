@@ -36,6 +36,11 @@ function something(workbook) {
 
 setTimeout(() => {
     t = Date.now();
-    XlsxPopulate.fromFileAsync("./test/test2.xlsx").then(something);
+    XlsxPopulate.fromFileAsync("./test/test.xlsm")
+        .then(something)
+        .then(() => {
+            wb.toFileAsync('./out.xlsm');
+        });
+
 }, 0);
 
