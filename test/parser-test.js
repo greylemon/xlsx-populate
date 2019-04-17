@@ -19,7 +19,10 @@ function something(workbook) {
     // console.log(workbook.sheet('Act_Summary').cell('I11').getValue());
     // console.log(workbook.theme().themeColor(1));
     // console.log(workbook.sheet(0).getCell(3, 3).getValue());
-    console.log(workbook._refTable.getCalculationOrder({ sheet: '1', row: 1, col: 1 }));
+    const cell = workbook.sheet(0).cell('AD18');
+    const cell2 = workbook.sheet(0).cell('A1');
+    cell.setValue(2020);
+    console.log(cell2.getValue())
 
     console.log(`process formulas uses ${Date.now() - t}ms, with ? formulas, query data uses ??ms`);
     t = Date.now();
@@ -31,6 +34,6 @@ function something(workbook) {
 
 setTimeout(() => {
     t = Date.now();
-    XlsxPopulate.fromFileAsync("./test/test2.xlsx").then(something);
+    XlsxPopulate.fromFileAsync("./test/test.xlsm").then(something);
 }, 0);
 
