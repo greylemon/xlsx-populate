@@ -36,10 +36,8 @@
   "dependencies": {
     "cfb": "^1.1.0",
     "fast-formula-parser": "git+https://github.com/LesterLyu/fast-formula-parser.git",
-    "fast-xml-parser": "^3.12.16",
     "jszip": "^3.2.1",
     "lodash": "^4.17.11",
-    "sax": "^1.2.4",
     "saxes": "^3.1.9"
   },
   "repository": {

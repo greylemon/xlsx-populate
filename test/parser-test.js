@@ -15,10 +15,11 @@ function something(workbook) {
     t = Date.now();
     // console.log(workbook.sheet('Fin_Summary').cell('I11').formula());
     // console.log(workbook.sheet('Act_Summary').cell('H3176').formula());
-    workbook.sheet('Act_Summary').cell('H11').setValue(123);
-    console.log(workbook.sheet('Act_Summary').cell('I11').getValue());
-    console.log(workbook.theme().themeColor(1));
-    console.log(workbook.sheet(0).getCell(3, 3).getValue());
+    // workbook.sheet('Act_Summary').cell('H11').setValue(123);
+    // console.log(workbook.sheet('Act_Summary').cell('I11').getValue());
+    // console.log(workbook.theme().themeColor(1));
+    // console.log(workbook.sheet(0).getCell(3, 3).getValue());
+    console.log(workbook._refTable.getCalculationOrder({ sheet: '1', row: 1, col: 1 }));
 
     console.log(`process formulas uses ${Date.now() - t}ms, with ? formulas, query data uses ??ms`);
     t = Date.now();
@@ -30,6 +31,6 @@ function something(workbook) {
 
 setTimeout(() => {
     t = Date.now();
-    XlsxPopulate.fromFileAsync("./test.xlsx").then(something);
+    XlsxPopulate.fromFileAsync("./test/test2.xlsx").then(something);
 }, 0);
 
