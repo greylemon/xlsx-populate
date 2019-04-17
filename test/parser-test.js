@@ -5,6 +5,10 @@ const MAX_ROW = 1048576, MAX_COLUMN = 16384;
 let t = Date.now();
 let parser, depParser, wb, rt;
 
+/**
+ *
+ * @param {Workbook} workbook
+ */
 function something(workbook) {
     wb = workbook;
     console.log(`open workbook uses ${Date.now() - t}ms`);
@@ -13,6 +17,8 @@ function something(workbook) {
     // console.log(workbook.sheet('Act_Summary').cell('H3176').formula());
     workbook.sheet('Act_Summary').cell('H11').setValue(123);
     console.log(workbook.sheet('Act_Summary').cell('I11').getValue());
+    console.log(workbook.theme().themeColor(1));
+    console.log(workbook.sheet(0).getCell(3, 3).getValue());
 
     console.log(`process formulas uses ${Date.now() - t}ms, with ? formulas, query data uses ??ms`);
     t = Date.now();
@@ -24,6 +30,6 @@ function something(workbook) {
 
 setTimeout(() => {
     t = Date.now();
-    XlsxPopulate.fromFileAsync("./test/test.xlsm").then(something);
+    XlsxPopulate.fromFileAsync("./test.xlsx").then(something);
 }, 0);
 
