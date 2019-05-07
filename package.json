@@ -74,7 +74,7 @@
     "proxyquireify": "^3.2.1",
     "replacestream": "^4.0.3",
     "run-sequence": "^2.2.1",
-    "uglify-js": "^3.5.10",
+    "uglify-js": "^3.5.11",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.1"
