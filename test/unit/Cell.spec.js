@@ -1,7 +1,7 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
-const RichTexts = require('../../lib/RichText');
+const RichTexts = require('../../lib/worksheets/RichText');
 
 describe("Cell", () => {
     let Cell, cell, cellNode, row, sheet, workbook, sharedStrings, styleSheet, style, FormulaError, range;

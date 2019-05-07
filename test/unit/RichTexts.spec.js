@@ -1,8 +1,8 @@
 "use strict";
 
 const XlsxPoplate = require('../../lib/XlsxPopulate');
-const RichText = require('../../lib/RichText');
-const RichTextFragment = require('../../lib/RichTextFragment');
+const RichText = require('../../lib/worksheets/RichText');
+const RichTextFragment = require('../../lib/worksheets/RichTextFragment');
 
 describe("RichText", () => {
     let cell, workbook, cell2, cell3;
