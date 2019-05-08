@@ -1,15 +1,12 @@
 "use strict";
 
-const proxyquire = require("proxyquire");
+const Relationships = require("../../lib/workbooks/Relationships");
+const expect = require('chai').expect;
 
 describe("Relationships", () => {
-    let Relationships, relationships, relationshipsNode;
+    let relationships, relationshipsNode;
 
     beforeEach(() => {
-        Relationships = proxyquire("../../lib/Relationships", {
-            '@noCallThru': true
-        });
-
         relationshipsNode = {
             name: "Relationships",
             attributes: {
@@ -41,7 +38,7 @@ describe("Relationships", () => {
     describe("add", () => {
         it("should add a new relationship", () => {
             relationships.add("TYPE", "TARGET");
-            expect(relationshipsNode.children[2]).toEqualJson({
+            expect(relationshipsNode.children[2]).to.deep.eq({
                 name: "Relationship",
                 attributes: {
                     Id: "rId3",
@@ -53,7 +50,7 @@ describe("Relationships", () => {
 
         it("should add a new relationship with target mode", () => {
             relationships.add("TYPE", "TARGET", "TARGET_MODE");
-            expect(relationshipsNode.children[2]).toEqualJson({
+            expect(relationshipsNode.children[2]).to.deep.eq({
                 name: "Relationship",
                 attributes: {
                     Id: "rId3",
@@ -67,34 +64,34 @@ describe("Relationships", () => {
 
     describe("findById", () => {
         it("should return the relationship if matched", () => {
-            expect(relationships.findById("rId1")).toBe(relationshipsNode.children[1]);
-            expect(relationships.findById("rId2")).toBe(relationshipsNode.children[0]);
+            expect(relationships.findById("rId1")).to.eq(relationshipsNode.children[1]);
+            expect(relationships.findById("rId2")).to.eq(relationshipsNode.children[0]);
         });
 
         it("should return undefined if not matched", () => {
-            expect(relationships.findById("rId5")).toBeUndefined();
+            expect(relationships.findById("rId5")).to.be.undefined;
         });
     });
 
     describe("findByType", () => {
         it("should return the relationship if matched", () => {
-            expect(relationships.findByType("worksheet")).toBe(relationshipsNode.children[1]);
-            expect(relationships.findByType("theme")).toBe(relationshipsNode.children[0]);
+            expect(relationships.findByType("worksheet")).to.eq(relationshipsNode.children[1]);
+            expect(relationships.findByType("theme")).to.eq(relationshipsNode.children[0]);
         });
 
         it("should return undefined if not matched", () => {
-            expect(relationships.findByType("foo")).toBeUndefined();
+            expect(relationships.findByType("foo")).to.be.undefined;
         });
     });
 
     describe("toXml", () => {
         it("should return the node as is", () => {
-            expect(relationships.toXml()).toBe(relationshipsNode);
+            expect(relationships.toXml()).to.eq(relationshipsNode);
         });
 
         it("should return undefined", () => {
             relationshipsNode.children.length = 0;
-            expect(relationships.toXml()).toBeUndefined();
+            expect(relationships.toXml()).to.be.undefined;
         });
     });
 
@@ -102,7 +99,7 @@ describe("Relationships", () => {
         it("should set the next ID to 1 if no children", () => {
             relationships._node.children = [];
             relationships._getStartingId();
-            expect(relationships._nextId).toBe(1);
+            expect(relationships._nextId).to.eq(1);
         });
 
         it("should set the next ID to last found ID + 1", () => {
@@ -112,14 +109,14 @@ describe("Relationships", () => {
                 { attributes: { Id: 'rId3' } }
             ];
             relationships._getStartingId();
-            expect(relationships._nextId).toBe(4);
+            expect(relationships._nextId).to.eq(4);
         });
     });
 
     describe("_init", () => {
         it("should create the node if needed", () => {
             relationships._init(null);
-            expect(relationships._node).toEqualJson({
+            expect(relationships._node).to.deep.eq({
                 name: "Relationships",
                 attributes: {
                     xmlns: "http://schemas.openxmlformats.org/package/2006/relationships"

@@ -2,7 +2,7 @@
 
 const _ = require("lodash");
 const proxyquire = require("proxyquire");
-const Promise = require("jszip").external.Promise;
+const expect = require('chai').expect;
 
 describe("Workbook", () => {
     let resolved, fs, externals, JSZip, workbookNode, Workbook, StyleSheet, Sheet, SharedStrings, Relationships, ContentTypes, CoreProperties, XmlParser, XmlBuilder, Encryptor, blank;
@@ -134,7 +134,7 @@ describe("Workbook", () => {
         });
 
         describe("fromBlankAsync", () => {
-            itAsync("should init with blank data", () => {
+            it("should init with blank data", () => {
                 return Workbook.fromBlankAsync()
                     .then(workbook => {
                         expect(Workbook.prototype._initAsync).toHaveBeenCalledWith("BLANK", undefined);
@@ -144,7 +144,7 @@ describe("Workbook", () => {
         });
 
         describe("fromDataAsync", () => {
-            itAsync("should init with the data", () => {
+            it("should init with the data", () => {
                 return Workbook.fromDataAsync("DATA", "OPTS")
                     .then(workbook => {
                         expect(Workbook.prototype._initAsync).toHaveBeenCalledWith("DATA", "OPTS");
@@ -161,7 +161,7 @@ describe("Workbook", () => {
             }
 
             if (!process.browser) {
-                itAsync("should init with the file data", () => {
+                it("should init with the file data", () => {
                     return Workbook.fromFileAsync("PATH", "OPTS")
                         .then(workbook => {
                             expect(Workbook.prototype._initAsync).toHaveBeenCalledWith("DATA", "OPTS");
@@ -401,7 +401,7 @@ describe("Workbook", () => {
                 spyOn(workbook, "_convertBufferToOutput").and.returnValue("OUTPUT");
             });
 
-            itAsync("should output the data", () => {
+            it("should output the data", () => {
                 return workbook.outputAsync({ type: "TYPE" })
                     .then(output => {
                         expect(output).toBe("OUTPUT");
@@ -435,7 +435,7 @@ describe("Workbook", () => {
                     });
             });
 
-            itAsync("should encrypt the workbook is password is set", () => {
+            it("should encrypt the workbook is password is set", () => {
                 return workbook.outputAsync({ password: "PASSWORD" })
                     .then(output => {
                         expect(Encryptor.prototype.encrypt).toHaveBeenCalledWith("ZIP", "PASSWORD");
@@ -476,7 +476,7 @@ describe("Workbook", () => {
             }
 
             if (!process.browser) {
-                itAsync("should write the workbook to file", () => {
+                it("should write the workbook to file", () => {
                     spyOn(workbook, "outputAsync").and.returnValue(Promise.resolve("OUTPUT"));
                     return workbook.toFileAsync("PATH")
                         .then(() => {
@@ -631,8 +631,8 @@ describe("Workbook", () => {
                 spyOn(workbook, "_convertInputToBufferAsync").and.returnValue(Promise.resolve("BUFFER"));
             });
 
-            itAsync("should extract the files from the data zip and load the objects", () => {
-                return workbook._initAsync("DATA", { base64: "BASE64" })
+            it("should extract the files from the data zip and load the objects", () => {
+                return workbook._init("DATA", { base64: "BASE64" })
                     .then(wb => {
                         expect(wb).toBe(workbook);
 
@@ -676,8 +676,8 @@ describe("Workbook", () => {
                     });
             });
 
-            itAsync("should decrypte the data if a password is set", () => {
-                return workbook._initAsync("DATA", { password: "PASSWORD" })
+            it("should decrypte the data if a password is set", () => {
+                return workbook._init("DATA", { password: "PASSWORD" })
                     .then(wb => {
                         expect(wb).toBe(workbook);
                         expect(workbook._convertInputToBufferAsync).toHaveBeenCalledWith("DATA", undefined);
@@ -686,22 +686,22 @@ describe("Workbook", () => {
                     });
             });
 
-            itAsync("should not add the shared strings if already present", () => {
+            it("should not add the shared strings if already present", () => {
                 Relationships.prototype.findByType.and.returnValue({});
                 ContentTypes.prototype.findByPartName.and.returnValue({});
 
-                return workbook._initAsync("DATA")
+                return workbook._init("DATA")
                     .then(() => {
                         expect(Relationships.prototype.add).not.toHaveBeenCalled();
                         expect(ContentTypes.prototype.add).not.toHaveBeenCalled();
                     });
             });
 
-            itAsync("should not add the shared strings if already present", () => {
+            it("should not add the shared strings if already present", () => {
                 Relationships.prototype.findByType.and.returnValue(undefined);
                 ContentTypes.prototype.findByPartName.and.returnValue(undefined);
 
-                return workbook._initAsync("DATA")
+                return workbook._init("DATA")
                     .then(() => {
                         expect(Relationships.prototype.add).toHaveBeenCalledWith("sharedStrings", "sharedStrings.xml");
                         expect(ContentTypes.prototype.add).toHaveBeenCalledWith("/xl/sharedStrings.xml", "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml");
@@ -710,7 +710,7 @@ describe("Workbook", () => {
         });
 
         describe("_parseNodesAsync", () => {
-            itAsync("should parse the nodes", () => {
+            it("should parse the nodes", () => {
                 workbook._zip = new JSZip();
                 return workbook._parseNodesAsync(["foo", "bar", "baz"])
                     .then(nodes => {
@@ -906,7 +906,7 @@ describe("Workbook", () => {
             });
 
             if (process.browser) {
-                itAsync("should convert to a blob", () => {
+                it("should convert to a blob", () => {
                     const input = Buffer.from([0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72]);
                     const output = workbook._convertBufferToOutput(input, "blob");
                     expect(output).toEqual(jasmine.any(Blob));
@@ -951,7 +951,7 @@ describe("Workbook", () => {
         });
 
         describe("_convertInputToBufferAsync", () => {
-            itAsync("should return buffers unchanged", () => {
+            it("should return buffers unchanged", () => {
                 const input = Buffer.alloc(5);
                 return workbook._convertInputToBufferAsync(input)
                     .then(output => {
@@ -960,7 +960,7 @@ describe("Workbook", () => {
             });
 
             if (process.browser) {
-                itAsync("should convert a blob", () => {
+                it("should convert a blob", () => {
                     const input = new Blob([new Uint8Array([0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72])], { type: Workbook.MIME_TYPE });
                     return workbook._convertInputToBufferAsync(input)
                         .then(output => {
@@ -970,7 +970,7 @@ describe("Workbook", () => {
                 });
             }
 
-            itAsync("should convert a base64 string", () => {
+            it("should convert a base64 string", () => {
                 return workbook._convertInputToBufferAsync("Zm9vYmFy", true)
                     .then(output => {
                         expect(Buffer.isBuffer(output)).toBe(true);
@@ -978,7 +978,7 @@ describe("Workbook", () => {
                     });
             });
 
-            itAsync("should convert a binary string", () => {
+            it("should convert a binary string", () => {
                 return workbook._convertInputToBufferAsync("foobar")
                     .then(output => {
                         expect(Buffer.isBuffer(output)).toBe(true);
@@ -986,7 +986,7 @@ describe("Workbook", () => {
                     });
             });
 
-            itAsync("should convert a Uint8Array", () => {
+            it("should convert a Uint8Array", () => {
                 const input = new Uint8Array([0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72])
                 return workbook._convertInputToBufferAsync(input)
                     .then(output => {
@@ -995,7 +995,7 @@ describe("Workbook", () => {
                     });
             });
 
-            itAsync("should convert an ArrayBuffer", () => {
+            it("should convert an ArrayBuffer", () => {
                 const input = new Uint8Array([0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72]).buffer;
                 return workbook._convertInputToBufferAsync(input)
                     .then(output => {

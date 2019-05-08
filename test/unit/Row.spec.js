@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("Row", () => {
     let Row, Cell, row, rowNode, sheet, style, styleSheet, workbook, horizontalPageBreaks;
@@ -18,7 +19,7 @@ describe("Row", () => {
         Cell.prototype.find = jasmine.createSpy('find');
         Cell.prototype.style = jasmine.createSpy('style');
 
-        Row = proxyquire("../../lib/Row", {
+        Row = proxyquire("../../lib/worksheets/Row", {
             './Cell': Cell,
             '@noCallThru': true
         });

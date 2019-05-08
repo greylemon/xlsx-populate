@@ -2,12 +2,13 @@
 
 const _ = require("lodash");
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("Column", () => {
     let Column, column, columnNode, sheet, style, styleSheet, workbook, existingRows, verticalPageBreaks;
 
     beforeEach(() => {
-        Column = proxyquire("../../lib/Column", {
+        Column = proxyquire("../../lib/worksheets/Column", {
             '@noCallThru': true
         });
 

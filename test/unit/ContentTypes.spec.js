@@ -1,12 +1,13 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("ContentTypes", () => {
     let ContentTypes, contentTypes, contentTypesNode;
 
     beforeEach(() => {
-        ContentTypes = proxyquire("../../lib/ContentTypes", {
+        ContentTypes = proxyquire("../../lib/workbooks/ContentTypes", {
             '@noCallThru': true
         });
 

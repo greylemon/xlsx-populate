@@ -1,12 +1,13 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("Range", () => {
     let Range, range, startCell, endCell, sheet, style;
 
     beforeEach(() => {
-        Range = proxyquire("../../lib/Range", {
+        Range = proxyquire("../../lib/worksheets/Range", {
             '@noCallThru': true
         });
 

@@ -1,27 +1,10 @@
 "use strict";
 
-const proxyquire = require("proxyquire");
-const Promise = require("jszip").external.Promise;
+const XmlParser = require('../../lib/xml/XmlParser');
+const expect = require('chai').expect;
 
-describe("XmlParser", () => {
-    let XmlParser, xmlParser, externals;
-
-    beforeEach(() => {
-        // proxyquire doesn't like overriding raw objects... a spy obj works.
-        externals = jasmine.createSpyObj("externals", ["_"]);
-        externals.Promise = Promise;
-
-        XmlParser = proxyquire("../../lib/XmlParser", {
-            './externals': externals,
-            '@noCallThru': true
-        });
-        xmlParser = new XmlParser();
-    });
-
-    describe("build", () => {
-        itAsync("should create the XML", () => {
-            const xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<root foo="1" bar="something">foo<child>
+const xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:foo="1" xmlns:bar="something">foo<child>
     <A>TEXT</A>
     <B foo:bar="value"/>
     <C/>
@@ -32,13 +15,18 @@ describe("XmlParser", () => {
     <G>-1.23</G>
   </child>bar</root>`;
 
-            return XmlParser.parseAsync(xml)
+describe("XmlParser", () => {
+    const xmlParser = new XmlParser();
+
+    describe("build", () => {
+        it("should create the XML", () => {
+            return xmlParser.parseAsync(xml)
                 .then(node => {
-                    expect(node).toEqualJson({
+                    expect(node).to.deep.eq({
                         name: 'root',
                         attributes: {
-                            foo: 1,
-                            bar: "something"
+                            'xmlns:foo': 1,
+                            'xmlns:bar': "something"
                         },
                         children: [
                             "foo",

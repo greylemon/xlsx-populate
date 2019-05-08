@@ -1,14 +1,12 @@
 "use strict";
 
-const proxyquire = require("proxyquire");
+const Encryptor = require("../../lib/Encryptor");
+const expect = require('chai').expect;
 
 describe("Encryptor", () => {
-    let Encryptor, XmlParser, XmlBuilder, encryptor;
+    let encryptor;
 
     beforeEach(() => {
-        Encryptor = proxyquire("../../lib/Encryptor", {
-            '@noCallThru': true
-        });
         encryptor = new Encryptor();
     });
 
@@ -46,18 +44,18 @@ describe("Encryptor", () => {
             };
 
             const output = encryptor._buildEncryptionInfo(input);
-            expect(output.slice(0, 8)).toEqualUInt8Array(Buffer.from([0x04, 0x00, 0x04, 0x00, 0x40, 0x00, 0x00, 0x00]));
-            expect(output.slice(8).toString()).toBe(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><encryption xmlns="http://schemas.microsoft.com/office/2006/encryption" xmlns:p="http://schemas.microsoft.com/office/2006/keyEncryptor/password" xmlns:c="http://schemas.microsoft.com/office/2006/keyEncryptor/certificate"><keyData saltSize="3" blockSize="34" keyBits="56" hashSize="12" cipherAlgorithm="PKG_CIPHER_ALGORITHM" cipherChaining="PKG_CIPHER_CHAINING" hashAlgorithm="PKG_HASH_ALGORITHM" saltValue="AQID"/><dataIntegrity encryptedHmacKey="BwgJ" encryptedHmacValue="CQgH"/><keyEncryptors><keyEncryptor uri="http://schemas.microsoft.com/office/2006/keyEncryptor/password"><p:encryptedKey spinCount="21" saltSize="3" blockSize="90" keyBits="43" hashSize="79" cipherAlgorithm="KEY_CIPHER_ALGORITHM" cipherChaining="KEY_CIPHER_CHAINING" hashAlgorithm="KEY_HASH_ALGORITHM" saltValue="BAUG" encryptedVerifierHashInput="AwIB" encryptedVerifierHashValue="AAEC" encryptedKeyValue="BgUE"/></keyEncryptor></keyEncryptors></encryption>`);
+            expect(output.slice(0, 8)).to.deep.eq(Buffer.from([0x04, 0x00, 0x04, 0x00, 0x40, 0x00, 0x00, 0x00]));
+            expect(output.slice(8).toString()).to.eq(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><encryption xmlns="http://schemas.microsoft.com/office/2006/encryption" xmlns:p="http://schemas.microsoft.com/office/2006/keyEncryptor/password" xmlns:c="http://schemas.microsoft.com/office/2006/keyEncryptor/certificate"><keyData saltSize="3" blockSize="34" keyBits="56" hashSize="12" cipherAlgorithm="PKG_CIPHER_ALGORITHM" cipherChaining="PKG_CIPHER_CHAINING" hashAlgorithm="PKG_HASH_ALGORITHM" saltValue="AQID"/><dataIntegrity encryptedHmacKey="BwgJ" encryptedHmacValue="CQgH"/><keyEncryptors><keyEncryptor uri="http://schemas.microsoft.com/office/2006/keyEncryptor/password"><p:encryptedKey spinCount="21" saltSize="3" blockSize="90" keyBits="43" hashSize="79" cipherAlgorithm="KEY_CIPHER_ALGORITHM" cipherChaining="KEY_CIPHER_CHAINING" hashAlgorithm="KEY_HASH_ALGORITHM" saltValue="BAUG" encryptedVerifierHashInput="AwIB" encryptedVerifierHashValue="AAEC" encryptedKeyValue="BgUE"/></keyEncryptor></keyEncryptors></encryption>`);
         });
     });
 
     describe("_parseEncryptionInfoAsync", () => {
-        itAsync("should parse the encryption info", () => {
+        it("should parse the encryption info", () => {
             const xml = `<encryption xmlns="http://schemas.microsoft.com/office/2006/encryption" xmlns:p="http://schemas.microsoft.com/office/2006/keyEncryptor/password" xmlns:c="http://schemas.microsoft.com/office/2006/keyEncryptor/certificate"><keyData saltSize="16" blockSize="16" keyBits="256" hashSize="64" cipherAlgorithm="AES" cipherChaining="ChainingModeCBC" hashAlgorithm="SHA512" saltValue="UWYgcVRmEQ/aHrvzqA7xnQ=="/><dataIntegrity encryptedHmacKey="9On0eyZfGVgmwHm4Fi1tV2640oW2wKPEJrU4UY/FUuS2uYh2sh5GRn2mvZ9ifaCOI0P8kdtVcaqDkvxOWODVrw==" encryptedHmacValue="NHg7giBi9SGaKJV3dq4seA+dFaaTYJNkuDBWI0ct92hhJ8mqvzwfiUAyo5a/f+fUmP7QdtH4LIADvgGKXiJLEw=="/><keyEncryptors><keyEncryptor uri="http://schemas.microsoft.com/office/2006/keyEncryptor/password"><p:encryptedKey spinCount="100000" saltSize="16" blockSize="16" keyBits="256" hashSize="64" cipherAlgorithm="AES" cipherChaining="ChainingModeCBC" hashAlgorithm="SHA512" saltValue="hcJBsEzDpOwkH2qzS9eo3Q==" encryptedVerifierHashInput="T0cM1hi2GTWxzwEa0zZ4vg==" encryptedVerifierHashValue="Pz9v8OrlVkcbrcdfDrxjzD92phbLdUGgifErOSx84RD3E9/c52bVYea9gK+luia2DR727ecXkAjqJT6KGpaOMw==" encryptedKeyValue="hQZ/4Gzp34ILXQ0zc/pRe3JjZVoAjAl2cl1hA56ww9E="/></keyEncryptor></keyEncryptors></encryption>`;
             const input = Buffer.concat([Buffer.alloc(8), Buffer.from(xml)]);
             return encryptor._parseEncryptionInfoAsync(Buffer.from(input))
                 .then(output => {
-                    expect(output).toEqualJson({
+                    expect(output).to.deep.eq({
                         package: {
                             cipherAlgorithm: 'AES',
                             cipherChaining: 'ChainingModeCBC',
@@ -81,15 +79,15 @@ describe("Encryptor", () => {
 
     describe("_hash", () => {
         it("should calculate the hash", () => {
-            const output = encryptor._hash("SHA256", Buffer.from([0x66, 0x6f, 0x6f]), Buffer.from([0x62, 0x61, 0x72]))
-            expect(output.toString("base64")).toBe("w6uP8Tcg6K2QR905Rms8iXTlksL6OD1KOWBxTK7wxPI=");
+            const output = encryptor._hash("SHA256", Buffer.from([0x66, 0x6f, 0x6f]), Buffer.from([0x62, 0x61, 0x72]));
+            expect(output.toString("base64")).to.eq("w6uP8Tcg6K2QR905Rms8iXTlksL6OD1KOWBxTK7wxPI=");
         });
     });
 
     describe("_hmac", () => {
         it("should calculate the hash", () => {
-            const output = encryptor._hash("SHA256", Buffer.from([1, 2, 3, 4, 5]), Buffer.from([0x66, 0x6f, 0x6f]), Buffer.from([0x62, 0x61, 0x72]))
-            expect(output.toString("base64")).toBe("H2SZlE1Npwp6Uw7Ee061LK6veJVKmj6SXO7ldVgTpa8=");
+            const output = encryptor._hash("SHA256", Buffer.from([1, 2, 3, 4, 5]), Buffer.from([0x66, 0x6f, 0x6f]), Buffer.from([0x62, 0x61, 0x72]));
+            expect(output.toString("base64")).to.eq("H2SZlE1Npwp6Uw7Ee061LK6veJVKmj6SXO7ldVgTpa8=");
         });
     });
 
@@ -100,25 +98,25 @@ describe("Encryptor", () => {
         const cipherText = Buffer.from("KEPYtNg0JfAy6H20RggidB7s6IiA16lJYrL/MfushFSGCwu6g1nWE+kbOe2/LnaNXPRtnXmFhhC/ITLEPFuWkpN8nT6FjDht2NCzmnzp85E=", "base64");
 
         it("should encrypt the data", () => {
-            const output = encryptor._crypt( true, "AES", "ChainingModeCBC", key, iv, plainText);
-            expect(output).toEqualUInt8Array(cipherText)
+            const output = encryptor._crypt(true, "AES", "ChainingModeCBC", key, iv, plainText);
+            expect(output).to.deep.eq(cipherText);
         });
 
         it("should decrypt the data", () => {
             const output = encryptor._crypt(false, "AES", "ChainingModeCBC", key, iv, cipherText);
-            expect(output).toEqualUInt8Array(plainText);
+            expect(output).to.deep.eq(plainText);
         });
     });
 
     describe("_createUInt32LEBuffer", () => {
         it("should create a 4 byte buffer by default", () => {
             const output = encryptor._createUInt32LEBuffer(1234);
-            expect(output).toEqualUInt8Array(Buffer.from([210, 4, 0, 0]));
+            expect(output).to.deep.eq(Buffer.from([210, 4, 0, 0]));
         });
 
         it("should create a buffer of given length", () => {
             const output = encryptor._createUInt32LEBuffer(4321, 7);
-            expect(output).toEqualUInt8Array(Buffer.from([225, 16, 0, 0, 0, 0, 0]));
+            expect(output).to.deep.eq(Buffer.from([225, 16, 0, 0, 0, 0, 0]));
         });
     });
 });

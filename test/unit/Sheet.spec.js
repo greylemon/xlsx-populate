@@ -1,6 +1,7 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("Sheet", () => {
     let Sheet, Range, Row, Cell, Column, Relationships, sheet, idNode, sheetNode, workbook, PageBreaks;
@@ -24,12 +25,12 @@ describe("Sheet", () => {
         Relationships.prototype.findById = jasmine.createSpy("Relationships.findById").and.callFake(id => ({ attributes: { Target: `TARGET:${id}` } }));
         Relationships.prototype.add = jasmine.createSpy("Relationships.add").and.returnValue({ attributes: { Id: "ID" } });
 
-        Sheet = proxyquire("../../lib/Sheet", {
-            './Range': Range,
-            './Row': Row,
-            './Column': Column,
-            './Cell': Cell,
-            './Relationships': Relationships,
+        Sheet = proxyquire("../../lib/worksheets/Sheet", {
+            './worksheets/Range': Range,
+            './worksheets/Row': Row,
+            './worksheets/Column': Column,
+            './worksheets/Cell': Cell,
+            './workbooks/Relationships': Relationships,
             '@noCallThru': true
         });
 

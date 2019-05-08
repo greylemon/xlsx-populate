@@ -1,16 +1,10 @@
 "use strict";
 
-const proxyquire = require("proxyquire");
+const XmlBuilder = require("../../lib/xml/XmlBuilder");
+const expect = require('chai').expect;
 
 describe("XmlBuilder", () => {
-    let XmlBuilder, xmlBuilder;
-
-    beforeEach(() => {
-        XmlBuilder = proxyquire("../../lib/XmlBuilder", {
-            '@noCallThru': true
-        });
-        xmlBuilder = new XmlBuilder();
-    });
+    const xmlBuilder = new XmlBuilder();
 
     describe("build", () => {
         it("should create the XML", () => {
@@ -41,7 +35,7 @@ describe("XmlBuilder", () => {
                 ]
             };
 
-            expect(xmlBuilder.build(node)).toBe(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><root foo="1" bar="something'&quot;&lt;&gt;&amp;">fooXML<child><A>TEXT</A><B foo:bar="value"/><C/></child>bar'"&lt;&gt;&amp;</root>`);
+            expect(xmlBuilder.build(node)).to.eq(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><root foo="1" bar="something'&quot;&lt;&gt;&amp;">fooXML<child><A>TEXT</A><B foo:bar="value"/><C/></child>bar'"&lt;&gt;&amp;</root>`);
         });
 
         it("should return undefined if root toXml yields nil", () => {
@@ -51,7 +45,7 @@ describe("XmlBuilder", () => {
                 }
             };
 
-            expect(xmlBuilder.build(node)).toBeUndefined();
+            expect(xmlBuilder.build(node)).to.be.undefined;
         });
     });
 });

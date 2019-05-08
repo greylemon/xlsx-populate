@@ -1,12 +1,13 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("CoreProperties", () => {
     let CoreProperties, coreProperties, corePropertiesNode;
 
     beforeEach(() => {
-        CoreProperties = proxyquire("../../lib/CoreProperties", {
+        CoreProperties = proxyquire("../../lib/workbooks/CoreProperties", {
             '@noCallThru': true
         });
 

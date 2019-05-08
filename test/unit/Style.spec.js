@@ -4,6 +4,7 @@
 
 const proxyquire = require("proxyquire");
 const _ = require("lodash");
+const expect = require('chai').expect;
 
 describe("Style", () => {
     let Style, style, styleSheet, id, xfNode, fontNode, fillNode, borderNode, emptyBorderNode;

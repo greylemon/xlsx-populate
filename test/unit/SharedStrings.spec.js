@@ -1,12 +1,13 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("SharedStrings", () => {
     let SharedStrings, sharedStrings, sharedStringsNode;
 
     beforeEach(() => {
-        SharedStrings = proxyquire("../../lib/SharedStrings", {
+        SharedStrings = proxyquire("../../lib/workbooks/SharedStrings", {
             '@noCallThru': true
         });
 

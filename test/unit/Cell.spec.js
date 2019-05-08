@@ -1,52 +1,46 @@
 "use strict";
 
-const proxyquire = require("proxyquire");
+const Cell = require("../../lib/worksheets/Cell");
+const FormulaError = require('../../lib/FormulaError');
 const RichTexts = require('../../lib/worksheets/RichText');
+const expect = require('chai').expect;
 
 describe("Cell", () => {
-    let Cell, cell, cellNode, row, sheet, workbook, sharedStrings, styleSheet, style, FormulaError, range;
+    let cell, cellNode, row, sheet, workbook, sharedStrings, styleSheet, style, range;
 
     beforeEach(() => {
-        FormulaError = jasmine.createSpyObj("FormulaError", ["getError"]);
-        FormulaError.getError.and.returnValue("ERROR");
-
-        Cell = proxyquire("../../lib/Cell", {
-            './FormulaError': FormulaError,
-            '@noCallThru': true
-        });
-
-        const Style = class {};
-        if (!Style.name) Style.name = "Style";
-        Style.prototype.id = jasmine.createSpy("Style.id").and.returnValue(4);
-        Style.prototype.style = jasmine.createSpy("Style.style").and.callFake(name => `STYLE:${name}`);
-        style = new Style();
-
-        styleSheet = jasmine.createSpyObj("styleSheet", ["createStyle"]);
-        styleSheet.createStyle.and.returnValue(style);
-
-        sharedStrings = jasmine.createSpyObj("sharedStrings", ['getIndexForString', 'getStringByIndex']);
-        sharedStrings.getIndexForString.and.returnValue(7);
-        sharedStrings.getStringByIndex.and.returnValue("STRING");
-
-        workbook = jasmine.createSpyObj("workbook", ["sharedStrings", "styleSheet"]);
-        workbook.sharedStrings.and.returnValue(sharedStrings);
-        workbook.styleSheet.and.returnValue(styleSheet);
-
-        range = jasmine.createSpyObj('range', ['value', 'style']);
-
-        sheet = jasmine.createSpyObj('sheet', ['createStyle', 'activeCell', 'updateMaxSharedFormulaId', 'name', 'column',
-            'clearCellsUsingSharedFormula', 'cell', 'range', 'hyperlink', 'dataValidation', 'verticalPageBreaks', 'setSharedFormulaRefCell']);
-        sheet.activeCell.and.returnValue("ACTIVE CELL");
-        sheet.name.and.returnValue("NAME");
-        sheet.column.and.returnValue("COLUMN");
-        sheet.hyperlink.and.returnValue("HYPERLINK");
-        sheet.range.and.returnValue(range);
-        sheet.dataValidation.and.returnValue("DATAVALIDATION");
-
-        row = jasmine.createSpyObj('row', ['sheet', 'workbook', 'rowNumber', 'addPageBreak']);
-        row.sheet.and.returnValue(sheet);
-        row.workbook.and.returnValue(workbook);
-        row.rowNumber.and.returnValue(7);
+        // const Style = class {};
+        // if (!Style.name) Style.name = "Style";
+        // Style.prototype.id = jasmine.createSpy("Style.id").and.returnValue(4);
+        // Style.prototype.style = jasmine.createSpy("Style.style").and.callFake(name => `STYLE:${name}`);
+        // style = new Style();
+        //
+        // styleSheet = jasmine.createSpyObj("styleSheet", ["createStyle"]);
+        // styleSheet.createStyle.and.returnValue(style);
+        //
+        // sharedStrings = jasmine.createSpyObj("sharedStrings", ['getIndexForString', 'getStringByIndex']);
+        // sharedStrings.getIndexForString.and.returnValue(7);
+        // sharedStrings.getStringByIndex.and.returnValue("STRING");
+        //
+        // workbook = jasmine.createSpyObj("workbook", ["sharedStrings", "styleSheet"]);
+        // workbook.sharedStrings.and.returnValue(sharedStrings);
+        // workbook.styleSheet.and.returnValue(styleSheet);
+        //
+        // range = jasmine.createSpyObj('range', ['value', 'style']);
+        //
+        // sheet = jasmine.createSpyObj('sheet', ['createStyle', 'activeCell', 'updateMaxSharedFormulaId', 'name', 'column',
+        //     'clearCellsUsingSharedFormula', 'cell', 'range', 'hyperlink', 'dataValidation', 'verticalPageBreaks', 'setSharedFormulaRefCell']);
+        // sheet.activeCell.and.returnValue("ACTIVE CELL");
+        // sheet.name.and.returnValue("NAME");
+        // sheet.column.and.returnValue("COLUMN");
+        // sheet.hyperlink.and.returnValue("HYPERLINK");
+        // sheet.range.and.returnValue(range);
+        // sheet.dataValidation.and.returnValue("DATAVALIDATION");
+        //
+        // row = jasmine.createSpyObj('row', ['sheet', 'workbook', 'rowNumber', 'addPageBreak']);
+        // row.sheet.and.returnValue(sheet);
+        // row.workbook.and.returnValue(workbook);
+        // row.rowNumber.and.returnValue(7);
 
         cellNode = {
             name: 'c',
@@ -695,7 +689,7 @@ describe("Cell", () => {
         beforeEach(() => {
             cell.clear();
             delete cell._columnNumber;
-            spyOn(cell, "_parseNode");
+            // spyOn(cell, "_parseNode");
         });
 
         it("should parse the node", () => {

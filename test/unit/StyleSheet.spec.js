@@ -1,13 +1,14 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("StyleSheet", () => {
     let Style, StyleSheet, styleSheet, styleSheetNode;
 
     beforeEach(() => {
         Style = jasmine.createSpy("_Style");
-        StyleSheet = proxyquire("../../lib/StyleSheet", {
+        StyleSheet = proxyquire("../../lib/workbooks/StyleSheet", {
             "./Style": Style,
             '@noCallThru': true
         });

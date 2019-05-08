@@ -1,6 +1,7 @@
 "use strict";
 
 const proxyquire = require("proxyquire");
+const expect = require('chai').expect;
 
 describe("addressConverter", () => {
     let addressConverter;
@@ -13,29 +14,29 @@ describe("addressConverter", () => {
 
     describe("columnNameToNumber", () => {
         it("should convert the name to a number", () => {
-            expect(addressConverter.columnNameToNumber('A')).toBe(1);
-            expect(addressConverter.columnNameToNumber('C')).toBe(3);
-            expect(addressConverter.columnNameToNumber('Z')).toBe(26);
-            expect(addressConverter.columnNameToNumber('AA')).toBe(27);
-            expect(addressConverter.columnNameToNumber('ZZ')).toBe(702);
-            expect(addressConverter.columnNameToNumber('AAC')).toBe(705);
+            expect(addressConverter.columnNameToNumber('A')).to.eq(1);
+            expect(addressConverter.columnNameToNumber('C')).to.eq(3);
+            expect(addressConverter.columnNameToNumber('Z')).to.eq(26);
+            expect(addressConverter.columnNameToNumber('AA')).to.eq(27);
+            expect(addressConverter.columnNameToNumber('ZZ')).to.eq(702);
+            expect(addressConverter.columnNameToNumber('AAC')).to.eq(705);
         });
     });
 
     describe("columnNumberToName", () => {
         it("should convert the number to a name", () => {
-            expect(addressConverter.columnNumberToName(1)).toBe('A');
-            expect(addressConverter.columnNumberToName(3)).toBe('C');
-            expect(addressConverter.columnNumberToName(26)).toBe('Z');
-            expect(addressConverter.columnNumberToName(27)).toBe('AA');
-            expect(addressConverter.columnNumberToName(702)).toBe('ZZ');
-            expect(addressConverter.columnNumberToName(705)).toBe('AAC');
+            expect(addressConverter.columnNumberToName(1)).to.eq('A');
+            expect(addressConverter.columnNumberToName(3)).to.eq('C');
+            expect(addressConverter.columnNumberToName(26)).to.eq('Z');
+            expect(addressConverter.columnNumberToName(27)).to.eq('AA');
+            expect(addressConverter.columnNumberToName(702)).to.eq('ZZ');
+            expect(addressConverter.columnNumberToName(705)).to.eq('AAC');
         });
     });
 
     describe("fromAddress", () => {
         it("should parse a range", () => {
-            expect(addressConverter.fromAddress("A1:C3")).toEqualJson({
+            expect(addressConverter.fromAddress("A1:C3")).to.deep.eq({
                 type: 'range',
                 startColumnAnchored: false,
                 startColumnName: 'A',
@@ -49,7 +50,7 @@ describe("addressConverter", () => {
                 endRowNumber: 3
             });
 
-            expect(addressConverter.fromAddress("Sheet1!$B$4:$D$1")).toEqualJson({
+            expect(addressConverter.fromAddress("Sheet1!$B$4:$D$1")).to.deep.eq({
                 type: 'range',
                 sheetName: 'Sheet1',
                 startColumnAnchored: true,
@@ -66,7 +67,7 @@ describe("addressConverter", () => {
         });
 
         it("should parse a cell", () => {
-            expect(addressConverter.fromAddress("Z56")).toEqualJson({
+            expect(addressConverter.fromAddress("Z56")).to.deep.eq({
                 type: 'cell',
                 columnAnchored: false,
                 columnName: 'Z',
@@ -75,7 +76,7 @@ describe("addressConverter", () => {
                 rowNumber: 56
             });
 
-            expect(addressConverter.fromAddress("'Sheet One'!$AC$1")).toEqualJson({
+            expect(addressConverter.fromAddress("'Sheet One'!$AC$1")).to.deep.eq({
                 type: 'cell',
                 sheetName: 'Sheet One',
                 columnAnchored: true,
@@ -87,7 +88,7 @@ describe("addressConverter", () => {
         });
 
         it("should parse a column range", () => {
-            expect(addressConverter.fromAddress("Z:ZZ")).toEqualJson({
+            expect(addressConverter.fromAddress("Z:ZZ")).to.deep.eq({
                 type: 'columnRange',
                 startColumnAnchored: false,
                 startColumnName: 'Z',
@@ -97,7 +98,7 @@ describe("addressConverter", () => {
                 endColumnNumber: 702
             });
 
-            expect(addressConverter.fromAddress("'Foo''s Bar'!$A:$B")).toEqualJson({
+            expect(addressConverter.fromAddress("'Foo''s Bar'!$A:$B")).to.deep.eq({
                 type: 'columnRange',
                 sheetName: "Foo's Bar",
                 startColumnAnchored: true,
@@ -110,14 +111,14 @@ describe("addressConverter", () => {
         });
 
         it("should parse a column", () => {
-            expect(addressConverter.fromAddress("E:E")).toEqualJson({
+            expect(addressConverter.fromAddress("E:E")).to.deep.eq({
                 type: 'column',
                 columnAnchored: false,
                 columnName: 'E',
                 columnNumber: 5
             });
 
-            expect(addressConverter.fromAddress("'Foo!'!$A:$A")).toEqualJson({
+            expect(addressConverter.fromAddress("'Foo!'!$A:$A")).to.deep.eq({
                 type: 'column',
                 sheetName: "Foo!",
                 columnAnchored: true,
@@ -127,7 +128,7 @@ describe("addressConverter", () => {
         });
 
         it("should parse a row range", () => {
-            expect(addressConverter.fromAddress("103:104")).toEqualJson({
+            expect(addressConverter.fromAddress("103:104")).to.deep.eq({
                 type: 'rowRange',
                 startRowAnchored: false,
                 startRowNumber: 103,
@@ -135,7 +136,7 @@ describe("addressConverter", () => {
                 endRowNumber: 104
             });
 
-            expect(addressConverter.fromAddress("Sheet1!$5:$3")).toEqualJson({
+            expect(addressConverter.fromAddress("Sheet1!$5:$3")).to.deep.eq({
                 type: 'rowRange',
                 sheetName: 'Sheet1',
                 startRowAnchored: true,
@@ -146,13 +147,13 @@ describe("addressConverter", () => {
         });
 
         it("should parse a row", () => {
-            expect(addressConverter.fromAddress("23:23")).toEqualJson({
+            expect(addressConverter.fromAddress("23:23")).to.deep.eq({
                 type: 'row',
                 rowAnchored: false,
                 rowNumber: 23
             });
 
-            expect(addressConverter.fromAddress("Sheet1!$5:$5")).toEqualJson({
+            expect(addressConverter.fromAddress("Sheet1!$5:$5")).to.deep.eq({
                 type: 'row',
                 sheetName: 'Sheet1',
                 rowAnchored: true,
@@ -161,7 +162,7 @@ describe("addressConverter", () => {
         });
 
         it("should return undefined", () => {
-            expect(addressConverter.fromAddress("Foo")).toBeUndefined();
+            expect(addressConverter.fromAddress("Foo")).to.be.undefined;
         });
     });
 
@@ -179,7 +180,7 @@ describe("addressConverter", () => {
                 endColumnNumber: 3,
                 endRowAnchored: false,
                 endRowNumber: 3
-            })).toBe("A1:C3");
+            })).to.eq("A1:C3");
 
             expect(addressConverter.toAddress({
                 type: 'range',
@@ -194,7 +195,7 @@ describe("addressConverter", () => {
                 endColumnNumber: 4,
                 endRowAnchored: true,
                 endRowNumber: 1
-            })).toBe("'Sheet1'!$B$4:$D$1");
+            })).to.eq("'Sheet1'!$B$4:$D$1");
         });
 
         it("should create a cell address", () => {
@@ -205,7 +206,7 @@ describe("addressConverter", () => {
                 columnNumber: 26,
                 rowAnchored: false,
                 rowNumber: 56
-            })).toBe("Z56");
+            })).to.eq("Z56");
 
             expect(addressConverter.toAddress({
                 type: 'cell',
@@ -215,7 +216,7 @@ describe("addressConverter", () => {
                 columnNumber: 29,
                 rowAnchored: true,
                 rowNumber: 1
-            })).toBe("'Sheet One'!$AC$1");
+            })).to.eq("'Sheet One'!$AC$1");
         });
 
         it("should create a column range address", () => {
@@ -227,7 +228,7 @@ describe("addressConverter", () => {
                 endColumnAnchored: false,
                 endColumnName: 'ZZ',
                 endColumnNumber: 702
-            })).toBe("Z:ZZ");
+            })).to.eq("Z:ZZ");
 
             expect(addressConverter.toAddress({
                 type: 'columnRange',
@@ -238,7 +239,7 @@ describe("addressConverter", () => {
                 endColumnAnchored: true,
                 endColumnName: 'B',
                 endColumnNumber: 2
-            })).toBe("'Foo''s Bar'!$A:$B");
+            })).to.eq("'Foo''s Bar'!$A:$B");
         });
 
         it("should create a column address", () => {
@@ -247,7 +248,7 @@ describe("addressConverter", () => {
                 columnAnchored: false,
                 columnName: 'E',
                 columnNumber: 5
-            })).toBe("E:E");
+            })).to.eq("E:E");
 
             expect(addressConverter.toAddress({
                 type: 'column',
@@ -255,7 +256,7 @@ describe("addressConverter", () => {
                 columnAnchored: true,
                 columnName: 'A',
                 columnNumber: 1
-            })).toBe("'Foo!'!$A:$A");
+            })).to.eq("'Foo!'!$A:$A");
         });
 
         it("should create a row range address", () => {
@@ -265,7 +266,7 @@ describe("addressConverter", () => {
                 startRowNumber: 103,
                 endRowAnchored: false,
                 endRowNumber: 104
-            })).toBe("103:104");
+            })).to.eq("103:104");
 
             expect(addressConverter.toAddress({
                 type: 'rowRange',
@@ -274,7 +275,7 @@ describe("addressConverter", () => {
                 startRowNumber: 5,
                 endRowAnchored: true,
                 endRowNumber: 3
-            })).toBe("'Sheet1'!$5:$3");
+            })).to.eq("'Sheet1'!$5:$3");
         });
 
         it("should create a row address", () => {
@@ -282,14 +283,14 @@ describe("addressConverter", () => {
                 type: 'row',
                 rowAnchored: false,
                 rowNumber: 23
-            })).toBe("23:23");
+            })).to.eq("23:23");
 
             expect(addressConverter.toAddress({
                 type: 'row',
                 sheetName: 'Sheet1',
                 rowAnchored: true,
                 rowNumber: 5
-            })).toBe("'Sheet1'!$5:$5");
+            })).to.eq("'Sheet1'!$5:$5");
         });
     });
 });
