@@ -41,12 +41,12 @@ function something(workbook) {
     // a2.value(3);
     // console.log(a3.value());
 
-    console.log('...');
-    const a4 = workbook.sheet(0).cell('A4');
-    const a5 = workbook.sheet(0).cell('A5');
-    a4.formula('1233');
-    a5.setFormula('A4');
-    console.log(a5.value());
+    // console.log('...');
+    // const a4 = workbook.sheet(0).cell('A4');
+    // const a5 = workbook.sheet(0).cell('A5');
+    // a4.formula('1233');
+    // a5.setFormula('A4');
+    // console.log(a5.value());
 
 
 
@@ -57,6 +57,8 @@ function something(workbook) {
     // console.log(cell2.getValue())
     // console.log(cell3.getValue())
 
+    // workbook.sheet('Main').hyperlink('')
+
     console.log(`process formulas uses ${Date.now() - t}ms, with ? formulas, query data uses ??ms`);
     t = Date.now();
     // get data
@@ -64,13 +66,13 @@ function something(workbook) {
 
     console.log(`process formulas uses ${Date.now() - t}ms`);
 }
-
+const file = ['./TF33674675.xlsx', './test.xlsm']
 setTimeout(() => {
     t = Date.now();
-    XlsxPopulate.fromFileAsync("./test/test.xlsm")
+    XlsxPopulate.fromFileAsync(file[0])
         .then(something)
         .then(() => {
-            wb.toFileAsync('./out.xlsm');
+            wb.toFileAsync('./out.xlsx');
         });
 
 }, 0);
