@@ -9,7 +9,7 @@
     "FileReader": true
   },
   "parserOptions": {
-    "ecmaVersion": 2016
+    "ecmaVersion": 2017
   },
   "rules": {
     /* Possible Errors */
