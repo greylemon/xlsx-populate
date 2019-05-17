@@ -6,7 +6,7 @@ const files = [];
 const extensions = ['.xlsx', '.xlsm', '.xlsb'];
 
 describe('Read test', () => {
-    const fileNames = fs.readdirSync('./');
+    const fileNames = fs.readdirSync('./excels');
     fileNames.forEach(file => {
         const i = file.lastIndexOf('.');
         if (i < 0) return;
@@ -16,7 +16,7 @@ describe('Read test', () => {
     });
     files.forEach(file => {
         it(`should read ${file}`, done => {
-            XlsxPopulate.fromFileAsync(file)
+            XlsxPopulate.fromFileAsync('./excels/' + file)
                 .then(workbook => {
                     done();
                     return workbook;
@@ -28,3 +28,11 @@ describe('Read test', () => {
         });
     });
 });
+
+// it('should read file', function (done) {
+//     XlsxPopulate.fromFileAsync('./excels/' + '2017-18 Q4 Community LHIN Managed BLANK V1.xlsm')
+//         .then(workbook => {
+//             done();
+//             return workbook;
+//         });
+// });
