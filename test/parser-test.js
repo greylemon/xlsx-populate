@@ -18,6 +18,7 @@ describe('Read test', () => {
         it(`should read ${file}`, done => {
             XlsxPopulate.fromFileAsync('./excels/' + file)
                 .then(workbook => {
+                    workbook.sheet(0).cell(1, 1).style('bold');
                     done();
                     return workbook;
                 });
