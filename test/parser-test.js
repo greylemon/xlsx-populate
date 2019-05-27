@@ -19,13 +19,14 @@ describe('Read test', () => {
             XlsxPopulate.fromFileAsync('./excels/' + file)
                 .then(workbook => {
                     workbook.sheet(0).cell(1, 1).style('bold');
-                    done();
                     return workbook;
+                })
+                .then(workbook => {
+                    workbook.toFileAsync(`./excels/out/${file.slice(0, file.lastIndexOf('.'))}.out${file.slice(file.lastIndexOf('.'))}`)
+                        .then(() => {
+                            done();
+                        });
                 });
-            // .then(workbook => {
-            //     workbook.toFileAsync(`${file.slice(0, file.lastIndexOf('.'))}.out${file.slice(file.lastIndexOf('.'))}`);
-            //     done();
-            // });
         });
     });
 });
