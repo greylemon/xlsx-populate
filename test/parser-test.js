@@ -14,13 +14,13 @@ describe('Read test', () => {
             files.push(file);
         }
     });
-    // files = ['TF33674675.xlsx'];
+    files = ['formula-test.xlsx', 'TF33674675.xlsx'];
     files.forEach(file => {
         it(`should read ${file}`, done => {
             XlsxPopulate.fromFileAsync('./excels/' + file)
                 .then(workbook => {
                     workbook.sheet(0).cell(1, 1).style('bold');
-                    workbook.sheet(0).row(5).delete();
+                    workbook.sheet(0).row(1).delete();
                     return workbook;
                 })
                 .then(workbook => {

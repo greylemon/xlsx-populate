@@ -7,31 +7,39 @@ describe("Replacer", () => {
     describe("Replacer.replaceRowNumber", () => {
         describe("delete rows", () => {
             it("should replace cell reference", done => {
-                const res = replaceRowNumber('Sheet1!F30', 'Sheet1', 'Sheet1', 30, 29);
+                let res = replaceRowNumber('Sheet1!F30', 'Sheet1', 'Sheet1', 1, -1);
+                expect(res).to.eq('Sheet1!F29');
+                res = replaceRowNumber('Sheet1!F30', 'Sheet1', 'Sheet1', 29, -1);
                 expect(res).to.eq('Sheet1!F29');
                 done();
             });
 
             it("should replace range reference", done => {
-                let res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 30, 29);
+                let res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 30, -1);
                 expect(res).to.eq('Sheet1!F29:H33');
-                res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 30, 28);
+                res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 30, -2);
                 expect(res).to.eq('Sheet1!F29:H32');
-                res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 34, 29);
+                res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 29, -6);
                 expect(res).to.eq('#REF!');
-                res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 35, 28);
+                res = replaceRowNumber('Sheet1!F29:H34', 'Sheet1', 'Sheet1', 29, -6);
                 expect(res).to.eq('#REF!');
+                res = replaceRowNumber('Sheet1!B10:B12', 'Sheet1', 'Sheet1', 1, -1);
+                expect(res).to.eq('Sheet1!B9:B11');
+                res = replaceRowNumber('Sheet1!B1:B12', 'Sheet1', 'Sheet1', 1, -1);
+                expect(res).to.eq('Sheet1!B1:B11');
+                res = replaceRowNumber('Sheet1!B5:B12', 'Sheet1', 'Sheet1', 5, -1);
+                expect(res).to.eq('Sheet1!B4:B11');
                 done();
             });
 
             it("should replace row reference", done => {
-                let res = replaceRowNumber('Sheet1!29:34', 'Sheet1', 'Sheet1', 30, 29);
+                let res = replaceRowNumber('Sheet1!29:34', 'Sheet1', 'Sheet1', 30, -1);
                 expect(res).to.eq('Sheet1!29:33');
-                res = replaceRowNumber('Sheet1!29:34', 'Sheet1', 'Sheet1', 30, 28);
+                res = replaceRowNumber('Sheet1!29:34', 'Sheet1', 'Sheet1', 30, -2);
                 expect(res).to.eq('Sheet1!29:32');
-                res = replaceRowNumber('Sheet1!29:34+1', 'Sheet1', 'Sheet1', 34, 29);
+                res = replaceRowNumber('Sheet1!29:34+1', 'Sheet1', 'Sheet1', 29, -6);
                 expect(res).to.eq('#REF!+1');
-                res = replaceRowNumber('Sheet1!29:34', 'Sheet1', 'Sheet1', 35, 28);
+                res = replaceRowNumber('Sheet1!29:34', 'Sheet1', 'Sheet1', 29, -6);
                 expect(res).to.eq('#REF!');
                 done();
             });
