@@ -61,10 +61,10 @@
 <a href="https://www.npmjs.org/package/xlsx-populate"><img src="http://img.shields.io/npm/dm/xlsx-populate.svg" alt="npm module downloads per month"></a>
 <a href="https://travis-ci.org/dtjohnson/xlsx-populate"><img src="https://travis-ci.org/dtjohnson/xlsx-populate.svg?branch=master" alt="Build Status"></a>
 <a href="https://david-dm.org/dtjohnson/xlsx-populate"><img src="https://david-dm.org/dtjohnson/xlsx-populate.svg" alt="Dependency Status"></a></p>
-<h1>xlsx-populate</h1>
+<h1 id="xlsx-populate">xlsx-populate</h1>
 <p>Excel XLSX parser/generator written in JavaScript with Node.js and browser support, jQuery/d3-style method chaining, encryption, and a focus on keeping existing workbook features and styles in tact.</p>
-<h1><a href="https://lesterlyu.github.io/xlsx-populate/xlsx-populate/1.19.1/">API Document</a></h1>
-<h2>Table of Contents</h2>
+<h1 id="api-document"><a href="https://lesterlyu.github.io/xlsx-populate/xlsx-populate/1.19.1/">API Document</a></h1>
+<h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#installation">Installation</a>
 <ul>
@@ -115,12 +115,12 @@
 <li><a href="#style-reference">Style Reference</a></li>
 <li><a href="#api-reference">API Reference</a></li>
 </ul>
-<h2>Installation</h2>
-<h3>Node.js</h3>
+<h2 id="installation">Installation</h2>
+<h3 id="node.js">Node.js</h3>
 <pre class="prettyprint source lang-bash"><code>npm install xlsx-populate
 </code></pre>
 <p>Note that xlsx-populate uses ES6 features so only Node.js v4+ is supported.</p>
-<h3>Browser</h3>
+<h3 id="browser">Browser</h3>
 <p>A functional browser example can be found in <a href="https://gitcdn.xyz/repo/dtjohnson/xlsx-populate/master/examples/browser/index.html">examples/browser/index.html</a>.</p>
 <p>xlsx-populate is written first for Node.js. We use <a href="http://browserify.org/">browserify</a> and <a href="https://github.com/babel/babelify">babelify</a> to transpile and pack up the module for use in the browser.</p>
 <p>You have a number of options to include the code in the browser. You can download the combined, minified code from the browser directory in this repository or you can install with bower:</p>
@@ -128,9 +128,9 @@
 </code></pre>
 <p>After including the module in the browser, it is available globally as <code>XlsxPopulate</code>.</p>
 <p>Alternatively, you can require this module using <a href="http://browserify.org/">browserify</a>. Since xlsx-populate uses ES6 features, you will also need to use <a href="https://github.com/babel/babelify">babelify</a> with <a href="https://www.npmjs.com/package/babel-preset-env">babel-preset-env</a>.</p>
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 <p>xlsx-populate has an <a href="#api-reference">extensive API</a> for working with Excel workbooks. This section reviews the most common functions and use cases. Examples can also be found in the examples directory of the source code.</p>
-<h3>Populating Data</h3>
+<h3 id="populating-data">Populating Data</h3>
 <p>To populate data in a workbook, you first load one (either blank, from data, or from file). Then you can access sheets and
 cells within the workbook to manipulate them.</p>
 <pre class="prettyprint source lang-js"><code>const XlsxPopulate = require('xlsx-populate');
@@ -145,7 +145,7 @@ XlsxPopulate.fromBlankAsync()
         return workbook.toFileAsync(&quot;./out.xlsx&quot;);
     });
 </code></pre>
-<h3>Parsing Data</h3>
+<h3 id="parsing-data">Parsing Data</h3>
 <p>You can pull data out of existing workbooks using <a href="#Cell+value">Cell.value</a> as a getter without any arguments:</p>
 <pre class="prettyprint source lang-js"><code>const XlsxPopulate = require('xlsx-populate');
 
@@ -160,7 +160,7 @@ XlsxPopulate.fromFileAsync(&quot;./Book1.xlsx&quot;)
     });
 </code></pre>
 <p><strong>Note</strong>: in cells that contain values calculated by formulas, Excel will store the calculated value in the workbook. The <a href="#Cell+value">value</a> method will return the value of the cells at the time the workbook was saved. xlsx-populate will <em>not</em> recalculate the values as you manipulate the workbook and will <em>not</em> write the values to the output.</p>
-<h3>Ranges</h3>
+<h3 id="ranges">Ranges</h3>
 <p>xlsx-populate also supports ranges of cells to allow parsing/manipulation of multiple cells at once.</p>
 <pre class="prettyprint source lang-js"><code>const r = workbook.sheet(0).range(&quot;A1:C3&quot;);
 
@@ -189,14 +189,14 @@ const values = workbook.sheet(&quot;Sheet1&quot;).usedRange().value();
 ]);
 </code></pre>
 <p>The set range is returned.</p>
-<h3>Rows and Columns</h3>
+<h3 id="rows-and-columns">Rows and Columns</h3>
 <p>You can access rows and columns in order to change size, hide/show, or access cells within:</p>
 <pre class="prettyprint source lang-js"><code>// Get the B column, set its width and unhide it (assuming it was hidden).
 sheet.column(&quot;B&quot;).width(25).hidden(false);
 
 const cell = sheet.row(5).cell(3); // Returns the cell at C5.
 </code></pre>
-<h3>Managing Sheets</h3>
+<h3 id="managing-sheets">Managing Sheets</h3>
 <p>xlsx-populate supports a number of options for managing sheets.</p>
 <p>You can get a sheet by name or index or get all of the sheets as an array:</p>
 <pre class="prettyprint source lang-js"><code>// Get sheet by index
@@ -264,7 +264,7 @@ sheet.active(true);
 // Or from the workbook
 workbook.activeSheet(&quot;Sheet2&quot;);
 </code></pre>
-<h3>Defined Names</h3>
+<h3 id="defined-names">Defined Names</h3>
 <p>Excel supports creating defined names that refer to addresses, formulas, or constants. These defined names can be scoped
 to the entire workbook or just individual sheets. xlsx-populate supports looking up defined names that refer to cells or
 ranges. (Dereferencing other names will result in an error.) Defined names are particularly useful if you are populating
@@ -282,7 +282,7 @@ workbook.definedName(&quot;some name&quot;, &quot;TRUE&quot;);
 // Delete a sheet-scoped defined name:
 workbook.sheet(0).definedName(&quot;some name&quot;, null);
 </code></pre>
-<h3>Find and Replace</h3>
+<h3 id="find-and-replace">Find and Replace</h3>
 <p>You can search for occurrences of text in cells within the workbook or sheets and optionally replace them.</p>
 <pre class="prettyprint source lang-js"><code>// Find all occurrences of the text &quot;foo&quot; in the workbook and replace with &quot;bar&quot;.
 workbook.find(&quot;foo&quot;, &quot;bar&quot;); // Returns array of matched cells
@@ -300,7 +300,7 @@ workbook.sheet(&quot;Sheet1&quot;).cell(&quot;A1&quot;).find(&quot;foo&quot;); /
 <pre class="prettyprint source lang-js"><code>// Use a RegExp to replace all lowercase letters with uppercase
 workbook.find(/[a-z]+/g, match => match.toUpperCase());
 </code></pre>
-<h3>Styles</h3>
+<h3 id="styles">Styles</h3>
 <p>xlsx-populate supports a wide range of cell formatting. See the <a href="#style-reference">Style Reference</a> for the various options.</p>
 <p>To set/set a cell style:</p>
 <pre class="prettyprint source lang-js"><code>// Set a single style
@@ -384,13 +384,13 @@ You can also look up the desired format code in Excel:</p>
 <li>Switch the category to &quot;Custom&quot; if it is not already.</li>
 <li>The code in the &quot;Type&quot; box is the format you should copy.</li>
 </ul>
-<h3>Rich Texts</h3>
+<h3 id="rich-texts">Rich Texts</h3>
 <p>You can read/write rich texts to cells.</p>
-<h4>Supported styles</h4>
+<h4 id="supported-styles">Supported styles</h4>
 <p><code>bold</code>, <code>italic</code>, <code>underline</code>, <code>strikethrough</code>, <code>subscript</code>, <code>fontSize</code>,
 <code>fontFamily</code>, <code>fontGenericFamily</code>, <code>fontScheme</code>, <code>fontColor</code>.
 See the <a href="#style-reference">Style Reference</a> for the various options.</p>
-<h4>Usage</h4>
+<h4 id="usage-2">Usage</h4>
 <p>You can read and modify rich texts on an existing rich text cell:</p>
 <pre class="prettyprint source lang-js"><code>// assume A1 is a rich text cell
 const RichText = require('xlsx-Populate').RichText;
@@ -442,7 +442,7 @@ cell.value().add('text', { bold: true }, 1);
 // add after the last fragment
 cell.value().add('text', { bold: true });
 </code></pre>
-<h4>Notes</h4>
+<h4 id="notes">Notes</h4>
 <p>We make a deep copy of the richtext instance when assign it to a cell, which
 means you can only modify the content of the richtext before calling <code>cell.value(richtext)</code>.
 Any modification to the richtext instance after calling <code>cell.value(richtext)</code> will not
@@ -486,7 +486,7 @@ You may also need to set row height to have all lines displayed.</p>
 // remember to set height to show the whole row
 workbook.sheet(0).row(1).height(100);
 </code></pre>
-<h3>Dates</h3>
+<h3 id="dates">Dates</h3>
 <p>Excel stores date/times as the number of days since 1/1/1900 (<a href="https://en.wikipedia.org/wiki/Leap_year_bug">sort of</a>). It just applies a number formatting to make the number appear as a date. So to set a date value, you will need to also set a number format for a date if one doesn't already exist in the cell:</p>
 <pre class="prettyprint source lang-js"><code>cell.value(new Date(2017, 1, 22)).style(&quot;numberFormat&quot;, &quot;dddd, mmmm dd, yyyy&quot;);
 </code></pre>
@@ -494,7 +494,7 @@ workbook.sheet(0).row(1).height(100);
 <pre class="prettyprint source lang-js"><code>const num = cell.value(); // 42788
 const date = XlsxPopulate.numberToDate(num); // Wed Feb 22 2017 00:00:00 GMT-0500 (Eastern Standard Time)
 </code></pre>
-<h3>Data Validation</h3>
+<h3 id="data-validation">Data Validation</h3>
 <p>Data validation is also supported. To set/get/remove a cell data validation:</p>
 <pre class="prettyprint source lang-js"><code>// Set the data validation
 cell.dataValidation({
@@ -547,7 +547,7 @@ const obj = range.dataValidation(); // Returns an object
 range.dataValidation(null); //Returns the Range
 </code></pre>
 <p>Please note, the data validation gets applied to the entire range, <em>not</em> each Cell in the range.</p>
-<h3>Method Chaining</h3>
+<h3 id="method-chaining">Method Chaining</h3>
 <p>xlsx-populate uses method-chaining similar to that found in <a href="https://jquery.com/">jQuery</a> and <a href="https://d3js.org/">d3</a>. This lets you construct large chains of setters as desired:</p>
 <pre class="prettyprint source lang-js"><code>workbook
     .sheet(0)
@@ -565,7 +565,7 @@ range.dataValidation(null); //Returns the Range
             .style(&quot;underline&quot;, &quot;double&quot;);
 
 </code></pre>
-<h3>Hyperlinks</h3>
+<h3 id="hyperlinks">Hyperlinks</h3>
 <p>Hyperlinks are also supported on cells using the <a href="#Cell+hyperlink">Cell.hyperlink</a> method. The method will <em>not</em> style the content to look like a hyperlink. You must do that yourself:</p>
 <pre class="prettyprint source lang-js"><code>// Set a hyperlink
 cell.value(&quot;Link Text&quot;)
@@ -592,7 +592,7 @@ cell.value(&quot;Click to go to an internal cell&quot;)
 cell.value(&quot;Click to go to an internal cell&quot;)
     .hyperlink(workbook.sheet(0).cell(&quot;A1&quot;));
 </code></pre>
-<h3>Print Options</h3>
+<h3 id="print-options">Print Options</h3>
 <p>Print options are accessed using the <a href="#Sheet+printOptions">Sheet.printOptions</a> method. Defaults are all assumed to be false, so if the attribute is missing, then the method returns false. A method <a href="#Sheet+printGridLines">Sheet.printGridLines</a> is provided to offer the convenience of setting both gridLines and gridLinesSet.</p>
 <pre class="prettyprint source lang-js"><code>// Print row and column headings
 sheet.printOptions('headings', true);
@@ -617,7 +617,7 @@ sheet.printOptions('gridLineSets', false);
 
 const isPrintGridLinesEnabled = sheet.printGridLines(); // Returns false
 </code></pre>
-<h3>Page Margins</h3>
+<h3 id="page-margins">Page Margins</h3>
 <p>Excel requires that all page margins are defined or none at all. To ensure this, please choose an existing or custom preset. See <a href="#Sheet+pageMarginsPreset">Sheet.pageMarginsPreset</a>.</p>
 <pre class="prettyprint source lang-js"><code>// Get the current preset
 sheet.pageMarginsPreset(); // Returns undefined
@@ -635,7 +635,7 @@ sheet.pageMargins('top', 1.1);
 // Get top page margin in inches.
 const topPageMarginInInches = sheet.pageMargins('top'); // Returns 1.1
 </code></pre>
-<h3>SheetView Panes</h3>
+<h3 id="sheetview-panes">SheetView Panes</h3>
 <p>SheetView Panes are accessed using the <a href="#Sheet+panes">Sheet.panes</a> method.
 For convenience, we have <a href="#Sheet+freezePanes">Sheet.freezePanes</a>,
 <a href="#Sheet+splitPanes">Sheet.splitPanes</a>, <a href="#Sheet+resetPanes">Sheet.resetPanes</a>,
@@ -658,7 +658,7 @@ sheet.splitPanes(1000, 2000);
 // reset to normal panes (no freeze panes and split panes)
 sheet.resetPanes();
 </code></pre>
-<h3>Serving from Express</h3>
+<h3 id="serving-from-express">Serving from Express</h3>
 <p>You can serve the workbook from <a href="http://expressjs.com/">express</a> or other web servers with something like this:</p>
 <pre class="prettyprint source lang-js"><code>router.get(&quot;/download&quot;, function (req, res, next) {
     // Open the workbook.
@@ -680,7 +680,7 @@ sheet.resetPanes();
         .catch(next);
 });
 </code></pre>
-<h3>Browser Usage</h3>
+<h3 id="browser-usage">Browser Usage</h3>
 <p>Usage in the browser is almost the same. A functional example can be found in <a href="https://gitcdn.xyz/repo/dtjohnson/xlsx-populate/master/examples/browser/index.html">examples/browser/index.html</a>. The library is exposed globally as <code>XlsxPopulate</code>. Existing workbooks can be loaded from a file:</p>
 <pre class="prettyprint source lang-js"><code>// Assuming there is a file input in the page with the id 'file-input'
 var file = document.getElementById(&quot;file-input&quot;).files[0];
@@ -730,7 +730,7 @@ req.send();
         location.href = &quot;data:&quot; + XlsxPopulate.MIME_TYPE + &quot;;base64,&quot; + base64;
     });
 </code></pre>
-<h3>Promises</h3>
+<h3 id="promises">Promises</h3>
 <p>xlsx-populate uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> to manage async input/output. By default it uses the <code>Promise</code> defined in the browser or Node.js. In browsers that don't support promises (IE) a <a href="https://stuk.github.io/jszip/documentation/api_jszip/external.html">polyfill is used via JSZip</a>.</p>
 <pre class="prettyprint source lang-js"><code>// Get the current promise library in use.
 // Helpful for getting a usable Promise library in IE.
@@ -741,7 +741,7 @@ var Promise = XlsxPopulate.Promise;
 const XlsxPopulate = require(&quot;xlsx-populate&quot;);
 XlsxPopulate.Promise = Promise;
 </code></pre>
-<h3>Encryption</h3>
+<h3 id="encryption">Encryption</h3>
 <p>XLSX Agile encryption and descryption are supported so you can read and write password-protected workbooks. To read a protected workbook, pass the password in as an option:</p>
 <pre class="prettyprint source lang-js"><code>XlsxPopulate.fromFileAsync(&quot;./Book1.xlsx&quot;, { password: &quot;S3cret!&quot; })
     .then(workbook => {
@@ -753,15 +753,15 @@ XlsxPopulate.Promise = Promise;
 </code></pre>
 <p>The password option is supported in all output methods. N.B. Workbooks will only be encrypted if you supply a password when outputting even if they had a password when reading.</p>
 <p>Encryption support is also available in the browser, but take care! Any password you put in browser code can be read by anyone with access to your code. You should only use passwords that are supplied by the end-user. Also, the performance of encryption/decryption in the browser is far worse than with Node.js. IE, in particular, is extremely slow. xlsx-populate is bundled for browsers with and without encryption support as the encryption libraries increase the size of the bundle a lot.</p>
-<h2>Missing Features</h2>
+<h2 id="missing-features">Missing Features</h2>
 <p>There are many, many features of the XLSX format that are not yet supported. If your use case needs something that isn't supported
 please open an issue to show your support. Better still, feel free to <a href="#contributing">contribute</a> a pull request!</p>
-<h2>Submitting an Issue</h2>
+<h2 id="submitting-an-issue">Submitting an Issue</h2>
 <p>If you happen to run into a bug or an issue, please feel free to <a href="https://github.com/dtjohnson/xlsx-populate/issues">submit an issue</a>. I only ask that you please include sample JavaScript code that demonstrates the issue.
 If the problem lies with modifying some template, it is incredibly difficult to debug the issue without the template. So please attach the template if possible. If you have confidentiality concerns, please attach a different workbook that exhibits the issue or you can send your workbook directly to <a href="https://github.com/dtjohnson">dtjohnson</a> after creating the issue.</p>
-<h2>Contributing</h2>
+<h2 id="contributing">Contributing</h2>
 <p>Pull requests are very much welcome! If you'd like to contribute, please make sure to read this section carefully first.</p>
-<h3>How xlsx-populate Works</h3>
+<h3 id="how-xlsx-populate-works">How xlsx-populate Works</h3>
 <p>An XLSX workbook is essentially a zip of a bunch of XML files. xlsx-populate uses <a href="https://stuk.github.io/jszip/">JSZip</a>
 to unzip the workbook and <a href="https://github.com/isaacs/sax-js">sax-js</a> to parse the XML documents into corresponding objects.
 As you call methods, xlsx-populate manipulates the content of those objects. When you generate the output, xlsx-populate
@@ -774,7 +774,7 @@ It is extremely difficult for libraries to be able to support the entire specifi
 only the portion of the spec they support and any other content/styles in the workbook they don't support are lost. Since
 xlsx-populate just manipulates the XML data, it is able to preserve styles and other content while still only supporting
 a fraction of the spec.</p>
-<h3>Setting up your Environment</h3>
+<h3 id="setting-up-your-environment">Setting up your Environment</h3>
 <p>You'll need to make sure <a href="https://nodejs.org/en/">Node.js</a> v4+ is installed (as xlsx-populate uses ES6 syntax). You'll also
 need to install <a href="https://github.com/gulpjs/gulp">gulp</a>:</p>
 <pre class="prettyprint source lang-bash"><code>npm install -g gulp
@@ -794,7 +794,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 <pre class="prettyprint source lang-bash"><code>gulp build
 </code></pre>
 <p>Verify all is working, check in your code, and submit a pull request.</p>
-<h3>Pull Request Checklist</h3>
+<h3 id="pull-request-checklist">Pull Request Checklist</h3>
 <p>To make sure your code is consistent and high quality, please make sure to follow this checklist before submitting a pull request:</p>
 <ul>
 <li>Your code must follow the getter/setter pattern using a single function for both. Check <code>arguments.length</code> or use <code>ArgHandler</code> to distinguish.</li>
@@ -806,7 +806,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 <li>Whenever possible, do not modify/break existing API behavior. This module adheres to the <a href="https://docs.npmjs.com/getting-started/semantic-versioning">semantic versioning standard</a>. So any breaking changes will require a major release.</li>
 <li>If your feature needs more documentation than just the JSDoc output, please add to the docs/template.md README file.</li>
 </ul>
-<h3>Gulp Tasks</h3>
+<h3 id="gulp-tasks">Gulp Tasks</h3>
 <p>xlsx-populate uses <a href="https://github.com/gulpjs/gulp">gulp</a> as a build tool. There are a number of tasks:</p>
 <ul>
 <li><strong>browser</strong> - Transpile and build client-side JavaScript project bundle using <a href="http://browserify.org/">browserify</a> and <a href="https://github.com/babel/babelify">babelify</a>.</li>
@@ -822,8 +822,8 @@ to build the code for the browser. Do that by running the gulp build command:</p
 <li><strong>build</strong> - Run all gulp tasks, including linting and tests, and build the docs and browser bundle.</li>
 <li><strong>default</strong> - Run blank, unit, and docs tasks and watch the source files for those tasks for changes.</li>
 </ul>
-<h2>Style Reference</h2>
-<h3>Styles</h3>
+<h2 id="style-reference">Style Reference</h2>
+<h3 id="styles-2">Styles</h3>
 <table>
 <thead>
 <tr>
@@ -1000,7 +1000,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h3>Color</h3>
+<h3 id="color">Color</h3>
 <p>An object representing a color.</p>
 <table>
 <thead>
@@ -1028,7 +1028,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h3>Borders</h3>
+<h3 id="borders">Borders</h3>
 <p>An object representing all of the borders.</p>
 <table>
 <thead>
@@ -1066,7 +1066,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h3>Border</h3>
+<h3 id="border">Border</h3>
 <p>An object representing an individual border.</p>
 <table>
 <thead>
@@ -1094,7 +1094,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h3>SolidFill</h3>
+<h3 id="solidfill">SolidFill</h3>
 <p>An object representing a solid fill.</p>
 <table>
 <thead>
@@ -1117,7 +1117,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h3>PatternFill</h3>
+<h3 id="patternfill">PatternFill</h3>
 <p>An object representing a pattern fill.</p>
 <table>
 <thead>
@@ -1150,7 +1150,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h3>GradientFill</h3>
+<h3 id="gradientfill">GradientFill</h3>
 <p>An object representing a gradient fill.</p>
 <table>
 <thead>
@@ -1213,7 +1213,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 </tr>
 </tbody>
 </table>
-<h2>API Reference</h2>
+<h2 id="api-reference">API Reference</h2>
 <!-- api --></article>
     </section>
 
@@ -1229,7 +1229,7 @@ to build the code for the browser. Do that by running the gulp build command:</p
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jul 02 2019 17:11:26 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jul 02 2019 17:20:56 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

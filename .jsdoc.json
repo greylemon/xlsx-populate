@@ -12,6 +12,9 @@
   "plugins": [
     "plugins/markdown"
   ],
+  "markdown": {
+    "idInHeadings": true
+  },
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": true,
