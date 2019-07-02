@@ -27,7 +27,7 @@
     "e2e-parse": "jasmine JASMINE_CONFIG_PATH=test/e2e-parse/jasmine.json",
     "test:windows": "npm-run-all test e2e-parse e2e-generate",
     "build": "webpack",
-    "docs": "gulp docs"
+    "docs": "gulp docs & jsdoc --configure .jsdoc.json --verbose"
   },
   "author": "Dave T. Johnson <dave@dtjohnson.net>",
   "contributors": [
@@ -51,11 +51,13 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
+    "docdash": "^1.1.1",
     "edge-js": "^12.3.1",
     "glob": "^7.1.4",
     "gulp": "^4.0.2",
     "gulp-eslint": "^6.0.0",
     "jasmine": "^3.4.0",
+    "jsdoc": "^3.6.2",
     "jsdoc-to-markdown": "^5.0.0",
     "jsondiffpatch": "^0.3.11",
     "markdown-include": "^0.4.3",

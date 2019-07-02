@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>worksheets/DataValidations.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Cell.html">Cell</a><ul class='methods'><li data-type='method'><a href="Cell.html#_evaluateFormula">_evaluateFormula</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#addHorizontalPageBreak">addHorizontalPageBreak</a></li><li data-type='method'><a href="Cell.html#address">address</a></li><li data-type='method'><a href="Cell.html#clear">clear</a></li><li data-type='method'><a href="Cell.html#column">column</a></li><li data-type='method'><a href="Cell.html#columnName">columnName</a></li><li data-type='method'><a href="Cell.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dependencies">dependencies</a></li><li data-type='method'><a href="Cell.html#find">find</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#getMasterSharedFormulaCell">getMasterSharedFormulaCell</a></li><li data-type='method'><a href="Cell.html#getStyle">getStyle</a></li><li data-type='method'><a href="Cell.html#getValue">getValue</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#isMasterMergedCell">isMasterMergedCell</a></li><li data-type='method'><a href="Cell.html#isMasterShardFormula">isMasterShardFormula</a></li><li data-type='method'><a href="Cell.html#isSharedFormula">isSharedFormula</a></li><li data-type='method'><a href="Cell.html#masterMergedCell">masterMergedCell</a></li><li data-type='method'><a href="Cell.html#merged">merged</a></li><li data-type='method'><a href="Cell.html#rangeTo">rangeTo</a></li><li data-type='method'><a href="Cell.html#recalculate">recalculate</a></li><li data-type='method'><a href="Cell.html#relativeCell">relativeCell</a></li><li data-type='method'><a href="Cell.html#row">row</a></li><li data-type='method'><a href="Cell.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Cell.html#setFormula">setFormula</a></li><li data-type='method'><a href="Cell.html#setStyle">setStyle</a></li><li data-type='method'><a href="Cell.html#setValue">setValue</a></li><li data-type='method'><a href="Cell.html#sharedFormula">sharedFormula</a></li><li data-type='method'><a href="Cell.html#sheet">sheet</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#tap">tap</a></li><li data-type='method'><a href="Cell.html#thru">thru</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#workbook">workbook</a></li></ul></li><li><a href="Column.html">Column</a><ul class='methods'><li data-type='method'><a href="Column.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Column.html#address">address</a></li><li data-type='method'><a href="Column.html#cell">cell</a></li><li data-type='method'><a href="Column.html#columnName">columnName</a></li><li data-type='method'><a href="Column.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#sheet">sheet</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#workbook">workbook</a></li></ul></li><li><a href="DataValidations.html">DataValidations</a><ul class='methods'><li data-type='method'><a href="DataValidations.html#delete">delete</a></li><li data-type='method'><a href="DataValidations.html#get">get</a></li><li data-type='method'><a href="DataValidations.html#getDataValidation">getDataValidation</a></li><li data-type='method'><a href="DataValidations.html#parse">parse</a></li><li data-type='method'><a href="DataValidations.html#parseFormula">parseFormula</a></li><li data-type='method'><a href="DataValidations.html#set">set</a></li><li data-type='method'><a href="DataValidations.html#setDataValidation">setDataValidation</a></li><li data-type='method'><a href="DataValidations.html#toXml">toXml</a></li><li data-type='method'><a href="DataValidations.html#validate">validate</a></li></ul></li><li><a href="FormulaError.html">FormulaError</a><ul class='methods'><li data-type='method'><a href="FormulaError.html#error">error</a></li></ul></li><li><a href="Hyperlinks.html">Hyperlinks</a><ul class='methods'><li data-type='method'><a href="Hyperlinks.html#delete">delete</a></li><li data-type='method'><a href="Hyperlinks.html#get">get</a></li><li data-type='method'><a href="Hyperlinks.html#parse">parse</a></li><li data-type='method'><a href="Hyperlinks.html#set">set</a></li><li data-type='method'><a href="Hyperlinks.html#toXml">toXml</a></li></ul></li><li><a href="MergeCells.html">MergeCells</a><ul class='methods'><li data-type='method'><a href="MergeCells.html#delete">delete</a></li><li data-type='method'><a href="MergeCells.html#get">get</a></li><li data-type='method'><a href="MergeCells.html#parse">parse</a></li><li data-type='method'><a href="MergeCells.html#set">set</a></li><li data-type='method'><a href="MergeCells.html#toXml">toXml</a></li></ul></li><li><a href="PageBreaks.html">PageBreaks</a><ul class='methods'><li data-type='method'><a href="PageBreaks.html#add">add</a></li><li data-type='method'><a href="PageBreaks.html#remove">remove</a></li></ul></li><li><a href="Range.html">Range</a><ul class='methods'><li data-type='method'><a href="Range.html#address">address</a></li><li data-type='method'><a href="Range.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Range.html#cell">cell</a></li><li data-type='method'><a href="Range.html#cells">cells</a></li><li data-type='method'><a href="Range.html#clear">clear</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#endCell">endCell</a></li><li data-type='method'><a href="Range.html#forEach">forEach</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#map">map</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#reduce">reduce</a></li><li data-type='method'><a href="Range.html#sheet">sheet</a></li><li data-type='method'><a href="Range.html#startCell">startCell</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#tap">tap</a></li><li data-type='method'><a href="Range.html#thru">thru</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#workbook">workbook</a></li></ul></li><li><a href="Reference.html">Reference</a><ul class='methods'><li data-type='method'><a href="Reference.html#retrieve">retrieve</a></li></ul></li><li><a href="ReferenceTable.html">ReferenceTable</a><ul class='methods'><li data-type='method'><a href="ReferenceTable.html#add">add</a></li><li data-type='method'><a href="ReferenceTable.html#getCalculationOrder">getCalculationOrder</a></li><li data-type='method'><a href="ReferenceTable.html#getDirectReferences">getDirectReferences</a></li><li data-type='method'><a href="ReferenceTable.html#remove">remove</a></li></ul></li><li><a href="RichText.html">RichText</a><ul class='methods'><li data-type='method'><a href="RichText.html#add">add</a></li><li data-type='method'><a href="RichText.html#clear">clear</a></li><li data-type='method'><a href="RichText.html#copy">copy</a></li><li data-type='method'><a href="RichText.html#get">get</a></li><li data-type='method'><a href="RichText.html#getInstanceWithCellRef">getInstanceWithCellRef</a></li><li data-type='method'><a href="RichText.html#remove">remove</a></li><li data-type='method'><a href="RichText.html#text">text</a></li></ul></li><li><a href="RichTextFragment.html">RichTextFragment</a><ul class='methods'><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li></ul></li><li><a href="Row.html">Row</a><ul class='methods'><li data-type='method'><a href="Row.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Row.html#address">address</a></li><li data-type='method'><a href="Row.html#cell">cell</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Row.html#sheet">sheet</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#workbook">workbook</a></li></ul></li><li><a href="Sheet.html">Sheet</a><ul class='methods'><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#column">column</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#delete">delete</a></li><li data-type='method'><a href="Sheet.html#find">find</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#getCell">getCell</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#horizontalPageBreaks">horizontalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#move">move</a></li><li data-type='method'><a href="Sheet.html#name">name</a></li><li data-type='method'><a href="Sheet.html#pageBreaks">pageBreaks</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#resetPanes">resetPanes</a></li><li data-type='method'><a href="Sheet.html#row">row</a></li><li data-type='method'><a href="Sheet.html#splitPanes">splitPanes</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#usedRange">usedRange</a></li><li data-type='method'><a href="Sheet.html#verticalPageBreaks">verticalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#workbook">workbook</a></li></ul></li><li><a href="Theme.html">Theme</a><ul class='methods'><li data-type='method'><a href="Theme.html#themeColor">themeColor</a></li></ul></li><li><a href="Workbook.html">Workbook</a><ul class='methods'><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#addSheet">addSheet</a></li><li data-type='method'><a href="Workbook.html#cloneSheet">cloneSheet</a></li><li data-type='method'><a href="Workbook.html#definedName">definedName</a></li><li data-type='method'><a href="Workbook.html#deleteSheet">deleteSheet</a></li><li data-type='method'><a href="Workbook.html#find">find</a></li><li data-type='method'><a href="Workbook.html#getSheetRIdByName">getSheetRIdByName</a></li><li data-type='method'><a href="Workbook.html#moveSheet">moveSheet</a></li><li data-type='method'><a href="Workbook.html#outputAsync">outputAsync</a></li><li data-type='method'><a href="Workbook.html#properties">properties</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#sheet">sheet</a></li><li data-type='method'><a href="Workbook.html#sheets">sheets</a></li><li data-type='method'><a href="Workbook.html#theme">theme</a></li><li data-type='method'><a href="Workbook.html#toFileAsync">toFileAsync</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="XlsxPopulate.html">XlsxPopulate</a><ul class='methods'><li data-type='method'><a href="XlsxPopulate.html#.dateToNumber">dateToNumber</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromBlankAsync">fromBlankAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromDataAsync">fromDataAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromFileAsync">fromFileAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.numberToDate">numberToDate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">worksheets/DataValidations.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+
+const {
+    decodeRowRange, decodeColRange, encodeColRange, encodeRowRange, isInColRange, isInRowRange
+} = require('../formula/Utils');
+
+const xm = 'http://schemas.microsoft.com/office/excel/2006/main';
+
+// https://docs.microsoft.com/en-us/openspecs/office_standards/ms-xlsx/89029dfc-1ca8-4ff9-afe0-46f9454d09c6
+const defaultAttributes = {
+    type: 'none',
+    errorStyle: 'stop',
+    imeMode: 'noControl',
+    operator: 'between',
+    allowBlank: false,
+    showDropDown: false, // show dropdown combo box. false if show in-cell dropdown
+    showInputMessage: false,
+    showErrorMessage: false,
+    errorTitle: undefined,
+    error: undefined,
+    promptTitle: undefined,
+    prompt: undefined
+};
+const keys = Object.keys(defaultAttributes);
+const booleanKeys = ['allowBlank', 'showDropDown', 'showInputMessage', 'showErrorMessage'];
+
+/**
+ * A class stores dataValidations.
+ */
+class DataValidations {
+    /**
+     * @param {Sheet} sheet - The sheet.
+     * @param {{}} dataValidationsNode - The dataValidation node.
+     * @param {{}} extNode - The extension data validation node.
+     */
+    constructor(sheet, dataValidationsNode, extNode) {
+        this._sheet = sheet;
+
+        // helps faster query.
+        this._data = new Map();
+        this._position = { sheet: sheet.name() };
+        this._addressCache = {};
+
+        if (dataValidationsNode) {
+            dataValidationsNode.children.forEach(dataValidationNode => {
+                this.set(dataValidationNode.attributes.sqref, dataValidationNode);
+            });
+        }
+        if (extNode &amp;&amp; extNode.children.length > 0) {
+            extNode.children[0].children.forEach(x14DataValidationNode => {
+                // xm:sqref
+                this.set(x14DataValidationNode.children[x14DataValidationNode.children.length - 1].children[0],
+                    x14DataValidationNode);
+            });
+        }
+    }
+
+    /**
+     * Get a data validation on the given address.
+     * @param {string} address - The address of a cell or range.
+     * @param {boolean} [parseFormula=true] - Whether parsing the formulas. If true, the returned object contains
+     *                                  formula1Result amd formula2Result.
+     * @return {undefined|{allowBlank, formula1, showErrorMessage, imeMode, showDropDown, formula2, showInputMessage,
+     *          type, error, operator, errorStyle, errorTitle, promptTitle, prompt, formula1Result, formula2Result}}
+     *          - The data validation object.
+     */
+    getDataValidation(address, parseFormula = true) {
+        const node = this.get(address);
+        if (!node) return;
+
+        const dataValidation = {
+            formula1: undefined,
+            formula2: undefined
+        };
+        keys.forEach(key => {
+            dataValidation[key] = node.attributes[key] || defaultAttributes[key];
+
+            // cast to boolean
+            if (booleanKeys.includes(key))
+                dataValidation[key] = Boolean(dataValidation[key]);
+        });
+
+        const isX14 = node.name.charAt(0) === 'x';
+        const hasFormula1 = isX14 ? node.children[0].name === 'x14:formula1' : node.children.length > 0;
+        const hasFormula2 = isX14 ? node.children[1].name === 'x14:formula2' : node.children.length > 1;
+        if (hasFormula1) {
+            dataValidation.formula1 = String(isX14 ? node.children[0].children[0].children[0] : node.children[0].children[0]);
+            if (parseFormula) dataValidation.formula1Result = this.parseFormula(dataValidation.formula1);
+        }
+        if (hasFormula2) {
+            dataValidation.formula2 = String(isX14 ? node.children[1].children[0].children[0] : node.children[1].children[0]);
+            if (parseFormula) dataValidation.formula2Result = this.parseFormula(dataValidation.formula2);
+        }
+
+        // pre-process the list data validation
+        if (dataValidation.type === 'list') {
+            if (typeof dataValidation.formula1Result === "string") {
+                dataValidation.formula1Result = dataValidation.formula1Result.replace(/\s[,;]\s/g, ',').split(',');
+                for (let i = 0; i &lt; dataValidation.formula1Result.length; i++) {
+                    dataValidation.formula1Result[i] = dataValidation.formula1Result[i].trim();
+                }
+            } else if (Array.isArray(dataValidation.formula1Result)) {
+                dataValidation.formula1Result = dataValidation.formula1Result.flat();
+            } else {
+                dataValidation.formula1Result = [dataValidation.formula1Result];
+            }
+        }
+        return dataValidation;
+    }
+
+    /**
+     * Set a data validation on the given address.
+     * @param {string} address - The address of a cell or range.
+     * @param {undefined|{allowBlank, formula1, showErrorMessage, imeMode, showDropDown, formula2, showInputMessage,
+     *          type, error, operator, errorStyle, errorTitle, promptTitle, prompt}} dataValidation - The data validation object.
+     * @return {undefined}
+     */
+    setDataValidation(address, dataValidation) {
+        const formula1 = String(dataValidation.formula1);
+        const formula2 = String(dataValidation.formula2);
+
+        // if one of the formula contains sheet reference.
+        const isX14 = formula1.formula1.replace(/"[^"]*"/g, '').indexOf('!') > 0
+            || formula2.replace(/"[^"]*"/g, '').indexOf('!') > 0;
+
+        const node = {
+            name: 'dataValidation',
+            attributes: {},
+            children: []
+        };
+        keys.forEach(key => {
+            if (dataValidation[key] &amp;&amp; dataValidation[key] !== defaultAttributes[key])
+                node.attributes[key] = dataValidation[key];
+        });
+
+        if (isX14) {
+            node.name = 'x14:dataValidation';
+            if (dataValidation.formula1 != null) {
+                node.children.push({
+                    name: 'x14:formula1',
+                    attributes: {},
+                    children: [
+                        {
+                            name: 'xm:f',
+                            attributes: {},
+                            children: [dataValidation.formula1]
+                        }
+                    ]
+                });
+                if (dataValidation.formula2) {
+                    node.children.push({
+                        name: 'x14:formula2',
+                        attributes: {},
+                        children: [
+                            {
+                                name: 'xm:f',
+                                attributes: {},
+                                children: [dataValidation.formula2]
+                            }
+                        ]
+                    });
+                }
+            }
+            node.children.push({
+                name: 'xm:sqref',
+                attributes: {},
+                children: [address]
+            });
+        } else {
+            // normal data validation (no other sheet reference)
+            node.attributes.sqref = address;
+            if (dataValidation.formula1 != null) {
+                node.children.push({
+                    name: 'formula1',
+                    attributes: {},
+                    children: [dataValidation.formula1]
+                });
+                if (dataValidation.formula2 != null) {
+                    node.children.push({
+                        name: 'formula1',
+                        attributes: {},
+                        children: [dataValidation.formula1]
+                    });
+                }
+            }
+        }
+    }
+
+    /**
+     * Validate a input.
+     * @param {Cell} cell - The cell to validate.
+     * @param {string|boolean|number|undefined|null} input - The input to validate.
+     * @param {boolean} [isFormula] - If true, the input is a formula.
+     * @return {{result: boolean, dataValidation: {}}} An object that contains Whether the input is valid.
+     * @example
+     *      validate(cell, '1+1', true)
+     *      validate(cell, '111')
+     */
+    validate(cell, input, isFormula) {
+        const dataValidation = this.getDataValidation(cell.address());
+        const res = { result: true, dataValidation };
+        if (!dataValidation)
+            return res;
+        if (dataValidation.allowBlank &amp;&amp; input == null)
+            return res;
+        if (isFormula)
+            input = this._sheet.workbook().formulaParser._parser.parse(`${input}`, cell.getRef());
+        if (Array.isArray(input))
+            input = input.flat()[0];
+        if (dataValidation.type === 'whole') { // whole number
+            res.result = typeof input === "number" &amp;&amp; Math.trunc(input) === input
+                &amp;&amp; this._testNumber(input, dataValidation);
+        } else if (dataValidation.type === 'decimal') {
+            res.result = typeof input === "number" &amp;&amp; this._testNumber(input, dataValidation);
+        } else if (dataValidation.type === 'list') {
+            res.result = dataValidation.formula1Result.includes(input);
+        } else if (dataValidation.type === 'date') {
+            res.result = typeof input === "number" &amp;&amp; this._testNumber(Math.trunc(input), dataValidation);
+        } else if (dataValidation.type === 'time') {
+            res.result = typeof input === "number" &amp;&amp; this._testNumber(input % 1, dataValidation);
+        } else if (dataValidation.type === 'textLength') {
+            res.result = this._testNumber(String(input).length, dataValidation);
+        } else if (dataValidation.type === 'custom') {
+            res.result = Boolean(dataValidation.formula1Result);
+        }
+        return res;
+    }
+
+    _testNumber(number, dataValidation) {
+        const { operator, formula1Result, formula2Result } = dataValidation;
+        switch (operator) {
+            case 'between':
+                return number >= formula1Result &amp;&amp; number &lt;= formula2Result;
+            case 'notBetween':
+                return number &lt; formula1Result &amp;&amp; number > formula2Result;
+            case 'equal':
+                return number === formula1Result;
+            case 'notEqual':
+                return number !== formula1Result;
+            case 'greaterThan':
+                return number > formula1Result;
+            case 'lessThan':
+                return number &lt; formula1Result;
+            case 'greaterThanOrEqual':
+                return number >= formula1Result;
+            case 'lessThanOrEqual':
+                return number &lt;= formula1Result;
+            default:
+                throw Error(`DataValidations._testNumber: Unknown operator ${operator} in ${JSON.stringify(dataValidation)}`);
+        }
+    }
+
+    /**
+     * Parse a formula.
+     * @param {string|number} formula - The formula to parse.
+     * @return {*} The formula result
+     */
+    parseFormula(formula) {
+        return this._sheet.workbook().formulaParser._parser.parse(`${formula}`,
+            { sheet: this._sheet.name() }, true);
+    }
+
+    /**
+     * Parse a reference, i.e. D19, A1:C9, Sheet2!A1, A:C, 1:6...
+     * @param {string} address - The reference string to parse.
+     * @return {{sheet: string, row: number, col: number}} The reference object.
+     */
+    parse(address) {
+        let ref = this._addressCache[address];
+        if (!ref) {
+            ref = this._sheet.workbook()._parser.parseReference(address, this._position.sheet);
+            this._addressCache[address] = ref;
+        }
+        return ref;
+    }
+
+    /**
+     * Retrieve a dataValidation node.
+     * @param {string} refString - The reference string to parse.
+     * @return {{}|undefined} A dataValidation node.
+     */
+    get(refString) {
+        if (this._data.size === 0) return;
+        const ref = this.parse(refString);
+        let curr;
+        this._data.forEach((refRow, rowRange) => {
+            const row = decodeRowRange(rowRange);
+            if (!(row.from &lt;= ref.row &amp;&amp; ref.row &lt;= row.to))
+                return;
+            refRow.forEach((dataValidation, colRange) => {
+                const col = decodeColRange(colRange);
+                if (col.from &lt;= ref.col &amp;&amp; ref.col &lt;= col.to) {
+                    // prefer range reference
+                    if (row.from !== row.to || col.from !== col.to || !curr)
+                        curr = dataValidation;
+                }
+            });
+        });
+        return curr;
+    }
+
+    /**
+     * Add dataValidation. If exists, replace it.
+     * @param {string} refString - The reference string to add.
+     * @param {{name, attributes, children}} dataValidation - The inner dataValidation node.
+     * @return {undefined}
+     */
+    set(refString, dataValidation) {
+        const addresses = refString.trim().split(' ');
+        if (addresses.length > 1) {
+            for (let i = 0; i &lt; addresses.length; i++) {
+                this.set(addresses[i], dataValidation);
+            }
+        } else {
+            const ref = this.parse(refString);
+
+            let rowRange, colRange;
+            if (ref.from) {
+                // ref is a range reference
+                rowRange = encodeRowRange(ref.from.row, ref.to.row);
+                colRange = encodeColRange(ref.from.col, ref.to.col);
+            } else {
+                // cell reference
+                rowRange = encodeRowRange(ref.row, ref.row);
+                colRange = encodeColRange(ref.col, ref.col);
+            }
+
+            // get row range
+            let refRow = this._data.get(rowRange);
+            if (!refRow) {
+                refRow = new Map();
+                this._data.set(rowRange, refRow);
+            }
+            refRow.set(colRange, dataValidation);
+        }
+    }
+
+    /**
+     * Remove a dataValidation.
+     * @param {string} refString - The reference you want to remove.
+     * @return {undefined}
+     */
+    delete(refString) {
+        const ref = this.parse(refString);
+        this._data.forEach((refRow, rowRange) => {
+            if (!isInRowRange(rowRange, ref.row))
+                return;
+            refRow.forEach((dataValidation, colRange) => {
+                if (!isInColRange(colRange, ref.col))
+                    return;
+                rowRange.delete(colRange);
+            });
+            if (refRow.size === 0)
+                this._data.delete(rowRange);
+        });
+    }
+
+    forEach(fn) {
+        this._data.forEach(refRow => {
+            refRow.forEach(node => {
+                fn(node);
+            });
+        });
+    }
+
+    /**
+     * Return an xml form object.
+     * @return {{node, x14Node}} two Xml object.
+     */
+    toXml() {
+        const node = {
+            name: 'dataValidations',
+            attributes: {},
+            children: []
+        };
+        const x14Node = {
+            name: 'x14:dataValidations',
+            attributes: { 'xmlns:xm': xm },
+            children: []
+        };
+        this._data.forEach(refRow => {
+            refRow.forEach(dataValidation => {
+                if (dataValidation != null) {
+                    if (dataValidation.name.charAt(0) === 'x') {
+                        x14Node.children.push(dataValidation);
+                    } else {
+                        node.children.push(dataValidation);
+                    }
+                }
+            });
+        });
+        node.children = [...new Set(node.children)];
+        node.attributes.count = node.children.length;
+        x14Node.children = [...new Set(x14Node.children)];
+        x14Node.attributes.count = x14Node.children.length;
+        return { node, x14Node };
+    }
+}
+
+module.exports = DataValidations;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jul 02 2019 16:55:05 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

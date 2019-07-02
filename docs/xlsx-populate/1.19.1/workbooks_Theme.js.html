@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>workbooks/Theme.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Cell.html">Cell</a><ul class='methods'><li data-type='method'><a href="Cell.html#_evaluateFormula">_evaluateFormula</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#addHorizontalPageBreak">addHorizontalPageBreak</a></li><li data-type='method'><a href="Cell.html#address">address</a></li><li data-type='method'><a href="Cell.html#clear">clear</a></li><li data-type='method'><a href="Cell.html#column">column</a></li><li data-type='method'><a href="Cell.html#columnName">columnName</a></li><li data-type='method'><a href="Cell.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dependencies">dependencies</a></li><li data-type='method'><a href="Cell.html#find">find</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#getMasterSharedFormulaCell">getMasterSharedFormulaCell</a></li><li data-type='method'><a href="Cell.html#getStyle">getStyle</a></li><li data-type='method'><a href="Cell.html#getValue">getValue</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#isMasterMergedCell">isMasterMergedCell</a></li><li data-type='method'><a href="Cell.html#isMasterShardFormula">isMasterShardFormula</a></li><li data-type='method'><a href="Cell.html#isSharedFormula">isSharedFormula</a></li><li data-type='method'><a href="Cell.html#masterMergedCell">masterMergedCell</a></li><li data-type='method'><a href="Cell.html#merged">merged</a></li><li data-type='method'><a href="Cell.html#rangeTo">rangeTo</a></li><li data-type='method'><a href="Cell.html#recalculate">recalculate</a></li><li data-type='method'><a href="Cell.html#relativeCell">relativeCell</a></li><li data-type='method'><a href="Cell.html#row">row</a></li><li data-type='method'><a href="Cell.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Cell.html#setFormula">setFormula</a></li><li data-type='method'><a href="Cell.html#setStyle">setStyle</a></li><li data-type='method'><a href="Cell.html#setValue">setValue</a></li><li data-type='method'><a href="Cell.html#sharedFormula">sharedFormula</a></li><li data-type='method'><a href="Cell.html#sheet">sheet</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#tap">tap</a></li><li data-type='method'><a href="Cell.html#thru">thru</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#workbook">workbook</a></li></ul></li><li><a href="Column.html">Column</a><ul class='methods'><li data-type='method'><a href="Column.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Column.html#address">address</a></li><li data-type='method'><a href="Column.html#cell">cell</a></li><li data-type='method'><a href="Column.html#columnName">columnName</a></li><li data-type='method'><a href="Column.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#sheet">sheet</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#workbook">workbook</a></li></ul></li><li><a href="DataValidations.html">DataValidations</a><ul class='methods'><li data-type='method'><a href="DataValidations.html#delete">delete</a></li><li data-type='method'><a href="DataValidations.html#get">get</a></li><li data-type='method'><a href="DataValidations.html#getDataValidation">getDataValidation</a></li><li data-type='method'><a href="DataValidations.html#parse">parse</a></li><li data-type='method'><a href="DataValidations.html#parseFormula">parseFormula</a></li><li data-type='method'><a href="DataValidations.html#set">set</a></li><li data-type='method'><a href="DataValidations.html#setDataValidation">setDataValidation</a></li><li data-type='method'><a href="DataValidations.html#toXml">toXml</a></li><li data-type='method'><a href="DataValidations.html#validate">validate</a></li></ul></li><li><a href="FormulaError.html">FormulaError</a><ul class='methods'><li data-type='method'><a href="FormulaError.html#error">error</a></li></ul></li><li><a href="Hyperlinks.html">Hyperlinks</a><ul class='methods'><li data-type='method'><a href="Hyperlinks.html#delete">delete</a></li><li data-type='method'><a href="Hyperlinks.html#get">get</a></li><li data-type='method'><a href="Hyperlinks.html#parse">parse</a></li><li data-type='method'><a href="Hyperlinks.html#set">set</a></li><li data-type='method'><a href="Hyperlinks.html#toXml">toXml</a></li></ul></li><li><a href="MergeCells.html">MergeCells</a><ul class='methods'><li data-type='method'><a href="MergeCells.html#delete">delete</a></li><li data-type='method'><a href="MergeCells.html#get">get</a></li><li data-type='method'><a href="MergeCells.html#parse">parse</a></li><li data-type='method'><a href="MergeCells.html#set">set</a></li><li data-type='method'><a href="MergeCells.html#toXml">toXml</a></li></ul></li><li><a href="PageBreaks.html">PageBreaks</a><ul class='methods'><li data-type='method'><a href="PageBreaks.html#add">add</a></li><li data-type='method'><a href="PageBreaks.html#remove">remove</a></li></ul></li><li><a href="Range.html">Range</a><ul class='methods'><li data-type='method'><a href="Range.html#address">address</a></li><li data-type='method'><a href="Range.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Range.html#cell">cell</a></li><li data-type='method'><a href="Range.html#cells">cells</a></li><li data-type='method'><a href="Range.html#clear">clear</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#endCell">endCell</a></li><li data-type='method'><a href="Range.html#forEach">forEach</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#map">map</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#reduce">reduce</a></li><li data-type='method'><a href="Range.html#sheet">sheet</a></li><li data-type='method'><a href="Range.html#startCell">startCell</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#tap">tap</a></li><li data-type='method'><a href="Range.html#thru">thru</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#workbook">workbook</a></li></ul></li><li><a href="Reference.html">Reference</a><ul class='methods'><li data-type='method'><a href="Reference.html#retrieve">retrieve</a></li></ul></li><li><a href="ReferenceTable.html">ReferenceTable</a><ul class='methods'><li data-type='method'><a href="ReferenceTable.html#add">add</a></li><li data-type='method'><a href="ReferenceTable.html#getCalculationOrder">getCalculationOrder</a></li><li data-type='method'><a href="ReferenceTable.html#getDirectReferences">getDirectReferences</a></li><li data-type='method'><a href="ReferenceTable.html#remove">remove</a></li></ul></li><li><a href="RichText.html">RichText</a><ul class='methods'><li data-type='method'><a href="RichText.html#add">add</a></li><li data-type='method'><a href="RichText.html#clear">clear</a></li><li data-type='method'><a href="RichText.html#copy">copy</a></li><li data-type='method'><a href="RichText.html#get">get</a></li><li data-type='method'><a href="RichText.html#getInstanceWithCellRef">getInstanceWithCellRef</a></li><li data-type='method'><a href="RichText.html#remove">remove</a></li><li data-type='method'><a href="RichText.html#text">text</a></li></ul></li><li><a href="RichTextFragment.html">RichTextFragment</a><ul class='methods'><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li></ul></li><li><a href="Row.html">Row</a><ul class='methods'><li data-type='method'><a href="Row.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Row.html#address">address</a></li><li data-type='method'><a href="Row.html#cell">cell</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Row.html#sheet">sheet</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#workbook">workbook</a></li></ul></li><li><a href="Sheet.html">Sheet</a><ul class='methods'><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#column">column</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#delete">delete</a></li><li data-type='method'><a href="Sheet.html#find">find</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#getCell">getCell</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#horizontalPageBreaks">horizontalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#move">move</a></li><li data-type='method'><a href="Sheet.html#name">name</a></li><li data-type='method'><a href="Sheet.html#pageBreaks">pageBreaks</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#resetPanes">resetPanes</a></li><li data-type='method'><a href="Sheet.html#row">row</a></li><li data-type='method'><a href="Sheet.html#splitPanes">splitPanes</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#usedRange">usedRange</a></li><li data-type='method'><a href="Sheet.html#verticalPageBreaks">verticalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#workbook">workbook</a></li></ul></li><li><a href="Theme.html">Theme</a><ul class='methods'><li data-type='method'><a href="Theme.html#themeColor">themeColor</a></li></ul></li><li><a href="Workbook.html">Workbook</a><ul class='methods'><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#addSheet">addSheet</a></li><li data-type='method'><a href="Workbook.html#cloneSheet">cloneSheet</a></li><li data-type='method'><a href="Workbook.html#definedName">definedName</a></li><li data-type='method'><a href="Workbook.html#deleteSheet">deleteSheet</a></li><li data-type='method'><a href="Workbook.html#find">find</a></li><li data-type='method'><a href="Workbook.html#getSheetRIdByName">getSheetRIdByName</a></li><li data-type='method'><a href="Workbook.html#moveSheet">moveSheet</a></li><li data-type='method'><a href="Workbook.html#outputAsync">outputAsync</a></li><li data-type='method'><a href="Workbook.html#properties">properties</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#sheet">sheet</a></li><li data-type='method'><a href="Workbook.html#sheets">sheets</a></li><li data-type='method'><a href="Workbook.html#theme">theme</a></li><li data-type='method'><a href="Workbook.html#toFileAsync">toFileAsync</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="XlsxPopulate.html">XlsxPopulate</a><ul class='methods'><li data-type='method'><a href="XlsxPopulate.html#.dateToNumber">dateToNumber</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromBlankAsync">fromBlankAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromDataAsync">fromDataAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromFileAsync">fromFileAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.numberToDate">numberToDate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">workbooks/Theme.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+
+const xmlq = require("../xml/xmlq");
+
+/**
+ * A readonly theme.
+ */
+class Theme {
+    /**
+     * Creates a new instance of Theme. (Read only)
+     * @param {{}} node - The node.
+     */
+    constructor(node) {
+        if (!node) {
+            return;
+        }
+        this._node = node;
+        const themeElements = xmlq.findChild(node, "a:themeElements");
+        if (!themeElements) return;
+        this._clrScheme = xmlq.findChild(themeElements, "a:clrScheme");
+        this._colorKeys = ['a:lt1', 'a:dk1', 'a:lt2', 'a:dk2', 'a:accent1', 'a:accent2', 'a:accent3', 'a:accent4',
+            'a:accent5', 'a:accent6', 'a:hlink', 'a:folHlink'];
+    }
+
+    /**
+     * Get the rgb theme color
+     * @param {number} index - theme color index
+     * @param {number|undefined|null} tint - tint value
+     * @return {string} color
+     */
+    themeColor(index, tint) {
+        if (!this._node) throw new Error(`Theme.themeColor: This workbook does not have theme.`);
+        index = parseInt(index);
+        tint = parseFloat(tint);
+        let color;
+        let colorTag = xmlq.findChild(this._clrScheme, this._colorKeys[index]);
+        colorTag = colorTag.children[0];
+        if (index === 0 || index === 1) {
+            color = colorTag.attributes[Object.keys(colorTag.attributes)[1]];
+        } else {
+            color = colorTag.attributes[Object.keys(colorTag.attributes)[0]];
+        }
+        if (tint === undefined || tint === null) {
+            return color;
+        }
+        const rgb = Theme._hexToRgb(color);
+        const hsl = Theme._rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+        // the following link tells how to calculate given a tint value.
+        // https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.tabcolor.aspx
+        if (tint &lt; 0) {
+            hsl.l *= 1 + tint;
+            return Theme._rgbToHex(Theme._hslToRgb(hsl.h, hsl.s, hsl.l));
+        } else if (tint > 0) {
+            hsl.l = hsl.l * (1 - tint) + tint;
+            return Theme._rgbToHex(Theme._hslToRgb(hsl.h, hsl.s, hsl.l));
+        } else {
+            // no change
+            return color;
+        }
+    }
+
+
+    /**
+     *
+     * @param {string} hex string
+     * @return {{r: number, b: number, g: number}} rgb
+     * @private
+     */
+    static _hexToRgb(hex) {
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        return { r, g, b };
+    }
+
+    /**
+     *
+     * @param {{r: number, b: number, g: number}} rgb representation
+     * @return {string} hex string
+     * @private
+     */
+    static _rgbToHex(rgb) {
+        return Math.round(rgb.r).toString(16) + Math.round(rgb.g).toString(16) + Math.round(rgb.b).toString(16);
+    }
+
+    /**
+     * Converts an RGB color value to HSL. Conversion formula
+     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Assumes r, g, and b are contained in the set [0, 255] and
+     * returns h, s, and l in the set [0, 1].
+     *
+     * @private
+     * @param   {number}  r       The red color value
+     * @param   {number}  g       The green color value
+     * @param   {number}  b       The blue color value
+     * @return  {{h: number, s: number, l: number}}   The HSL representation
+     */
+    static _rgbToHsl(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s;
+        const l = (max + min) / 2;
+
+        if (max === min) {
+            h = s = 0; // achromatic
+        } else {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+            switch (max) {
+                case r:
+                    h = (g - b) / d + (g &lt; b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+                default:
+                    break;
+            }
+            h /= 6;
+        }
+        return { h, s, l };
+    }
+
+    /**
+     * Converts an HSL color value to RGB. Conversion formula
+     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Assumes h, s, and l are contained in the set [0, 1] and
+     * returns r, g, and b in the set [0, 255].
+     *
+     * @private
+     * @param   {number}  h       The hue
+     * @param   {number}  s       The saturation
+     * @param   {number}  l       The lightness
+     * @return  {{r: number, b: number, g: number}}          The RGB representation
+     */
+    static _hslToRgb(h, s, l) {
+        let r, g, b;
+
+        if (s === 0) {
+            r = g = b = l; // achromatic
+        } else {
+            const hue2rgb = (p, q, t) => {
+                if (t &lt; 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t &lt; 1 / 6) return p + (q - p) * 6 * t;
+                if (t &lt; 1 / 2) return q;
+                if (t &lt; 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                return p;
+            };
+
+            const q = l &lt; 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
+
+            r = hue2rgb(p, q, h + 1 / 3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1 / 3);
+        }
+        return { r: r * 255, g: g * 255, b: b * 255 };
+    }
+}
+
+module.exports = Theme;
+
+/*
+xl/theme/theme1.xml
+
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+&lt;a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office Theme">
+    &lt;a:themeElements>
+        &lt;a:clrScheme name="Office">
+            &lt;a:dk1>
+                &lt;a:sysClr val="windowText" lastClr="000000"/>
+            &lt;/a:dk1>
+            &lt;a:lt1>
+                &lt;a:sysClr val="window" lastClr="FFFFFF"/>
+            &lt;/a:lt1>
+            &lt;a:dk2>
+                &lt;a:srgbClr val="44546A"/>
+            &lt;/a:dk2>
+            &lt;a:lt2>
+                &lt;a:srgbClr val="E7E6E6"/>
+            &lt;/a:lt2>
+            &lt;a:accent1>
+                &lt;a:srgbClr val="5B9BD5"/>
+            &lt;/a:accent1>
+            &lt;a:accent2>
+                &lt;a:srgbClr val="ED7D31"/>
+            &lt;/a:accent2>
+            &lt;a:accent3>
+                &lt;a:srgbClr val="A5A5A5"/>
+            &lt;/a:accent3>
+            &lt;a:accent4>
+                &lt;a:srgbClr val="FFC000"/>
+            &lt;/a:accent4>
+            &lt;a:accent5>
+                &lt;a:srgbClr val="4472C4"/>
+            &lt;/a:accent5>
+            &lt;a:accent6>
+                &lt;a:srgbClr val="70AD47"/>
+            &lt;/a:accent6>
+            &lt;a:hlink>
+                &lt;a:srgbClr val="0563C1"/>
+            &lt;/a:hlink>
+            &lt;a:folHlink>
+                &lt;a:srgbClr val="954F72"/>
+            &lt;/a:folHlink>
+        &lt;/a:clrScheme>
+        &lt;a:fontScheme name="Office">
+            &lt;a:majorFont>
+                &lt;a:latin typeface="Calibri Light" panose="020F0302020204030204"/>
+                &lt;a:ea typeface=""/>
+                &lt;a:cs typeface=""/>
+                &lt;a:font script="Jpan" typeface="游ゴシック Light"/>
+                &lt;a:font script="Hang" typeface="맑은 고딕"/>
+                &lt;a:font script="Hans" typeface="等线 Light"/>
+                &lt;a:font script="Hant" typeface="新細明體"/>
+                &lt;a:font script="Arab" typeface="Times New Roman"/>
+                &lt;a:font script="Hebr" typeface="Times New Roman"/>
+                &lt;a:font script="Thai" typeface="Tahoma"/>
+                &lt;a:font script="Ethi" typeface="Nyala"/>
+                &lt;a:font script="Beng" typeface="Vrinda"/>
+                &lt;a:font script="Gujr" typeface="Shruti"/>
+                &lt;a:font script="Khmr" typeface="MoolBoran"/>
+                &lt;a:font script="Knda" typeface="Tunga"/>
+                &lt;a:font script="Guru" typeface="Raavi"/>
+                &lt;a:font script="Cans" typeface="Euphemia"/>
+                &lt;a:font script="Cher" typeface="Plantagenet Cherokee"/>
+                &lt;a:font script="Yiii" typeface="Microsoft Yi Baiti"/>
+                &lt;a:font script="Tibt" typeface="Microsoft Himalaya"/>
+                &lt;a:font script="Thaa" typeface="MV Boli"/>
+                &lt;a:font script="Deva" typeface="Mangal"/>
+                &lt;a:font script="Telu" typeface="Gautami"/>
+                &lt;a:font script="Taml" typeface="Latha"/>
+                &lt;a:font script="Syrc" typeface="Estrangelo Edessa"/>
+                &lt;a:font script="Orya" typeface="Kalinga"/>
+                &lt;a:font script="Mlym" typeface="Kartika"/>
+                &lt;a:font script="Laoo" typeface="DokChampa"/>
+                &lt;a:font script="Sinh" typeface="Iskoola Pota"/>
+                &lt;a:font script="Mong" typeface="Mongolian Baiti"/>
+                &lt;a:font script="Viet" typeface="Times New Roman"/>
+                &lt;a:font script="Uigh" typeface="Microsoft Uighur"/>
+                &lt;a:font script="Geor" typeface="Sylfaen"/>
+            &lt;/a:majorFont>
+            &lt;a:minorFont>
+                &lt;a:latin typeface="Calibri" panose="020F0502020204030204"/>
+                &lt;a:ea typeface=""/>
+                &lt;a:cs typeface=""/>
+                &lt;a:font script="Jpan" typeface="游ゴシック"/>
+                &lt;a:font script="Hang" typeface="맑은 고딕"/>
+                &lt;a:font script="Hans" typeface="等线"/>
+                &lt;a:font script="Hant" typeface="新細明體"/>
+                &lt;a:font script="Arab" typeface="Arial"/>
+                &lt;a:font script="Hebr" typeface="Arial"/>
+                &lt;a:font script="Thai" typeface="Tahoma"/>
+                &lt;a:font script="Ethi" typeface="Nyala"/>
+                &lt;a:font script="Beng" typeface="Vrinda"/>
+                &lt;a:font script="Gujr" typeface="Shruti"/>
+                &lt;a:font script="Khmr" typeface="DaunPenh"/>
+                &lt;a:font script="Knda" typeface="Tunga"/>
+                &lt;a:font script="Guru" typeface="Raavi"/>
+                &lt;a:font script="Cans" typeface="Euphemia"/>
+                &lt;a:font script="Cher" typeface="Plantagenet Cherokee"/>
+                &lt;a:font script="Yiii" typeface="Microsoft Yi Baiti"/>
+                &lt;a:font script="Tibt" typeface="Microsoft Himalaya"/>
+                &lt;a:font script="Thaa" typeface="MV Boli"/>
+                &lt;a:font script="Deva" typeface="Mangal"/>
+                &lt;a:font script="Telu" typeface="Gautami"/>
+                &lt;a:font script="Taml" typeface="Latha"/>
+                &lt;a:font script="Syrc" typeface="Estrangelo Edessa"/>
+                &lt;a:font script="Orya" typeface="Kalinga"/>
+                &lt;a:font script="Mlym" typeface="Kartika"/>
+                &lt;a:font script="Laoo" typeface="DokChampa"/>
+                &lt;a:font script="Sinh" typeface="Iskoola Pota"/>
+                &lt;a:font script="Mong" typeface="Mongolian Baiti"/>
+                &lt;a:font script="Viet" typeface="Arial"/>
+                &lt;a:font script="Uigh" typeface="Microsoft Uighur"/>
+                &lt;a:font script="Geor" typeface="Sylfaen"/>
+            &lt;/a:minorFont>
+        &lt;/a:fontScheme>
+        &lt;a:fmtScheme name="Office">
+            &lt;a:fillStyleLst>
+                &lt;a:solidFill>
+                    &lt;a:schemeClr val="phClr"/>
+                &lt;/a:solidFill>
+                &lt;a:gradFill rotWithShape="1">
+                    &lt;a:gsLst>
+                        &lt;a:gs pos="0">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:lumMod val="110000"/>
+                                &lt;a:satMod val="105000"/>
+                                &lt;a:tint val="67000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                        &lt;a:gs pos="50000">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:lumMod val="105000"/>
+                                &lt;a:satMod val="103000"/>
+                                &lt;a:tint val="73000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                        &lt;a:gs pos="100000">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:lumMod val="105000"/>
+                                &lt;a:satMod val="109000"/>
+                                &lt;a:tint val="81000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                    &lt;/a:gsLst>
+                    &lt;a:lin ang="5400000" scaled="0"/>
+                &lt;/a:gradFill>
+                &lt;a:gradFill rotWithShape="1">
+                    &lt;a:gsLst>
+                        &lt;a:gs pos="0">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:satMod val="103000"/>
+                                &lt;a:lumMod val="102000"/>
+                                &lt;a:tint val="94000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                        &lt;a:gs pos="50000">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:satMod val="110000"/>
+                                &lt;a:lumMod val="100000"/>
+                                &lt;a:shade val="100000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                        &lt;a:gs pos="100000">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:lumMod val="99000"/>
+                                &lt;a:satMod val="120000"/>
+                                &lt;a:shade val="78000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                    &lt;/a:gsLst>
+                    &lt;a:lin ang="5400000" scaled="0"/>
+                &lt;/a:gradFill>
+            &lt;/a:fillStyleLst>
+            &lt;a:lnStyleLst>
+                &lt;a:ln w="6350" cap="flat" cmpd="sng" algn="ctr">
+                    &lt;a:solidFill>
+                        &lt;a:schemeClr val="phClr"/>
+                    &lt;/a:solidFill>
+                    &lt;a:prstDash val="solid"/>
+                    &lt;a:miter lim="800000"/>
+                &lt;/a:ln>
+                &lt;a:ln w="12700" cap="flat" cmpd="sng" algn="ctr">
+                    &lt;a:solidFill>
+                        &lt;a:schemeClr val="phClr"/>
+                    &lt;/a:solidFill>
+                    &lt;a:prstDash val="solid"/>
+                    &lt;a:miter lim="800000"/>
+                &lt;/a:ln>
+                &lt;a:ln w="19050" cap="flat" cmpd="sng" algn="ctr">
+                    &lt;a:solidFill>
+                        &lt;a:schemeClr val="phClr"/>
+                    &lt;/a:solidFill>
+                    &lt;a:prstDash val="solid"/>
+                    &lt;a:miter lim="800000"/>
+                &lt;/a:ln>
+            &lt;/a:lnStyleLst>
+            &lt;a:effectStyleLst>
+                &lt;a:effectStyle>
+                    &lt;a:effectLst/>
+                &lt;/a:effectStyle>
+                &lt;a:effectStyle>
+                    &lt;a:effectLst/>
+                &lt;/a:effectStyle>
+                &lt;a:effectStyle>
+                    &lt;a:effectLst>
+                        &lt;a:outerShdw blurRad="57150" dist="19050" dir="5400000" algn="ctr" rotWithShape="0">
+                            &lt;a:srgbClr val="000000">
+                                &lt;a:alpha val="63000"/>
+                            &lt;/a:srgbClr>
+                        &lt;/a:outerShdw>
+                    &lt;/a:effectLst>
+                &lt;/a:effectStyle>
+            &lt;/a:effectStyleLst>
+            &lt;a:bgFillStyleLst>
+                &lt;a:solidFill>
+                    &lt;a:schemeClr val="phClr"/>
+                &lt;/a:solidFill>
+                &lt;a:solidFill>
+                    &lt;a:schemeClr val="phClr">
+                        &lt;a:tint val="95000"/>
+                        &lt;a:satMod val="170000"/>
+                    &lt;/a:schemeClr>
+                &lt;/a:solidFill>
+                &lt;a:gradFill rotWithShape="1">
+                    &lt;a:gsLst>
+                        &lt;a:gs pos="0">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:tint val="93000"/>
+                                &lt;a:satMod val="150000"/>
+                                &lt;a:shade val="98000"/>
+                                &lt;a:lumMod val="102000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                        &lt;a:gs pos="50000">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:tint val="98000"/>
+                                &lt;a:satMod val="130000"/>
+                                &lt;a:shade val="90000"/>
+                                &lt;a:lumMod val="103000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                        &lt;a:gs pos="100000">
+                            &lt;a:schemeClr val="phClr">
+                                &lt;a:shade val="63000"/>
+                                &lt;a:satMod val="120000"/>
+                            &lt;/a:schemeClr>
+                        &lt;/a:gs>
+                    &lt;/a:gsLst>
+                    &lt;a:lin ang="5400000" scaled="0"/>
+                &lt;/a:gradFill>
+            &lt;/a:bgFillStyleLst>
+        &lt;/a:fmtScheme>
+    &lt;/a:themeElements>
+    &lt;a:objectDefaults/>
+    &lt;a:extraClrSchemeLst/>
+    &lt;a:extLst>
+        &lt;a:ext uri="{05A4C25C-085E-4340-85A3-A5531E510DB2}">
+            &lt;thm15:themeFamily xmlns:thm15="http://schemas.microsoft.com/office/thememl/2012/main" name="Office Theme"
+                               id="{62F939B6-93AF-4DB8-9C6B-D6C7DFDC589F}"
+                               vid="{4A3C46E8-61CC-4603-A589-7422A47A8E4A}"/>
+        &lt;/a:ext>
+    &lt;/a:extLst>
+&lt;/a:theme>
+
+*/
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jul 02 2019 16:55:05 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

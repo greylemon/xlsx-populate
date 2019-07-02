@@ -1,4 +1,48 @@
-"use strict";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>worksheets/Cell.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Cell.html">Cell</a><ul class='methods'><li data-type='method'><a href="Cell.html#_evaluateFormula">_evaluateFormula</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#addHorizontalPageBreak">addHorizontalPageBreak</a></li><li data-type='method'><a href="Cell.html#address">address</a></li><li data-type='method'><a href="Cell.html#clear">clear</a></li><li data-type='method'><a href="Cell.html#column">column</a></li><li data-type='method'><a href="Cell.html#columnName">columnName</a></li><li data-type='method'><a href="Cell.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dependencies">dependencies</a></li><li data-type='method'><a href="Cell.html#find">find</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#getMasterSharedFormulaCell">getMasterSharedFormulaCell</a></li><li data-type='method'><a href="Cell.html#getStyle">getStyle</a></li><li data-type='method'><a href="Cell.html#getValue">getValue</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#isMasterMergedCell">isMasterMergedCell</a></li><li data-type='method'><a href="Cell.html#isMasterShardFormula">isMasterShardFormula</a></li><li data-type='method'><a href="Cell.html#isSharedFormula">isSharedFormula</a></li><li data-type='method'><a href="Cell.html#masterMergedCell">masterMergedCell</a></li><li data-type='method'><a href="Cell.html#merged">merged</a></li><li data-type='method'><a href="Cell.html#rangeTo">rangeTo</a></li><li data-type='method'><a href="Cell.html#recalculate">recalculate</a></li><li data-type='method'><a href="Cell.html#relativeCell">relativeCell</a></li><li data-type='method'><a href="Cell.html#row">row</a></li><li data-type='method'><a href="Cell.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Cell.html#setFormula">setFormula</a></li><li data-type='method'><a href="Cell.html#setStyle">setStyle</a></li><li data-type='method'><a href="Cell.html#setValue">setValue</a></li><li data-type='method'><a href="Cell.html#sharedFormula">sharedFormula</a></li><li data-type='method'><a href="Cell.html#sheet">sheet</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#tap">tap</a></li><li data-type='method'><a href="Cell.html#thru">thru</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#workbook">workbook</a></li></ul></li><li><a href="Column.html">Column</a><ul class='methods'><li data-type='method'><a href="Column.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Column.html#address">address</a></li><li data-type='method'><a href="Column.html#cell">cell</a></li><li data-type='method'><a href="Column.html#columnName">columnName</a></li><li data-type='method'><a href="Column.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#sheet">sheet</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#workbook">workbook</a></li></ul></li><li><a href="DataValidations.html">DataValidations</a><ul class='methods'><li data-type='method'><a href="DataValidations.html#delete">delete</a></li><li data-type='method'><a href="DataValidations.html#get">get</a></li><li data-type='method'><a href="DataValidations.html#getDataValidation">getDataValidation</a></li><li data-type='method'><a href="DataValidations.html#parse">parse</a></li><li data-type='method'><a href="DataValidations.html#parseFormula">parseFormula</a></li><li data-type='method'><a href="DataValidations.html#set">set</a></li><li data-type='method'><a href="DataValidations.html#setDataValidation">setDataValidation</a></li><li data-type='method'><a href="DataValidations.html#toXml">toXml</a></li><li data-type='method'><a href="DataValidations.html#validate">validate</a></li></ul></li><li><a href="FormulaError.html">FormulaError</a><ul class='methods'><li data-type='method'><a href="FormulaError.html#error">error</a></li></ul></li><li><a href="Hyperlinks.html">Hyperlinks</a><ul class='methods'><li data-type='method'><a href="Hyperlinks.html#delete">delete</a></li><li data-type='method'><a href="Hyperlinks.html#get">get</a></li><li data-type='method'><a href="Hyperlinks.html#parse">parse</a></li><li data-type='method'><a href="Hyperlinks.html#set">set</a></li><li data-type='method'><a href="Hyperlinks.html#toXml">toXml</a></li></ul></li><li><a href="MergeCells.html">MergeCells</a><ul class='methods'><li data-type='method'><a href="MergeCells.html#delete">delete</a></li><li data-type='method'><a href="MergeCells.html#get">get</a></li><li data-type='method'><a href="MergeCells.html#parse">parse</a></li><li data-type='method'><a href="MergeCells.html#set">set</a></li><li data-type='method'><a href="MergeCells.html#toXml">toXml</a></li></ul></li><li><a href="PageBreaks.html">PageBreaks</a><ul class='methods'><li data-type='method'><a href="PageBreaks.html#add">add</a></li><li data-type='method'><a href="PageBreaks.html#remove">remove</a></li></ul></li><li><a href="Range.html">Range</a><ul class='methods'><li data-type='method'><a href="Range.html#address">address</a></li><li data-type='method'><a href="Range.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Range.html#cell">cell</a></li><li data-type='method'><a href="Range.html#cells">cells</a></li><li data-type='method'><a href="Range.html#clear">clear</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#endCell">endCell</a></li><li data-type='method'><a href="Range.html#forEach">forEach</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#map">map</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#reduce">reduce</a></li><li data-type='method'><a href="Range.html#sheet">sheet</a></li><li data-type='method'><a href="Range.html#startCell">startCell</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#tap">tap</a></li><li data-type='method'><a href="Range.html#thru">thru</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#workbook">workbook</a></li></ul></li><li><a href="Reference.html">Reference</a><ul class='methods'><li data-type='method'><a href="Reference.html#retrieve">retrieve</a></li></ul></li><li><a href="ReferenceTable.html">ReferenceTable</a><ul class='methods'><li data-type='method'><a href="ReferenceTable.html#add">add</a></li><li data-type='method'><a href="ReferenceTable.html#getCalculationOrder">getCalculationOrder</a></li><li data-type='method'><a href="ReferenceTable.html#getDirectReferences">getDirectReferences</a></li><li data-type='method'><a href="ReferenceTable.html#remove">remove</a></li></ul></li><li><a href="RichText.html">RichText</a><ul class='methods'><li data-type='method'><a href="RichText.html#add">add</a></li><li data-type='method'><a href="RichText.html#clear">clear</a></li><li data-type='method'><a href="RichText.html#copy">copy</a></li><li data-type='method'><a href="RichText.html#get">get</a></li><li data-type='method'><a href="RichText.html#getInstanceWithCellRef">getInstanceWithCellRef</a></li><li data-type='method'><a href="RichText.html#remove">remove</a></li><li data-type='method'><a href="RichText.html#text">text</a></li></ul></li><li><a href="RichTextFragment.html">RichTextFragment</a><ul class='methods'><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li></ul></li><li><a href="Row.html">Row</a><ul class='methods'><li data-type='method'><a href="Row.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Row.html#address">address</a></li><li data-type='method'><a href="Row.html#cell">cell</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Row.html#sheet">sheet</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#workbook">workbook</a></li></ul></li><li><a href="Sheet.html">Sheet</a><ul class='methods'><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#column">column</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#delete">delete</a></li><li data-type='method'><a href="Sheet.html#find">find</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#getCell">getCell</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#horizontalPageBreaks">horizontalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#move">move</a></li><li data-type='method'><a href="Sheet.html#name">name</a></li><li data-type='method'><a href="Sheet.html#pageBreaks">pageBreaks</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#resetPanes">resetPanes</a></li><li data-type='method'><a href="Sheet.html#row">row</a></li><li data-type='method'><a href="Sheet.html#splitPanes">splitPanes</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#usedRange">usedRange</a></li><li data-type='method'><a href="Sheet.html#verticalPageBreaks">verticalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#workbook">workbook</a></li></ul></li><li><a href="Theme.html">Theme</a><ul class='methods'><li data-type='method'><a href="Theme.html#themeColor">themeColor</a></li></ul></li><li><a href="Workbook.html">Workbook</a><ul class='methods'><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#addSheet">addSheet</a></li><li data-type='method'><a href="Workbook.html#cloneSheet">cloneSheet</a></li><li data-type='method'><a href="Workbook.html#definedName">definedName</a></li><li data-type='method'><a href="Workbook.html#deleteSheet">deleteSheet</a></li><li data-type='method'><a href="Workbook.html#find">find</a></li><li data-type='method'><a href="Workbook.html#getSheetRIdByName">getSheetRIdByName</a></li><li data-type='method'><a href="Workbook.html#moveSheet">moveSheet</a></li><li data-type='method'><a href="Workbook.html#outputAsync">outputAsync</a></li><li data-type='method'><a href="Workbook.html#properties">properties</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#sheet">sheet</a></li><li data-type='method'><a href="Workbook.html#sheets">sheets</a></li><li data-type='method'><a href="Workbook.html#theme">theme</a></li><li data-type='method'><a href="Workbook.html#toFileAsync">toFileAsync</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="XlsxPopulate.html">XlsxPopulate</a><ul class='methods'><li data-type='method'><a href="XlsxPopulate.html#.dateToNumber">dateToNumber</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromBlankAsync">fromBlankAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromDataAsync">fromDataAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromFileAsync">fromFileAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.numberToDate">numberToDate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">worksheets/Cell.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
 
 const _ = require("lodash");
 const ArgHandler = require("../ArgHandler");
@@ -41,10 +85,10 @@ class Cell {
      * Sets the value of the cell.
      * @param {RichText|string|boolean|number|null|undefined} value - The value to set.
      * @param {boolean} [clear] - If clear this cell.
-     * @returns {Array.<{}>} The cells updated
+     * @returns {Array.&lt;{}>} The cells updated
      */
     setValue(value, clear = true) {
-        if (clear && this._formulaType)
+        if (clear &amp;&amp; this._formulaType)
             this.clear();
         if (value instanceof RichText)
             this._value = value.copy(this);
@@ -61,7 +105,7 @@ class Cell {
     }
 
     getFormula() {
-        if (this._formulaType === "shared" && !this._formula) {
+        if (this._formulaType === "shared" &amp;&amp; !this._formula) {
             return this.sharedFormula();
         }
         return this._formula;
@@ -71,7 +115,7 @@ class Cell {
      * Sets the formula of this cell.
      * @param {string} formula - The formula to set.
      * @param {boolean} [calculate=true] - Should the formula be calculated.
-     * @returns {Array<{}>} The cells updated
+     * @returns {Array&lt;{}>} The cells updated
      */
     setFormula(formula, calculate = true) {
         // skip if the formula does not change
@@ -95,7 +139,7 @@ class Cell {
 
     /**
      * Perform re-calculation, but not rebuild reference table
-     * @return {Array<{}>} A list of cells that updated.
+     * @return {Array&lt;{}>} A list of cells that updated.
      */
     recalculate() {
         const result = this._evaluateFormula();
@@ -135,7 +179,7 @@ class Cell {
      * @return {undefined}
      */
     _checkStyle() {
-        if (!this._style && !(arguments[0] instanceof Style)) {
+        if (!this._style &amp;&amp; !(arguments[0] instanceof Style)) {
             this._style = this.workbook().styleSheet().createStyle(this._styleId);
         }
     }
@@ -197,9 +241,9 @@ class Cell {
             type: 'cell',
             rowNumber: this.rowNumber(),
             columnNumber: this.columnNumber(),
-            sheetName: opts && opts.includeSheetName && this.sheet().name(),
-            rowAnchored: opts && (opts.rowAnchored || opts.anchored),
-            columnAnchored: opts && (opts.columnAnchored || opts.anchored)
+            sheetName: opts &amp;&amp; opts.includeSheetName &amp;&amp; this.sheet().name(),
+            rowAnchored: opts &amp;&amp; (opts.rowAnchored || opts.anchored),
+            columnAnchored: opts &amp;&amp; (opts.columnAnchored || opts.anchored)
         });
     }
 
@@ -223,7 +267,7 @@ class Cell {
             });
         }
 
-        const hostSharedFormulaId = this._formulaRef && this._sharedFormulaId;
+        const hostSharedFormulaId = this._formulaRef &amp;&amp; this._sharedFormulaId;
 
         this._value = undefined;
         this._formulaType = undefined;
@@ -302,7 +346,7 @@ class Cell {
             })
             .case(['string', '*'], (formula, result) => {
                 const supportedType = ['string', 'number', 'boolean'];
-                if (!supportedType.includes(typeof result) && !(result instanceof Date))
+                if (!supportedType.includes(typeof result) &amp;&amp; !(result instanceof Date))
                     throw new Error('Formula result can only be string, number, boolean or Date.');
                 this.clear();
                 this._formulaType = "normal";
@@ -400,7 +444,7 @@ class Cell {
     isMasterMergedCell(merged) {
         if (!merged) merged = this.merged();
         if (!merged) return false;
-        return merged.from.row === this.rowNumber() && merged.from.col === this.columnNumber();
+        return merged.from.row === this.rowNumber() &amp;&amp; merged.from.col === this.columnNumber();
     }
 
     /**
@@ -495,8 +539,8 @@ class Cell {
      * @returns {*} The style.
      *//**
      * Gets multiple styles.
-     * @param {Array.<string>} names - The names of the style.
-     * @returns {object.<string, *>} Object whose keys are the style names and values are the styles.
+     * @param {Array.&lt;string>} names - The names of the style.
+     * @returns {object.&lt;string, *>} Object whose keys are the style names and values are the styles.
      *//**
      * Sets an individual style.
      * @param {string} name - The name of the style.
@@ -505,11 +549,11 @@ class Cell {
      *//**
      * Sets the styles in the range starting with the cell.
      * @param {string} name - The name of the style.
-     * @param {Array.<Array.<*>>} - 2D array of values to set.
+     * @param {Array.&lt;Array.&lt;*>>} - 2D array of values to set.
      * @returns {Range} The range that was set.
      *//**
      * Sets multiple styles.
-     * @param {object.<string, *>} styles - Object whose keys are the style names and values are the styles to set.
+     * @param {object.&lt;string, *>} styles - Object whose keys are the style names and values are the styles to set.
      * @returns {Cell} The cell.
      *//**
      * Sets to a specific style
@@ -571,7 +615,7 @@ class Cell {
      * @returns {Cell} The cell.
      *//**
      * Sets the values in the range starting with the cell.
-     * @param {Array.<Array.<string|boolean|number|null|undefined>>} - 2D array of values to set.
+     * @param {Array.&lt;Array.&lt;string|boolean|number|null|undefined>>} - 2D array of values to set.
      * @returns {Range} The range that was set.
      */
     value() {
@@ -645,7 +689,7 @@ class Cell {
     }
 
     /**
-     * @return {Array.<ReferenceLiteral>} The dependencies of the formula in this cell.
+     * @return {Array.&lt;ReferenceLiteral>} The dependencies of the formula in this cell.
      */
     dependencies() {
         return this._dep;
@@ -697,7 +741,7 @@ class Cell {
      * @ignore
      */
     getSharedRefFormula() {
-        return this._formulaType === "shared" ? this._formulaRef && this._formula : undefined;
+        return this._formulaType === "shared" ? this._formulaRef &amp;&amp; this._formula : undefined;
     }
 
     /**
@@ -707,7 +751,7 @@ class Cell {
      * @ignore
      */
     sharesFormula(id) {
-        return this._formulaType === "shared" && this._sharedFormulaId === id;
+        return this._formulaType === "shared" &amp;&amp; this._sharedFormulaId === id;
     }
 
     /**
@@ -866,13 +910,13 @@ class Cell {
             this._formula = fNode.children.length ? `${fNode.children[0]}` : undefined;
 
             // this is the main cell the shared formula references.
-            if (this._formulaType === "shared" && this._formulaRef) {
+            if (this._formulaType === "shared" &amp;&amp; this._formulaRef) {
                 // store the shared formula to sheet
                 this.sheet().setSharedFormulaRefCell(this._sharedFormulaId, this);
 
                 // Update the sheet's max shared formula ID so we can set future IDs an index beyond this.
                 this.sheet().updateMaxSharedFormulaId(this._sharedFormulaId);
-            } else if (this._formulaType === 'shared' && !this._formula) {
+            } else if (this._formulaType === 'shared' &amp;&amp; !this._formula) {
                 // evaluate shared formula
                 this._formula = this.sharedFormula();
             }
@@ -911,7 +955,7 @@ class Cell {
         } else if (type === "str") {
             // Simple string value.
             const vNode = xmlq.findChild(node, 'v');
-            this._value = vNode && vNode.children[0];
+            this._value = vNode &amp;&amp; vNode.children[0];
         } else if (type === "inlineStr") {
             // Inline string value: can be simple text or rich text.
             const isNode = xmlq.findChild(node, 'is');
@@ -931,7 +975,7 @@ class Cell {
         } else {
             // Number value.
             const vNode = xmlq.findChild(node, 'v');
-            this._value = vNode && Number(vNode.children[0]);
+            this._value = vNode &amp;&amp; Number(vNode.children[0]);
         }
 
         // Delete known attributes.
@@ -955,8 +999,33 @@ class Cell {
 module.exports = Cell;
 
 /*
-<c r="A6" s="1" t="s">
-    <v>2</v>
-</c>
+&lt;c r="A6" s="1" t="s">
+    &lt;v>2&lt;/v>
+&lt;/c>
 */
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jul 02 2019 16:55:05 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      XmlBuilder - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Braintree SDK Client Reference
+    </h3>
+
+    
+
+    <h3>Classes</h3><ul><li id="ArgHandler-nav"><a href="ArgHandler.html">ArgHandler</a><ul class='methods'><li data-type="method" id="ArgHandler-_argsMatchTypes-nav"><a href="ArgHandler.html#_argsMatchTypes">_argsMatchTypes</a></li><li data-type="method" id="ArgHandler-case-nav"><a href="ArgHandler.html#case">case</a></li><li data-type="method" id="ArgHandler-handle-nav"><a href="ArgHandler.html#handle">handle</a></li></ul></li><li id="Cell-nav"><a href="Cell.html">Cell</a><ul class='methods'><li data-type="method" id="Cell-_checkStyle-nav"><a href="Cell.html#_checkStyle">_checkStyle</a></li><li data-type="method" id="Cell-_evaluateFormula-nav"><a href="Cell.html#_evaluateFormula">_evaluateFormula</a></li><li data-type="method" id="Cell-_init-nav"><a href="Cell.html#_init">_init</a></li><li data-type="method" id="Cell-_parseNode-nav"><a href="Cell.html#_parseNode">_parseNode</a></li><li data-type="method" id="Cell-active-nav"><a href="Cell.html#active">active</a></li><li data-type="method" id="Cell-active-nav"><a href="Cell.html#active">active</a></li><li data-type="method" id="Cell-addHorizontalPageBreak-nav"><a href="Cell.html#addHorizontalPageBreak">addHorizontalPageBreak</a></li><li data-type="method" id="Cell-address-nav"><a href="Cell.html#address">address</a></li><li data-type="method" id="Cell-clear-nav"><a href="Cell.html#clear">clear</a></li><li data-type="method" id="Cell-column-nav"><a href="Cell.html#column">column</a></li><li data-type="method" id="Cell-columnName-nav"><a href="Cell.html#columnName">columnName</a></li><li data-type="method" id="Cell-columnNumber-nav"><a href="Cell.html#columnNumber">columnNumber</a></li><li data-type="method" id="Cell-dataValidation-nav"><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type="method" id="Cell-dataValidation-nav"><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type="method" id="Cell-dependencies-nav"><a href="Cell.html#dependencies">dependencies</a></li><li data-type="method" id="Cell-find-nav"><a href="Cell.html#find">find</a></li><li data-type="method" id="Cell-formula-nav"><a href="Cell.html#formula">formula</a></li><li data-type="method" id="Cell-formula-nav"><a href="Cell.html#formula">formula</a></li><li data-type="method" id="Cell-formula-nav"><a href="Cell.html#formula">formula</a></li><li data-type="method" id="Cell-getMasterSharedFormulaCell-nav"><a href="Cell.html#getMasterSharedFormulaCell">getMasterSharedFormulaCell</a></li><li data-type="method" id="Cell-getStyle-nav"><a href="Cell.html#getStyle">getStyle</a></li><li data-type="method" id="Cell-getValue-nav"><a href="Cell.html#getValue">getValue</a></li><li data-type="method" id="Cell-hyperlink-nav"><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type="method" id="Cell-hyperlink-nav"><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type="method" id="Cell-hyperlink-nav"><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type="method" id="Cell-hyperlink-nav"><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type="method" id="Cell-isMasterMergedCell-nav"><a href="Cell.html#isMasterMergedCell">isMasterMergedCell</a></li><li data-type="method" id="Cell-isMasterShardFormula-nav"><a href="Cell.html#isMasterShardFormula">isMasterShardFormula</a></li><li data-type="method" id="Cell-isSharedFormula-nav"><a href="Cell.html#isSharedFormula">isSharedFormula</a></li><li data-type="method" id="Cell-masterMergedCell-nav"><a href="Cell.html#masterMergedCell">masterMergedCell</a></li><li data-type="method" id="Cell-merged-nav"><a href="Cell.html#merged">merged</a></li><li data-type="method" id="Cell-rangeTo-nav"><a href="Cell.html#rangeTo">rangeTo</a></li><li data-type="method" id="Cell-recalculate-nav"><a href="Cell.html#recalculate">recalculate</a></li><li data-type="method" id="Cell-relativeCell-nav"><a href="Cell.html#relativeCell">relativeCell</a></li><li data-type="method" id="Cell-row-nav"><a href="Cell.html#row">row</a></li><li data-type="method" id="Cell-rowNumber-nav"><a href="Cell.html#rowNumber">rowNumber</a></li><li data-type="method" id="Cell-setFormula-nav"><a href="Cell.html#setFormula">setFormula</a></li><li data-type="method" id="Cell-setStyle-nav"><a href="Cell.html#setStyle">setStyle</a></li><li data-type="method" id="Cell-setValue-nav"><a href="Cell.html#setValue">setValue</a></li><li data-type="method" id="Cell-sharedFormula-nav"><a href="Cell.html#sharedFormula">sharedFormula</a></li><li data-type="method" id="Cell-sheet-nav"><a href="Cell.html#sheet">sheet</a></li><li data-type="method" id="Cell-style-nav"><a href="Cell.html#style">style</a></li><li data-type="method" id="Cell-style-nav"><a href="Cell.html#style">style</a></li><li data-type="method" id="Cell-style-nav"><a href="Cell.html#style">style</a></li><li data-type="method" id="Cell-style-nav"><a href="Cell.html#style">style</a></li><li data-type="method" id="Cell-style-nav"><a href="Cell.html#style">style</a></li><li data-type="method" id="Cell-style-nav"><a href="Cell.html#style">style</a></li><li data-type="method" id="Cell-tap-nav"><a href="Cell.html#tap">tap</a></li><li data-type="method" id="Cell-thru-nav"><a href="Cell.html#thru">thru</a></li><li data-type="method" id="Cell-value-nav"><a href="Cell.html#value">value</a></li><li data-type="method" id="Cell-value-nav"><a href="Cell.html#value">value</a></li><li data-type="method" id="Cell-value-nav"><a href="Cell.html#value">value</a></li><li data-type="method" id="Cell-workbook-nav"><a href="Cell.html#workbook">workbook</a></li></ul></li><li id="Column-nav"><a href="Column.html">Column</a><ul class='methods'><li data-type="method" id="Column-_createStyleIfNeeded-nav"><a href="Column.html#_createStyleIfNeeded">_createStyleIfNeeded</a></li><li data-type="method" id="Column-addPageBreak-nav"><a href="Column.html#addPageBreak">addPageBreak</a></li><li data-type="method" id="Column-address-nav"><a href="Column.html#address">address</a></li><li data-type="method" id="Column-cell-nav"><a href="Column.html#cell">cell</a></li><li data-type="method" id="Column-columnName-nav"><a href="Column.html#columnName">columnName</a></li><li data-type="method" id="Column-columnNumber-nav"><a href="Column.html#columnNumber">columnNumber</a></li><li data-type="method" id="Column-hidden-nav"><a href="Column.html#hidden">hidden</a></li><li data-type="method" id="Column-hidden-nav"><a href="Column.html#hidden">hidden</a></li><li data-type="method" id="Column-sheet-nav"><a href="Column.html#sheet">sheet</a></li><li data-type="method" id="Column-style-nav"><a href="Column.html#style">style</a></li><li data-type="method" id="Column-style-nav"><a href="Column.html#style">style</a></li><li data-type="method" id="Column-style-nav"><a href="Column.html#style">style</a></li><li data-type="method" id="Column-style-nav"><a href="Column.html#style">style</a></li><li data-type="method" id="Column-style-nav"><a href="Column.html#style">style</a></li><li data-type="method" id="Column-width-nav"><a href="Column.html#width">width</a></li><li data-type="method" id="Column-width-nav"><a href="Column.html#width">width</a></li><li data-type="method" id="Column-workbook-nav"><a href="Column.html#workbook">workbook</a></li></ul></li><li id="DataValidations-nav"><a href="DataValidations.html">DataValidations</a><ul class='methods'><li data-type="method" id="DataValidations-delete-nav"><a href="DataValidations.html#delete">delete</a></li><li data-type="method" id="DataValidations-get-nav"><a href="DataValidations.html#get">get</a></li><li data-type="method" id="DataValidations-getDataValidation-nav"><a href="DataValidations.html#getDataValidation">getDataValidation</a></li><li data-type="method" id="DataValidations-parse-nav"><a href="DataValidations.html#parse">parse</a></li><li data-type="method" id="DataValidations-parseFormula-nav"><a href="DataValidations.html#parseFormula">parseFormula</a></li><li data-type="method" id="DataValidations-set-nav"><a href="DataValidations.html#set">set</a></li><li data-type="method" id="DataValidations-setDataValidation-nav"><a href="DataValidations.html#setDataValidation">setDataValidation</a></li><li data-type="method" id="DataValidations-toXml-nav"><a href="DataValidations.html#toXml">toXml</a></li><li data-type="method" id="DataValidations-validate-nav"><a href="DataValidations.html#validate">validate</a></li></ul></li><li id="Encryptor-nav"><a href="Encryptor.html">Encryptor</a><ul class='methods'><li data-type="method" id="Encryptor-_buildEncryptionInfo-nav"><a href="Encryptor.html#_buildEncryptionInfo">_buildEncryptionInfo</a></li><li data-type="method" id="Encryptor-_convertPasswordToKey-nav"><a href="Encryptor.html#_convertPasswordToKey">_convertPasswordToKey</a></li><li data-type="method" id="Encryptor-_createIV-nav"><a href="Encryptor.html#_createIV">_createIV</a></li><li data-type="method" id="Encryptor-_createUInt32LEBuffer-nav"><a href="Encryptor.html#_createUInt32LEBuffer">_createUInt32LEBuffer</a></li><li data-type="method" id="Encryptor-_crypt-nav"><a href="Encryptor.html#_crypt">_crypt</a></li><li data-type="method" id="Encryptor-_cryptPackage-nav"><a href="Encryptor.html#_cryptPackage">_cryptPackage</a></li><li data-type="method" id="Encryptor-_hash-nav"><a href="Encryptor.html#_hash">_hash</a></li><li data-type="method" id="Encryptor-_hmac-nav"><a href="Encryptor.html#_hmac">_hmac</a></li><li data-type="method" id="Encryptor-_parseEncryptionInfoAsync-nav"><a href="Encryptor.html#_parseEncryptionInfoAsync">_parseEncryptionInfoAsync</a></li><li data-type="method" id="Encryptor-decryptAsync-nav"><a href="Encryptor.html#decryptAsync">decryptAsync</a></li><li data-type="method" id="Encryptor-encrypt-nav"><a href="Encryptor.html#encrypt">encrypt</a></li></ul></li><li id="FormulaError-nav"><a href="FormulaError.html">FormulaError</a><ul class='methods'><li data-type="method" id="FormulaError-error-nav"><a href="FormulaError.html#error">error</a></li></ul></li><li id="Hyperlinks-nav"><a href="Hyperlinks.html">Hyperlinks</a><ul class='methods'><li data-type="method" id="Hyperlinks-delete-nav"><a href="Hyperlinks.html#delete">delete</a></li><li data-type="method" id="Hyperlinks-get-nav"><a href="Hyperlinks.html#get">get</a></li><li data-type="method" id="Hyperlinks-parse-nav"><a href="Hyperlinks.html#parse">parse</a></li><li data-type="method" id="Hyperlinks-set-nav"><a href="Hyperlinks.html#set">set</a></li><li data-type="method" id="Hyperlinks-toXml-nav"><a href="Hyperlinks.html#toXml">toXml</a></li></ul></li><li id="MergeCells-nav"><a href="MergeCells.html">MergeCells</a><ul class='methods'><li data-type="method" id="MergeCells-delete-nav"><a href="MergeCells.html#delete">delete</a></li><li data-type="method" id="MergeCells-get-nav"><a href="MergeCells.html#get">get</a></li><li data-type="method" id="MergeCells-parse-nav"><a href="MergeCells.html#parse">parse</a></li><li data-type="method" id="MergeCells-set-nav"><a href="MergeCells.html#set">set</a></li><li data-type="method" id="MergeCells-toXml-nav"><a href="MergeCells.html#toXml">toXml</a></li></ul></li><li id="PageBreaks-nav"><a href="PageBreaks.html">PageBreaks</a><ul class='methods'><li data-type="method" id="PageBreaks-add-nav"><a href="PageBreaks.html#add">add</a></li><li data-type="method" id="PageBreaks-remove-nav"><a href="PageBreaks.html#remove">remove</a></li></ul></li><li id="Range-nav"><a href="Range.html">Range</a><ul class='methods'><li data-type="method" id="Range-_findRangeExtent-nav"><a href="Range.html#_findRangeExtent">_findRangeExtent</a></li><li data-type="method" id="Range-address-nav"><a href="Range.html#address">address</a></li><li data-type="method" id="Range-autoFilter-nav"><a href="Range.html#autoFilter">autoFilter</a></li><li data-type="method" id="Range-cell-nav"><a href="Range.html#cell">cell</a></li><li data-type="method" id="Range-cells-nav"><a href="Range.html#cells">cells</a></li><li data-type="method" id="Range-clear-nav"><a href="Range.html#clear">clear</a></li><li data-type="method" id="Range-dataValidation-nav"><a href="Range.html#dataValidation">dataValidation</a></li><li data-type="method" id="Range-dataValidation-nav"><a href="Range.html#dataValidation">dataValidation</a></li><li data-type="method" id="Range-endCell-nav"><a href="Range.html#endCell">endCell</a></li><li data-type="method" id="Range-forEach-nav"><a href="Range.html#forEach">forEach</a></li><li data-type="method" id="Range-formula-nav"><a href="Range.html#formula">formula</a></li><li data-type="method" id="Range-formula-nav"><a href="Range.html#formula">formula</a></li><li data-type="method" id="Range-map-nav"><a href="Range.html#map">map</a></li><li data-type="method" id="Range-merged-nav"><a href="Range.html#merged">merged</a></li><li data-type="method" id="Range-merged-nav"><a href="Range.html#merged">merged</a></li><li data-type="method" id="Range-reduce-nav"><a href="Range.html#reduce">reduce</a></li><li data-type="method" id="Range-sheet-nav"><a href="Range.html#sheet">sheet</a></li><li data-type="method" id="Range-startCell-nav"><a href="Range.html#startCell">startCell</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-style-nav"><a href="Range.html#style">style</a></li><li data-type="method" id="Range-tap-nav"><a href="Range.html#tap">tap</a></li><li data-type="method" id="Range-thru-nav"><a href="Range.html#thru">thru</a></li><li data-type="method" id="Range-value-nav"><a href="Range.html#value">value</a></li><li data-type="method" id="Range-value-nav"><a href="Range.html#value">value</a></li><li data-type="method" id="Range-value-nav"><a href="Range.html#value">value</a></li><li data-type="method" id="Range-value-nav"><a href="Range.html#value">value</a></li><li data-type="method" id="Range-workbook-nav"><a href="Range.html#workbook">workbook</a></li></ul></li><li id="Reference-nav"><a href="Reference.html">Reference</a><ul class='methods'><li data-type="method" id="Reference-retrieve-nav"><a href="Reference.html#retrieve">retrieve</a></li></ul></li><li id="ReferenceTable-nav"><a href="ReferenceTable.html">ReferenceTable</a><ul class='methods'><li data-type="method" id="ReferenceTable-add-nav"><a href="ReferenceTable.html#add">add</a></li><li data-type="method" id="ReferenceTable-getCalculationOrder-nav"><a href="ReferenceTable.html#getCalculationOrder">getCalculationOrder</a></li><li data-type="method" id="ReferenceTable-getDirectReferences-nav"><a href="ReferenceTable.html#getDirectReferences">getDirectReferences</a></li><li data-type="method" id="ReferenceTable-remove-nav"><a href="ReferenceTable.html#remove">remove</a></li></ul></li><li id="RichText-nav"><a href="RichText.html">RichText</a><ul class='methods'><li data-type="method" id="RichText-add-nav"><a href="RichText.html#add">add</a></li><li data-type="method" id="RichText-clear-nav"><a href="RichText.html#clear">clear</a></li><li data-type="method" id="RichText-copy-nav"><a href="RichText.html#copy">copy</a></li><li data-type="method" id="RichText-get-nav"><a href="RichText.html#get">get</a></li><li data-type="method" id="RichText-getInstanceWithCellRef-nav"><a href="RichText.html#getInstanceWithCellRef">getInstanceWithCellRef</a></li><li data-type="method" id="RichText-remove-nav"><a href="RichText.html#remove">remove</a></li><li data-type="method" id="RichText-text-nav"><a href="RichText.html#text">text</a></li></ul></li><li id="RichTextFragment-nav"><a href="RichTextFragment.html">RichTextFragment</a><ul class='methods'><li data-type="method" id="RichTextFragment-_set_fontGenericFamily-nav"><a href="RichTextFragment.html#_set_fontGenericFamily">_set_fontGenericFamily</a></li><li data-type="method" id="RichTextFragment-_set_fontScheme-nav"><a href="RichTextFragment.html#_set_fontScheme">_set_fontScheme</a></li><li data-type="method" id="RichTextFragment-style-nav"><a href="RichTextFragment.html#style">style</a></li><li data-type="method" id="RichTextFragment-style-nav"><a href="RichTextFragment.html#style">style</a></li><li data-type="method" id="RichTextFragment-style-nav"><a href="RichTextFragment.html#style">style</a></li><li data-type="method" id="RichTextFragment-style-nav"><a href="RichTextFragment.html#style">style</a></li><li data-type="method" id="RichTextFragment-value-nav"><a href="RichTextFragment.html#value">value</a></li><li data-type="method" id="RichTextFragment-value-nav"><a href="RichTextFragment.html#value">value</a></li></ul></li><li id="Row-nav"><a href="Row.html">Row</a><ul class='methods'><li data-type="method" id="Row-_createCellStylesIfNeeded-nav"><a href="Row.html#_createCellStylesIfNeeded">_createCellStylesIfNeeded</a></li><li data-type="method" id="Row-_createStyleIfNeeded-nav"><a href="Row.html#_createStyleIfNeeded">_createStyleIfNeeded</a></li><li data-type="method" id="Row-_init-nav"><a href="Row.html#_init">_init</a></li><li data-type="method" id="Row-addPageBreak-nav"><a href="Row.html#addPageBreak">addPageBreak</a></li><li data-type="method" id="Row-address-nav"><a href="Row.html#address">address</a></li><li data-type="method" id="Row-cell-nav"><a href="Row.html#cell">cell</a></li><li data-type="method" id="Row-height-nav"><a href="Row.html#height">height</a></li><li data-type="method" id="Row-height-nav"><a href="Row.html#height">height</a></li><li data-type="method" id="Row-hidden-nav"><a href="Row.html#hidden">hidden</a></li><li data-type="method" id="Row-hidden-nav"><a href="Row.html#hidden">hidden</a></li><li data-type="method" id="Row-rowNumber-nav"><a href="Row.html#rowNumber">rowNumber</a></li><li data-type="method" id="Row-sheet-nav"><a href="Row.html#sheet">sheet</a></li><li data-type="method" id="Row-style-nav"><a href="Row.html#style">style</a></li><li data-type="method" id="Row-style-nav"><a href="Row.html#style">style</a></li><li data-type="method" id="Row-style-nav"><a href="Row.html#style">style</a></li><li data-type="method" id="Row-style-nav"><a href="Row.html#style">style</a></li><li data-type="method" id="Row-style-nav"><a href="Row.html#style">style</a></li><li data-type="method" id="Row-workbook-nav"><a href="Row.html#workbook">workbook</a></li></ul></li><li id="Sheet-nav"><a href="Sheet.html">Sheet</a><ul class='methods'><li data-type="method" id="Sheet-_getOrCreateSheetViewNode-nav"><a href="Sheet.html#_getOrCreateSheetViewNode">_getOrCreateSheetViewNode</a></li><li data-type="method" id="Sheet-active-nav"><a href="Sheet.html#active">active</a></li><li data-type="method" id="Sheet-active-nav"><a href="Sheet.html#active">active</a></li><li data-type="method" id="Sheet-activeCell-nav"><a href="Sheet.html#activeCell">activeCell</a></li><li data-type="method" id="Sheet-activeCell-nav"><a href="Sheet.html#activeCell">activeCell</a></li><li data-type="method" id="Sheet-activeCell-nav"><a href="Sheet.html#activeCell">activeCell</a></li><li data-type="method" id="Sheet-autoFilter-nav"><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type="method" id="Sheet-autoFilter-nav"><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type="method" id="Sheet-cell-nav"><a href="Sheet.html#cell">cell</a></li><li data-type="method" id="Sheet-cell-nav"><a href="Sheet.html#cell">cell</a></li><li data-type="method" id="Sheet-column-nav"><a href="Sheet.html#column">column</a></li><li data-type="method" id="Sheet-definedName-nav"><a href="Sheet.html#definedName">definedName</a></li><li data-type="method" id="Sheet-definedName-nav"><a href="Sheet.html#definedName">definedName</a></li><li data-type="method" id="Sheet-delete-nav"><a href="Sheet.html#delete">delete</a></li><li data-type="method" id="Sheet-find-nav"><a href="Sheet.html#find">find</a></li><li data-type="method" id="Sheet-freezePanes-nav"><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type="method" id="Sheet-freezePanes-nav"><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type="method" id="Sheet-getCell-nav"><a href="Sheet.html#getCell">getCell</a></li><li data-type="method" id="Sheet-gridLinesVisible-nav"><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type="method" id="Sheet-gridLinesVisible-nav"><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type="method" id="Sheet-hidden-nav"><a href="Sheet.html#hidden">hidden</a></li><li data-type="method" id="Sheet-hidden-nav"><a href="Sheet.html#hidden">hidden</a></li><li data-type="method" id="Sheet-horizontalPageBreaks-nav"><a href="Sheet.html#horizontalPageBreaks">horizontalPageBreaks</a></li><li data-type="method" id="Sheet-hyperlink-nav"><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type="method" id="Sheet-hyperlink-nav"><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type="method" id="Sheet-hyperlink-nav"><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type="method" id="Sheet-move-nav"><a href="Sheet.html#move">move</a></li><li data-type="method" id="Sheet-name-nav"><a href="Sheet.html#name">name</a></li><li data-type="method" id="Sheet-pageBreaks-nav"><a href="Sheet.html#pageBreaks">pageBreaks</a></li><li data-type="method" id="Sheet-pageMargins-nav"><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type="method" id="Sheet-pageMargins-nav"><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type="method" id="Sheet-pageMarginsPreset-nav"><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type="method" id="Sheet-pageMarginsPreset-nav"><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type="method" id="Sheet-pageMarginsPreset-nav"><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type="method" id="Sheet-panes-nav"><a href="Sheet.html#panes">panes</a></li><li data-type="method" id="Sheet-panes-nav"><a href="Sheet.html#panes">panes</a></li><li data-type="method" id="Sheet-printGridLines-nav"><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type="method" id="Sheet-printGridLines-nav"><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type="method" id="Sheet-printOptions-nav"><a href="Sheet.html#printOptions">printOptions</a></li><li data-type="method" id="Sheet-printOptions-nav"><a href="Sheet.html#printOptions">printOptions</a></li><li data-type="method" id="Sheet-range-nav"><a href="Sheet.html#range">range</a></li><li data-type="method" id="Sheet-range-nav"><a href="Sheet.html#range">range</a></li><li data-type="method" id="Sheet-range-nav"><a href="Sheet.html#range">range</a></li><li data-type="method" id="Sheet-resetPanes-nav"><a href="Sheet.html#resetPanes">resetPanes</a></li><li data-type="method" id="Sheet-row-nav"><a href="Sheet.html#row">row</a></li><li data-type="method" id="Sheet-splitPanes-nav"><a href="Sheet.html#splitPanes">splitPanes</a></li><li data-type="method" id="Sheet-tabColor-nav"><a href="Sheet.html#tabColor">tabColor</a></li><li data-type="method" id="Sheet-tabColor-nav"><a href="Sheet.html#tabColor">tabColor</a></li><li data-type="method" id="Sheet-tabSelected-nav"><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type="method" id="Sheet-tabSelected-nav"><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type="method" id="Sheet-usedRange-nav"><a href="Sheet.html#usedRange">usedRange</a></li><li data-type="method" id="Sheet-verticalPageBreaks-nav"><a href="Sheet.html#verticalPageBreaks">verticalPageBreaks</a></li><li data-type="method" id="Sheet-workbook-nav"><a href="Sheet.html#workbook">workbook</a></li></ul></li><li id="Theme-nav"><a href="Theme.html">Theme</a><ul class='methods'><li data-type="method" id="Theme-_hexToRgb-nav"><a href="Theme.html#._hexToRgb">_hexToRgb</a></li><li data-type="method" id="Theme-_hslToRgb-nav"><a href="Theme.html#._hslToRgb">_hslToRgb</a></li><li data-type="method" id="Theme-_rgbToHex-nav"><a href="Theme.html#._rgbToHex">_rgbToHex</a></li><li data-type="method" id="Theme-_rgbToHsl-nav"><a href="Theme.html#._rgbToHsl">_rgbToHsl</a></li><li data-type="method" id="Theme-themeColor-nav"><a href="Theme.html#themeColor">themeColor</a></li></ul></li><li id="Workbook-nav"><a href="Workbook.html">Workbook</a><ul class='methods'><li data-type="method" id="Workbook-_addSheet-nav"><a href="Workbook.html#_addSheet">_addSheet</a></li><li data-type="method" id="Workbook-_convertBufferToOutput-nav"><a href="Workbook.html#_convertBufferToOutput">_convertBufferToOutput</a></li><li data-type="method" id="Workbook-_convertInputToBufferAsync-nav"><a href="Workbook.html#_convertInputToBufferAsync">_convertInputToBufferAsync</a></li><li data-type="method" id="Workbook-_initAsync-nav"><a href="Workbook.html#_initAsync">_initAsync</a></li><li data-type="method" id="Workbook-_parseNodesAsync-nav"><a href="Workbook.html#_parseNodesAsync">_parseNodesAsync</a></li><li data-type="method" id="Workbook-_parseSheetRefs-nav"><a href="Workbook.html#_parseSheetRefs">_parseSheetRefs</a></li><li data-type="method" id="Workbook-_reconstructSheetName2Id-nav"><a href="Workbook.html#_reconstructSheetName2Id">_reconstructSheetName2Id</a></li><li data-type="method" id="Workbook-_setSheetRefs-nav"><a href="Workbook.html#_setSheetRefs">_setSheetRefs</a></li><li data-type="method" id="Workbook-activeSheet-nav"><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type="method" id="Workbook-activeSheet-nav"><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type="method" id="Workbook-addSheet-nav"><a href="Workbook.html#addSheet">addSheet</a></li><li data-type="method" id="Workbook-cloneSheet-nav"><a href="Workbook.html#cloneSheet">cloneSheet</a></li><li data-type="method" id="Workbook-definedName-nav"><a href="Workbook.html#definedName">definedName</a></li><li data-type="method" id="Workbook-deleteSheet-nav"><a href="Workbook.html#deleteSheet">deleteSheet</a></li><li data-type="method" id="Workbook-find-nav"><a href="Workbook.html#find">find</a></li><li data-type="method" id="Workbook-getSheetRIdByName-nav"><a href="Workbook.html#getSheetRIdByName">getSheetRIdByName</a></li><li data-type="method" id="Workbook-moveSheet-nav"><a href="Workbook.html#moveSheet">moveSheet</a></li><li data-type="method" id="Workbook-outputAsync-nav"><a href="Workbook.html#outputAsync">outputAsync</a></li><li data-type="method" id="Workbook-properties-nav"><a href="Workbook.html#properties">properties</a></li><li data-type="method" id="Workbook-property-nav"><a href="Workbook.html#property">property</a></li><li data-type="method" id="Workbook-property-nav"><a href="Workbook.html#property">property</a></li><li data-type="method" id="Workbook-property-nav"><a href="Workbook.html#property">property</a></li><li data-type="method" id="Workbook-property-nav"><a href="Workbook.html#property">property</a></li><li data-type="method" id="Workbook-sheet-nav"><a href="Workbook.html#sheet">sheet</a></li><li data-type="method" id="Workbook-sheets-nav"><a href="Workbook.html#sheets">sheets</a></li><li data-type="method" id="Workbook-theme-nav"><a href="Workbook.html#theme">theme</a></li><li data-type="method" id="Workbook-toFileAsync-nav"><a href="Workbook.html#toFileAsync">toFileAsync</a></li></ul></li><li id="XmlBuilder-nav"><a href="XmlBuilder.html">XmlBuilder</a><ul class='methods'><li data-type="method" id="XmlBuilder-_build-nav"><a href="XmlBuilder.html#_build">_build</a></li><li data-type="method" id="XmlBuilder-_escapeString-nav"><a href="XmlBuilder.html#_escapeString">_escapeString</a></li><li data-type="method" id="XmlBuilder-build-nav"><a href="XmlBuilder.html#build">build</a></li></ul></li><li id="XmlParser-nav"><a href="XmlParser.html">XmlParser</a><ul class='methods'><li data-type="method" id="XmlParser-_covertToNumberIfNumber-nav"><a href="XmlParser.html#_covertToNumberIfNumber">_covertToNumberIfNumber</a></li><li data-type="method" id="XmlParser-parseAsync-nav"><a href="XmlParser.html#parseAsync">parseAsync</a></li></ul></li></ul><h3 id="global-nav">Global</h3><ul><li><a href="global.html#_">_</a></li><li><a href="global.html#STANDARD_CODES">STANDARD_CODES</a></li><li><a href="global.html#STARTING_CUSTOM_NUMBER_FORMAT_ID">STARTING_CUSTOM_NUMBER_FORMAT_ID</a></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        XmlBuilder
+      </h1>
+    
+
+    
+
+<section>
+  <header>
+    
+      <h2>
+        
+        XmlBuilder
+        
+      </h2>
+
+      
+        <div class="class-description">
+          <p>XML document builder.</p>
+        </div>
+      
+    
+  </header>
+
+  <article>
+    <div class="container-overview">
+      
+        
+
+
+  
+    <h2>Constructor</h2>
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#XmlBuilder">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="XmlBuilder">
+      <span class="type-signature">(private) </span>new XmlBuilder<span class="signature">()</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="xml_XmlBuilder.js.html">xml/XmlBuilder.js</a>, <a href="xml_XmlBuilder.js.html#line9">line 9</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+      <h3 class="subsection-title">Methods</h3>
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#_build">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="_build">
+      <span class="type-signature">(private) </span>_build<span class="signature">(node, xml)</span><span class="type-signature"> &rarr; {string}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Build the XML string. (This is the internal recursive method.)</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>node</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      Object
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>The node.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>xml</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>The initial XML doc string.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="xml_XmlBuilder.js.html">xml/XmlBuilder.js</a>, <a href="xml_XmlBuilder.js.html#line29">line 29</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#_escapeString">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="_escapeString">
+      <span class="type-signature">(private) </span>_escapeString<span class="signature">(value, isAttribute<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Escape a string for use in XML by replacing &amp;, &quot;, ', &lt;, and &gt;.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>value</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      *
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>The value to escape.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>isAttribute</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      boolean
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>A flag indicating if this is an attribute.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="xml_XmlBuilder.js.html">xml/XmlBuilder.js</a>, <a href="xml_XmlBuilder.js.html#line101">line 101</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#build">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="build">
+      <span class="type-signature"></span>build<span class="signature">(node)</span><span class="type-signature"> &rarr; {string}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Build an XML string from the JSON object.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>node</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      Object
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>The node.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="xml_XmlBuilder.js.html">xml/XmlBuilder.js</a>, <a href="xml_XmlBuilder.js.html#line15">line 15</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+
+    
+
+    
+  </article>
+</section>
+
+
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+
+</body>
+</html>

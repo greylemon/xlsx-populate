@@ -1,4 +1,48 @@
-"use strict";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>workbooks/Workbook.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Cell.html">Cell</a><ul class='methods'><li data-type='method'><a href="Cell.html#_evaluateFormula">_evaluateFormula</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#active">active</a></li><li data-type='method'><a href="Cell.html#addHorizontalPageBreak">addHorizontalPageBreak</a></li><li data-type='method'><a href="Cell.html#address">address</a></li><li data-type='method'><a href="Cell.html#clear">clear</a></li><li data-type='method'><a href="Cell.html#column">column</a></li><li data-type='method'><a href="Cell.html#columnName">columnName</a></li><li data-type='method'><a href="Cell.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Cell.html#dependencies">dependencies</a></li><li data-type='method'><a href="Cell.html#find">find</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#formula">formula</a></li><li data-type='method'><a href="Cell.html#getMasterSharedFormulaCell">getMasterSharedFormulaCell</a></li><li data-type='method'><a href="Cell.html#getStyle">getStyle</a></li><li data-type='method'><a href="Cell.html#getValue">getValue</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Cell.html#isMasterMergedCell">isMasterMergedCell</a></li><li data-type='method'><a href="Cell.html#isMasterShardFormula">isMasterShardFormula</a></li><li data-type='method'><a href="Cell.html#isSharedFormula">isSharedFormula</a></li><li data-type='method'><a href="Cell.html#masterMergedCell">masterMergedCell</a></li><li data-type='method'><a href="Cell.html#merged">merged</a></li><li data-type='method'><a href="Cell.html#rangeTo">rangeTo</a></li><li data-type='method'><a href="Cell.html#recalculate">recalculate</a></li><li data-type='method'><a href="Cell.html#relativeCell">relativeCell</a></li><li data-type='method'><a href="Cell.html#row">row</a></li><li data-type='method'><a href="Cell.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Cell.html#setFormula">setFormula</a></li><li data-type='method'><a href="Cell.html#setStyle">setStyle</a></li><li data-type='method'><a href="Cell.html#setValue">setValue</a></li><li data-type='method'><a href="Cell.html#sharedFormula">sharedFormula</a></li><li data-type='method'><a href="Cell.html#sheet">sheet</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#style">style</a></li><li data-type='method'><a href="Cell.html#tap">tap</a></li><li data-type='method'><a href="Cell.html#thru">thru</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#value">value</a></li><li data-type='method'><a href="Cell.html#workbook">workbook</a></li></ul></li><li><a href="Column.html">Column</a><ul class='methods'><li data-type='method'><a href="Column.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Column.html#address">address</a></li><li data-type='method'><a href="Column.html#cell">cell</a></li><li data-type='method'><a href="Column.html#columnName">columnName</a></li><li data-type='method'><a href="Column.html#columnNumber">columnNumber</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#hidden">hidden</a></li><li data-type='method'><a href="Column.html#sheet">sheet</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#style">style</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#width">width</a></li><li data-type='method'><a href="Column.html#workbook">workbook</a></li></ul></li><li><a href="DataValidations.html">DataValidations</a><ul class='methods'><li data-type='method'><a href="DataValidations.html#delete">delete</a></li><li data-type='method'><a href="DataValidations.html#get">get</a></li><li data-type='method'><a href="DataValidations.html#getDataValidation">getDataValidation</a></li><li data-type='method'><a href="DataValidations.html#parse">parse</a></li><li data-type='method'><a href="DataValidations.html#parseFormula">parseFormula</a></li><li data-type='method'><a href="DataValidations.html#set">set</a></li><li data-type='method'><a href="DataValidations.html#setDataValidation">setDataValidation</a></li><li data-type='method'><a href="DataValidations.html#toXml">toXml</a></li><li data-type='method'><a href="DataValidations.html#validate">validate</a></li></ul></li><li><a href="FormulaError.html">FormulaError</a><ul class='methods'><li data-type='method'><a href="FormulaError.html#error">error</a></li></ul></li><li><a href="Hyperlinks.html">Hyperlinks</a><ul class='methods'><li data-type='method'><a href="Hyperlinks.html#delete">delete</a></li><li data-type='method'><a href="Hyperlinks.html#get">get</a></li><li data-type='method'><a href="Hyperlinks.html#parse">parse</a></li><li data-type='method'><a href="Hyperlinks.html#set">set</a></li><li data-type='method'><a href="Hyperlinks.html#toXml">toXml</a></li></ul></li><li><a href="MergeCells.html">MergeCells</a><ul class='methods'><li data-type='method'><a href="MergeCells.html#delete">delete</a></li><li data-type='method'><a href="MergeCells.html#get">get</a></li><li data-type='method'><a href="MergeCells.html#parse">parse</a></li><li data-type='method'><a href="MergeCells.html#set">set</a></li><li data-type='method'><a href="MergeCells.html#toXml">toXml</a></li></ul></li><li><a href="PageBreaks.html">PageBreaks</a><ul class='methods'><li data-type='method'><a href="PageBreaks.html#add">add</a></li><li data-type='method'><a href="PageBreaks.html#remove">remove</a></li></ul></li><li><a href="Range.html">Range</a><ul class='methods'><li data-type='method'><a href="Range.html#address">address</a></li><li data-type='method'><a href="Range.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Range.html#cell">cell</a></li><li data-type='method'><a href="Range.html#cells">cells</a></li><li data-type='method'><a href="Range.html#clear">clear</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#dataValidation">dataValidation</a></li><li data-type='method'><a href="Range.html#endCell">endCell</a></li><li data-type='method'><a href="Range.html#forEach">forEach</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#formula">formula</a></li><li data-type='method'><a href="Range.html#map">map</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#merged">merged</a></li><li data-type='method'><a href="Range.html#reduce">reduce</a></li><li data-type='method'><a href="Range.html#sheet">sheet</a></li><li data-type='method'><a href="Range.html#startCell">startCell</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#style">style</a></li><li data-type='method'><a href="Range.html#tap">tap</a></li><li data-type='method'><a href="Range.html#thru">thru</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#value">value</a></li><li data-type='method'><a href="Range.html#workbook">workbook</a></li></ul></li><li><a href="Reference.html">Reference</a><ul class='methods'><li data-type='method'><a href="Reference.html#retrieve">retrieve</a></li></ul></li><li><a href="ReferenceTable.html">ReferenceTable</a><ul class='methods'><li data-type='method'><a href="ReferenceTable.html#add">add</a></li><li data-type='method'><a href="ReferenceTable.html#getCalculationOrder">getCalculationOrder</a></li><li data-type='method'><a href="ReferenceTable.html#getDirectReferences">getDirectReferences</a></li><li data-type='method'><a href="ReferenceTable.html#remove">remove</a></li></ul></li><li><a href="RichText.html">RichText</a><ul class='methods'><li data-type='method'><a href="RichText.html#add">add</a></li><li data-type='method'><a href="RichText.html#clear">clear</a></li><li data-type='method'><a href="RichText.html#copy">copy</a></li><li data-type='method'><a href="RichText.html#get">get</a></li><li data-type='method'><a href="RichText.html#getInstanceWithCellRef">getInstanceWithCellRef</a></li><li data-type='method'><a href="RichText.html#remove">remove</a></li><li data-type='method'><a href="RichText.html#text">text</a></li></ul></li><li><a href="RichTextFragment.html">RichTextFragment</a><ul class='methods'><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#style">style</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li><li data-type='method'><a href="RichTextFragment.html#value">value</a></li></ul></li><li><a href="Row.html">Row</a><ul class='methods'><li data-type='method'><a href="Row.html#addPageBreak">addPageBreak</a></li><li data-type='method'><a href="Row.html#address">address</a></li><li data-type='method'><a href="Row.html#cell">cell</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#height">height</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#hidden">hidden</a></li><li data-type='method'><a href="Row.html#rowNumber">rowNumber</a></li><li data-type='method'><a href="Row.html#sheet">sheet</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#style">style</a></li><li data-type='method'><a href="Row.html#workbook">workbook</a></li></ul></li><li><a href="Sheet.html">Sheet</a><ul class='methods'><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#active">active</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#activeCell">activeCell</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#autoFilter">autoFilter</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#cell">cell</a></li><li data-type='method'><a href="Sheet.html#column">column</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#definedName">definedName</a></li><li data-type='method'><a href="Sheet.html#delete">delete</a></li><li data-type='method'><a href="Sheet.html#find">find</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#freezePanes">freezePanes</a></li><li data-type='method'><a href="Sheet.html#getCell">getCell</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#gridLinesVisible">gridLinesVisible</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#hidden">hidden</a></li><li data-type='method'><a href="Sheet.html#horizontalPageBreaks">horizontalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#hyperlink">hyperlink</a></li><li data-type='method'><a href="Sheet.html#move">move</a></li><li data-type='method'><a href="Sheet.html#name">name</a></li><li data-type='method'><a href="Sheet.html#pageBreaks">pageBreaks</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMargins">pageMargins</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#pageMarginsPreset">pageMarginsPreset</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#panes">panes</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printGridLines">printGridLines</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#printOptions">printOptions</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#range">range</a></li><li data-type='method'><a href="Sheet.html#resetPanes">resetPanes</a></li><li data-type='method'><a href="Sheet.html#row">row</a></li><li data-type='method'><a href="Sheet.html#splitPanes">splitPanes</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabColor">tabColor</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#tabSelected">tabSelected</a></li><li data-type='method'><a href="Sheet.html#usedRange">usedRange</a></li><li data-type='method'><a href="Sheet.html#verticalPageBreaks">verticalPageBreaks</a></li><li data-type='method'><a href="Sheet.html#workbook">workbook</a></li></ul></li><li><a href="Theme.html">Theme</a><ul class='methods'><li data-type='method'><a href="Theme.html#themeColor">themeColor</a></li></ul></li><li><a href="Workbook.html">Workbook</a><ul class='methods'><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#activeSheet">activeSheet</a></li><li data-type='method'><a href="Workbook.html#addSheet">addSheet</a></li><li data-type='method'><a href="Workbook.html#cloneSheet">cloneSheet</a></li><li data-type='method'><a href="Workbook.html#definedName">definedName</a></li><li data-type='method'><a href="Workbook.html#deleteSheet">deleteSheet</a></li><li data-type='method'><a href="Workbook.html#find">find</a></li><li data-type='method'><a href="Workbook.html#getSheetRIdByName">getSheetRIdByName</a></li><li data-type='method'><a href="Workbook.html#moveSheet">moveSheet</a></li><li data-type='method'><a href="Workbook.html#outputAsync">outputAsync</a></li><li data-type='method'><a href="Workbook.html#properties">properties</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#property">property</a></li><li data-type='method'><a href="Workbook.html#sheet">sheet</a></li><li data-type='method'><a href="Workbook.html#sheets">sheets</a></li><li data-type='method'><a href="Workbook.html#theme">theme</a></li><li data-type='method'><a href="Workbook.html#toFileAsync">toFileAsync</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="XlsxPopulate.html">XlsxPopulate</a><ul class='methods'><li data-type='method'><a href="XlsxPopulate.html#.dateToNumber">dateToNumber</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromBlankAsync">fromBlankAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromDataAsync">fromDataAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.fromFileAsync">fromFileAsync</a></li><li data-type='method'><a href="XlsxPopulate.html#.numberToDate">numberToDate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">workbooks/Workbook.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
 
 const _ = require("lodash");
 const fs = require("fs");
@@ -36,7 +80,7 @@ const xmlParser = new XmlParser();
 const xmlBuilder = new XmlBuilder();
 
 // Initialize the encryptor if present (can be excluded in browser build).
-const encryptor = typeof Encryptor === "function" && new Encryptor();
+const encryptor = typeof Encryptor === "function" &amp;&amp; new Encryptor();
 
 // Characters not allowed in sheet names.
 const badSheetNameChars = ['\\', '/', '*', '[', ']', ':', '?'];
@@ -65,7 +109,7 @@ class Workbook {
 
     /**
      * Create a new blank workbook.
-     * @returns {Promise.<Workbook>} The workbook.
+     * @returns {Promise.&lt;Workbook>} The workbook.
      * @ignore
      */
     static fromBlankAsync() {
@@ -74,9 +118,9 @@ class Workbook {
 
     /**
      * Loads a workbook from a data object. (Supports any supported [JSZip data types]{@link https://stuk.github.io/jszip/documentation/api_jszip/load_async.html}.)
-     * @param {string|Array.<number>|ArrayBuffer|Uint8Array|Buffer|Blob|Promise.<*>} data - The data to load.
+     * @param {string|Array.&lt;number>|ArrayBuffer|Uint8Array|Buffer|Blob|Promise.&lt;*>} data - The data to load.
      * @param {{}} [opts] - Options
-     * @returns {Promise.<Workbook>} The workbook.
+     * @returns {Promise.&lt;Workbook>} The workbook.
      * @ignore
      */
     static fromDataAsync(data, opts) {
@@ -87,7 +131,7 @@ class Workbook {
      * Loads a workbook from file.
      * @param {string} path - The path to the workbook.
      * @param {{}} [opts] - Options
-     * @returns {Promise.<Workbook>} The workbook.
+     * @returns {Promise.&lt;Workbook>} The workbook.
      * @ignore
      */
     static fromFileAsync(path, opts) {
@@ -179,7 +223,7 @@ class Workbook {
 
         // Make sure we are not deleting the only visible sheet.
         const visibleSheets = _.filter(this._sheets, sheet => !sheet.hidden());
-        if (visibleSheets.length === 1 && visibleSheets[0] === sheet) {
+        if (visibleSheets.length === 1 &amp;&amp; visibleSheets[0] === sheet) {
             throw new Error("This sheet may not be deleted as a workbook must contain at least one visible sheet.");
         }
 
@@ -350,7 +394,7 @@ class Workbook {
 
     /**
      * Get an array of all the sheets in the workbook.
-     * @returns {Array.<Sheet>} The sheets.
+     * @returns {Array.&lt;Sheet>} The sheets.
      */
     sheets() {
         return this._sheets.slice();
@@ -362,8 +406,8 @@ class Workbook {
      * @returns {*} The property.
      *//**
      * Gets multiple properties.
-     * @param {Array.<string>} names - The names of the properties.
-     * @returns {object.<string, *>} Object whose keys are the property names and values are the properties.
+     * @param {Array.&lt;string>} names - The names of the properties.
+     * @returns {object.&lt;string, *>} Object whose keys are the property names and values are the properties.
      *//**
      * Sets an individual property.
      * @param {string} name - The name of the property.
@@ -371,7 +415,7 @@ class Workbook {
      * @returns {Workbook} The workbook.
      *//**
      * Sets multiple properties.
-     * @param {object.<string, *>} properties - Object whose keys are the property names and values are the values to set.
+     * @param {object.&lt;string, *>} properties - Object whose keys are the property names and values are the values to set.
      * @returns {Workbook} The workbook.
      */
     property() {
@@ -420,7 +464,7 @@ class Workbook {
      * @param {string} path - The path of the file to write.
      * @param {{}} [opts] - Options
      * @param {string} [opts.password] - The password to encrypt the workbook.
-     * @returns {Promise.<undefined>} A promise.
+     * @returns {Promise.&lt;undefined>} A promise.
      */
     toFileAsync(path, opts) {
         if (process.browser) throw new Error("Workbook.toFileAsync is not supported in the browser.");
@@ -439,12 +483,12 @@ class Workbook {
      * @return {undefined|number} Sheet Id.
      */
     getSheetRIdByName(sheetName) {
-        // <sheets>
-        // <sheet r:id="rId1" sheetId="1" name="Sheet1"/>
-        // <sheet r:id="rId2" sheetId="2" name="Sheet2"/>
-        // <sheet r:id="rId3" sheetId="4" name="Sheet3" state="hidden"/>
-        // </sheets>
-        for (let i = 0; i < this._sheetsNode.children.length; i++) {
+        // &lt;sheets>
+        // &lt;sheet r:id="rId1" sheetId="1" name="Sheet1"/>
+        // &lt;sheet r:id="rId2" sheetId="2" name="Sheet2"/>
+        // &lt;sheet r:id="rId3" sheetId="4" name="Sheet3" state="hidden"/>
+        // &lt;/sheets>
+        for (let i = 0; i &lt; this._sheetsNode.children.length; i++) {
             const child = this._sheetsNode.children[i];
             if (child.attributes.name === sheetName)
                 return Number(child.attributes['r:id'].slice(3));
@@ -479,13 +523,13 @@ class Workbook {
             sheetId = this.getSheetRIdByName(sheetScope.name()) - 1;
         let definedNameNode;
         definedNamesNode.children.forEach(node => {
-            if (node.attributes.name === name && node.attributes.localSheetId === sheetId)
+            if (node.attributes.name === name &amp;&amp; node.attributes.localSheetId === sheetId)
                 definedNameNode = node;
         });
         return new ArgHandler('Workbook.scopedDefinedName', arguments)
             .case(['*', 'string'], () => {
                 // Get the address from the definedNames node.
-                const refersTo = definedNameNode && definedNameNode.children[0];
+                const refersTo = definedNameNode &amp;&amp; definedNameNode.children[0];
                 if (!refersTo) return;
 
                 // Try to parse the address.
@@ -496,7 +540,7 @@ class Workbook {
             })
             .case(['*', 'string', 'nil'], () => {
                 if (definedNameNode) xmlq.removeChild(definedNamesNode, definedNameNode);
-                if (definedNamesNode && !definedNamesNode.children.length) xmlq.removeChild(this._node, definedNamesNode);
+                if (definedNamesNode &amp;&amp; !definedNamesNode.children.length) xmlq.removeChild(this._node, definedNamesNode);
                 return this;
             })
             .case(['*', 'string', '*'], () => {
@@ -577,7 +621,7 @@ class Workbook {
         return this._addSheet(name, indexOrBeforeSheet, () => {
             const cloneXml = node => {
                 // If the node has a toXml method, call it.
-                if (node && _.isFunction(node.toXml)) node = node.toXml();
+                if (node &amp;&amp; _.isFunction(node.toXml)) node = node.toXml();
 
                 if (typeof node === 'object') {
                     if (node.name) {
@@ -608,7 +652,7 @@ class Workbook {
                 return null;
             };
 
-            // clone SheetNode & relationshipNode from source
+            // clone SheetNode &amp; relationshipNode from source
             const fromXml = from.toXmls();
             const sheetNode = cloneXml(fromXml.sheet);
             const relationshipNode = cloneXml(fromXml.relationships);
@@ -679,7 +723,7 @@ class Workbook {
      * @param {string|ArrayBuffer|Uint8Array|Buffer|Blob} data - The data to load.
      * @param {{}} [opts] - Options
      * @param {boolean} [opts.base64=false] - No used unless input is a string. True if the input string is base64 encoded, false for binary.
-     * @returns {Promise.<Workbook>} The workbook.
+     * @returns {Promise.&lt;Workbook>} The workbook.
      * @private
      */
     _initAsync(data, opts) {
@@ -806,14 +850,14 @@ class Workbook {
 
     /**
      * Parse files out of zip into XML node objects.
-     * @param {Array.<string>} names - The file names to parse.
-     * @returns {Promise.<Array.<{}>>} An array of the parsed objects.
+     * @param {Array.&lt;string>} names - The file names to parse.
+     * @returns {Promise.&lt;Array.&lt;{}>>} An array of the parsed objects.
      * @private
      */
     _parseNodesAsync(names) {
         return Promise.all(_.map(names, name => this._zip.file(name)))
-            .then(files => Promise.all(_.map(files, file => file && file.async("string"))))
-            .then(texts => Promise.all(_.map(texts, text => text && xmlParser.parseAsync(text))));
+            .then(files => Promise.all(_.map(files, file => file &amp;&amp; file.async("string"))))
+            .then(texts => Promise.all(_.map(texts, text => text &amp;&amp; xmlParser.parseAsync(text))));
     }
 
     /**
@@ -824,8 +868,8 @@ class Workbook {
     _parseSheetRefs() {
         // Parse the active sheet.
         const bookViewsNode = xmlq.findChild(this._node, "bookViews");
-        const workbookViewNode = bookViewsNode && xmlq.findChild(bookViewsNode, "workbookView");
-        const activeTabId = workbookViewNode && workbookViewNode.attributes.activeTab || 0;
+        const workbookViewNode = bookViewsNode &amp;&amp; xmlq.findChild(bookViewsNode, "workbookView");
+        const activeTabId = workbookViewNode &amp;&amp; workbookViewNode.attributes.activeTab || 0;
         this._activeSheet = this._sheets[activeTabId];
 
         // Set the location sheet on the defined name nodes. The defined name should point to the index of the sheet
@@ -896,7 +940,7 @@ class Workbook {
         if (!type) type = process.browser ? "blob" : "nodebuffer";
 
         if (type === "buffer" || type === "nodebuffer") return buffer;
-        if (process.browser && type === "blob") return new Blob([buffer], { type: Workbook.MIME_TYPE });
+        if (process.browser &amp;&amp; type === "blob") return new Blob([buffer], { type: Workbook.MIME_TYPE });
         if (type === "base64") return buffer.toString("base64");
         if (type === "binarystring") return buffer.toString("utf8");
         if (type === "uint8array") return new Uint8Array(buffer);
@@ -909,7 +953,7 @@ class Workbook {
      * Convert input to buffer
      * @param {Buffer|Blob|string|Uint8Array|ArrayBuffer} input - The input
      * @param {boolean} [base64=false] - Only applies if input is a string. If true, the string is base64 encoded, false for binary
-     * @returns {Promise.<Buffer>} The buffer.
+     * @returns {Promise.&lt;Buffer>} The buffer.
      * @private
      */
     _convertInputToBufferAsync(input, base64) {
@@ -917,7 +961,7 @@ class Workbook {
             .then(() => {
                 if (Buffer.isBuffer(input)) return input;
 
-                if (process.browser && input instanceof Blob) {
+                if (process.browser &amp;&amp; input instanceof Blob) {
                     return new Promise(resolve => {
                         const fileReader = new FileReader();
                         fileReader.onload = event => {
@@ -927,8 +971,8 @@ class Workbook {
                     });
                 }
 
-                if (typeof input === "string" && base64) return Buffer.from(input, "base64");
-                if (typeof input === "string" && !base64) return Buffer.from(input, "utf8");
+                if (typeof input === "string" &amp;&amp; base64) return Buffer.from(input, "base64");
+                if (typeof input === "string" &amp;&amp; !base64) return Buffer.from(input, "utf8");
                 if (input instanceof Uint8Array || input instanceof ArrayBuffer) return Buffer.from(input);
 
                 throw new Error(`Input type unknown.`);
@@ -948,26 +992,51 @@ module.exports = Workbook;
 /*
 xl/workbook.xml
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x15" xmlns:x15="http://schemas.microsoft.com/office/spreadsheetml/2010/11/main">
-	<fileVersion appName="xl" lastEdited="7" lowestEdited="7" rupBuild="16925"/>
-	<workbookPr defaultThemeVersion="164011"/>
-	<mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
-		<mc:Choice Requires="x15">
-			<x15ac:absPath url="\path\to\file" xmlns:x15ac="http://schemas.microsoft.com/office/spreadsheetml/2010/11/ac"/>
-		</mc:Choice>
-	</mc:AlternateContent>
-	<bookViews>
-		<workbookView xWindow="3720" yWindow="0" windowWidth="27870" windowHeight="12795"/>
-	</bookViews>
-	<sheets>
-		<sheet name="Sheet1" sheetId="1" r:id="rId1"/>
-	</sheets>
-	<calcPr calcId="171027"/>
-	<extLst>
-		<ext uri="{140A7094-0E35-4892-8432-C4D2E57EDEB5}" xmlns:x15="http://schemas.microsoft.com/office/spreadsheetml/2010/11/main">
-			<x15:workbookPr chartTrackingRefBase="1"/>
-		</ext>
-	</extLst>
-</workbook>
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+&lt;workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x15" xmlns:x15="http://schemas.microsoft.com/office/spreadsheetml/2010/11/main">
+	&lt;fileVersion appName="xl" lastEdited="7" lowestEdited="7" rupBuild="16925"/>
+	&lt;workbookPr defaultThemeVersion="164011"/>
+	&lt;mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+		&lt;mc:Choice Requires="x15">
+			&lt;x15ac:absPath url="\path\to\file" xmlns:x15ac="http://schemas.microsoft.com/office/spreadsheetml/2010/11/ac"/>
+		&lt;/mc:Choice>
+	&lt;/mc:AlternateContent>
+	&lt;bookViews>
+		&lt;workbookView xWindow="3720" yWindow="0" windowWidth="27870" windowHeight="12795"/>
+	&lt;/bookViews>
+	&lt;sheets>
+		&lt;sheet name="Sheet1" sheetId="1" r:id="rId1"/>
+	&lt;/sheets>
+	&lt;calcPr calcId="171027"/>
+	&lt;extLst>
+		&lt;ext uri="{140A7094-0E35-4892-8432-C4D2E57EDEB5}" xmlns:x15="http://schemas.microsoft.com/office/spreadsheetml/2010/11/main">
+			&lt;x15:workbookPr chartTrackingRefBase="1"/>
+		&lt;/ext>
+	&lt;/extLst>
+&lt;/workbook>
 // */
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jul 02 2019 16:55:05 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

@@ -90,17 +90,13 @@ gulp.task("e2e-parse", cb => {
 });
 
 
-gulp.task("docs", () => {
-    return fs.readFileAsync(PATHS.readme.template, "utf8")
-        .then(text => {
-            const tocText = toc(text, { filter: str => str.indexOf('NOTOC-') === -1 }).content;
-            text = text.replace("<!-- toc -->", tocText);
-            text = text.replace(/NOTOC-/mg, "");
-            return jsdoc2md.render({ files: PATHS.lib })
-                .then(apiText => {
-                    apiText = apiText.replace(/^#/mg, "##");
-                    text = text.replace("<!-- api -->", apiText);
-                    return fs.writeFileAsync(PATHS.readme.build, text);
-                });
-        });
+gulp.task("docs", cb => {
+    // eslint-disable-next-line no-sync
+    let text = fs.readFileSync(PATHS.readme.template, "utf8");
+    const tocText = toc(text, { filter: str => str.indexOf('NOTOC-') === -1 }).content;
+    text = text.replace("<!-- toc -->", tocText);
+    text = text.replace(/NOTOC-/mg, "");
+    // eslint-disable-next-line no-sync
+    fs.writeFileSync(PATHS.readme.build, text);
+    cb();
 });
