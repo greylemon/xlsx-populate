@@ -992,14 +992,35 @@ An object representing a gradient fill.
 ### Classes
 
 <dl>
+<dt><a href="#Reference">Reference</a></dt>
+<dd></dd>
+<dt><a href="#ReferenceTable">ReferenceTable</a></dt>
+<dd><p>A reference table:  refA -&gt; refB (refB depends on refA)
+Using 1-based index.</p>
+</dd>
+<dt><a href="#FormulaError">FormulaError</a></dt>
+<dd><p>A formula error (e.g. #DIV/0!).</p>
+</dd>
+<dt><a href="#Theme">Theme</a></dt>
+<dd><p>A readonly theme.</p>
+</dd>
+<dt><a href="#Workbook">Workbook</a></dt>
+<dd><p>A workbook.</p>
+</dd>
 <dt><a href="#Cell">Cell</a></dt>
 <dd><p>A cell</p>
 </dd>
 <dt><a href="#Column">Column</a></dt>
 <dd><p>A column.</p>
 </dd>
-<dt><a href="#FormulaError">FormulaError</a></dt>
-<dd><p>A formula error (e.g. #DIV/0!).</p>
+<dt><a href="#DataValidations">DataValidations</a></dt>
+<dd><p>A class stores dataValidations.</p>
+</dd>
+<dt><a href="#Hyperlinks">Hyperlinks</a></dt>
+<dd><p>A class stores hyperlinks.</p>
+</dd>
+<dt><a href="#MergeCells">MergeCells</a></dt>
+<dd><p>A class stores merge cells.</p>
 </dd>
 <dt><a href="#PageBreaks">PageBreaks</a></dt>
 <dd><p>PageBreaks</p>
@@ -1018,12 +1039,6 @@ An object representing a gradient fill.
 </dd>
 <dt><a href="#Sheet">Sheet</a></dt>
 <dd><p>A worksheet.</p>
-</dd>
-<dt><a href="#Theme">Theme</a></dt>
-<dd><p>A readonly theme.</p>
-</dd>
-<dt><a href="#Workbook">Workbook</a></dt>
-<dd><p>A workbook.</p>
 </dd>
 </dl>
 
@@ -1048,10 +1063,414 @@ An object representing a gradient fill.
 ### Typedefs
 
 <dl>
+<dt><a href="#MODE">MODE</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#PaneOptions">PaneOptions</a> : <code>Object</code></dt>
 <dd><p><a href="https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pane?view=openxml-2.8.1">https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pane?view=openxml-2.8.1</a></p>
 </dd>
+<dt><a href="#ReferenceLiteral">ReferenceLiteral</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
+
+<a name="Reference"></a>
+
+### Reference
+**Kind**: global class  
+
+* [Reference](#Reference)
+    * [new Reference(ref, workbook)](#new_Reference_new)
+    * [.retrieve([workbook])](#Reference+retrieve) ⇒ [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column)
+
+<a name="new_Reference_new"></a>
+
+#### new Reference(ref, workbook)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ref | <code>Object</code> \| <code>Object</code> | The reference. |
+| workbook | [<code>Workbook</code>](#Workbook) | Workbook |
+
+<a name="Reference+retrieve"></a>
+
+#### reference.retrieve([workbook]) ⇒ [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column)
+Retrieve the referenced object. Can be Cell, Range, Row, Column.
+
+**Kind**: instance method of [<code>Reference</code>](#Reference)  
+**Returns**: [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column) - The referenced object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [workbook] | [<code>Workbook</code>](#Workbook) | The workbook uses to retrieve reference. |
+
+<a name="ReferenceTable"></a>
+
+### ReferenceTable
+A reference table:  refA -> refB (refB depends on refA)Using 1-based index.
+
+**Kind**: global class  
+
+* [ReferenceTable](#ReferenceTable)
+    * [.add(refA, refB)](#ReferenceTable+add) ⇒ <code>undefined</code>
+    * [.remove(refA, refB)](#ReferenceTable+remove) ⇒ <code>undefined</code>
+    * [.getCalculationOrder(ref, result)](#ReferenceTable+getCalculationOrder)
+    * [.getDirectReferences(ref)](#ReferenceTable+getDirectReferences) ⇒ <code>Array</code>
+
+<a name="ReferenceTable+add"></a>
+
+#### referenceTable.add(refA, refB) ⇒ <code>undefined</code>
+refB depends on refA, which means changes on refA will triggerre-calculation on refB.refA -> refB
+
+**Kind**: instance method of [<code>ReferenceTable</code>](#ReferenceTable)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refA | <code>Object</code> \| <code>Object</code> | Dependency of refB. |
+| refB | <code>Object</code> | A cell reference. |
+
+<a name="ReferenceTable+remove"></a>
+
+#### referenceTable.remove(refA, refB) ⇒ <code>undefined</code>
+Called when a cell (refB)'s value is cleared.Remember refA -> refB,
+
+**Kind**: instance method of [<code>ReferenceTable</code>](#ReferenceTable)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refA | <code>Object</code> \| <code>Object</code> | Dependency of refB. |
+| refB | <code>Object</code> | A cell reference. |
+
+<a name="ReferenceTable+getCalculationOrder"></a>
+
+#### referenceTable.getCalculationOrder(ref, result)
+Get all cells need to update in order given a ref is modified. Called when a cell is modified.
+
+**Kind**: instance method of [<code>ReferenceTable</code>](#ReferenceTable)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ref | <code>Object</code> | A cell reference |
+| result |  |  |
+
+<a name="ReferenceTable+getDirectReferences"></a>
+
+#### referenceTable.getDirectReferences(ref) ⇒ <code>Array</code>
+Get CalculationOrder for the first layer.
+
+**Kind**: instance method of [<code>ReferenceTable</code>](#ReferenceTable)  
+**Returns**: <code>Array</code> - The cells direct reference the given cell reference.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ref | <code>Object</code> | A cell reference |
+
+<a name="FormulaError"></a>
+
+### FormulaError
+A formula error (e.g. #DIV/0!).
+
+**Kind**: global class  
+
+* [FormulaError](#FormulaError)
+    * _instance_
+        * [.error()](#FormulaError+error) ⇒ <code>string</code>
+    * _static_
+        * [.DIV0](#FormulaError.DIV0) : [<code>FormulaError</code>](#FormulaError)
+        * [.NA](#FormulaError.NA) : [<code>FormulaError</code>](#FormulaError)
+        * [.NAME](#FormulaError.NAME) : [<code>FormulaError</code>](#FormulaError)
+        * [.NULL](#FormulaError.NULL) : [<code>FormulaError</code>](#FormulaError)
+        * [.NUM](#FormulaError.NUM) : [<code>FormulaError</code>](#FormulaError)
+        * [.REF](#FormulaError.REF) : [<code>FormulaError</code>](#FormulaError)
+        * [.VALUE](#FormulaError.VALUE) : [<code>FormulaError</code>](#FormulaError)
+
+<a name="FormulaError+error"></a>
+
+#### formulaError.error() ⇒ <code>string</code>
+Get the error code.
+
+**Kind**: instance method of [<code>FormulaError</code>](#FormulaError)  
+**Returns**: <code>string</code> - The error code.  
+<a name="FormulaError.DIV0"></a>
+
+#### FormulaError.DIV0 : [<code>FormulaError</code>](#FormulaError)
+\#DIV/0! error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="FormulaError.NA"></a>
+
+#### FormulaError.NA : [<code>FormulaError</code>](#FormulaError)
+\#N/A error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="FormulaError.NAME"></a>
+
+#### FormulaError.NAME : [<code>FormulaError</code>](#FormulaError)
+\#NAME? error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="FormulaError.NULL"></a>
+
+#### FormulaError.NULL : [<code>FormulaError</code>](#FormulaError)
+\#NULL! error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="FormulaError.NUM"></a>
+
+#### FormulaError.NUM : [<code>FormulaError</code>](#FormulaError)
+\#NUM! error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="FormulaError.REF"></a>
+
+#### FormulaError.REF : [<code>FormulaError</code>](#FormulaError)
+\#REF! error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="FormulaError.VALUE"></a>
+
+#### FormulaError.VALUE : [<code>FormulaError</code>](#FormulaError)
+\#VALUE! error.
+
+**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+<a name="Theme"></a>
+
+### Theme
+A readonly theme.
+
+**Kind**: global class  
+
+* [Theme](#Theme)
+    * [new Theme(node)](#new_Theme_new)
+    * [.themeColor(index, tint)](#Theme+themeColor) ⇒ <code>string</code>
+
+<a name="new_Theme_new"></a>
+
+#### new Theme(node)
+Creates a new instance of Theme. (Read only)
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| node | <code>Object</code> | The node. |
+
+<a name="Theme+themeColor"></a>
+
+#### theme.themeColor(index, tint) ⇒ <code>string</code>
+Get the rgb theme color
+
+**Kind**: instance method of [<code>Theme</code>](#Theme)  
+**Returns**: <code>string</code> - color  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>number</code> | theme color index |
+| tint | <code>number</code> \| <code>undefined</code> \| <code>null</code> | tint value |
+
+<a name="Workbook"></a>
+
+### Workbook
+A workbook.
+
+**Kind**: global class  
+
+* [Workbook](#Workbook)
+    * [.formulaParser](#Workbook+formulaParser) ⇒ <code>Parser</code>
+    * [.activeSheet(sheet)](#Workbook+activeSheet) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.addSheet(name, [indexOrBeforeSheet])](#Workbook+addSheet) ⇒ [<code>Sheet</code>](#Sheet)
+    * [.definedName(name, refersTo)](#Workbook+definedName) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.deleteSheet(sheet)](#Workbook+deleteSheet) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.find(pattern, [replacement])](#Workbook+find) ⇒ <code>boolean</code>
+    * [.moveSheet(sheet, [indexOrBeforeSheet])](#Workbook+moveSheet) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.outputAsync([opts])](#Workbook+outputAsync) ⇒ <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code>
+    * [.sheet(sheetNameOrIndex)](#Workbook+sheet) ⇒ [<code>Sheet</code>](#Sheet) \| <code>undefined</code>
+    * [.sheets()](#Workbook+sheets) ⇒ [<code>Array.&lt;Sheet&gt;</code>](#Sheet)
+    * [.property(properties)](#Workbook+property) ⇒ [<code>Workbook</code>](#Workbook)
+    * [.properties()](#Workbook+properties) ⇒ <code>CoreProperties</code>
+    * [.toFileAsync(path, [opts])](#Workbook+toFileAsync) ⇒ <code>Promise.&lt;undefined&gt;</code>
+    * [.getSheetRIdByName(sheetName)](#Workbook+getSheetRIdByName) ⇒ <code>undefined</code> \| <code>number</code>
+    * [.theme()](#Workbook+theme) ⇒ [<code>Theme</code>](#Theme)
+    * [.cloneSheet(from, name, [indexOrBeforeSheet])](#Workbook+cloneSheet) ⇒ [<code>Sheet</code>](#Sheet)
+
+<a name="Workbook+formulaParser"></a>
+
+#### workbook.formulaParser ⇒ <code>Parser</code>
+Get formula parser instance.
+
+**Kind**: instance property of [<code>Workbook</code>](#Workbook)  
+**Returns**: <code>Parser</code> - A Parser instance, which contains dependency parser, formula parser, reference parser.  
+<a name="Workbook+activeSheet"></a>
+
+#### workbook.activeSheet(sheet) ⇒ [<code>Workbook</code>](#Workbook)
+Set the active sheet in the workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheet | [<code>Sheet</code>](#Sheet) \| <code>string</code> \| <code>number</code> | The sheet or name of sheet or index of sheet to activate. The sheet must not be hidden. |
+
+<a name="Workbook+addSheet"></a>
+
+#### workbook.addSheet(name, [indexOrBeforeSheet]) ⇒ [<code>Sheet</code>](#Sheet)
+Add a new sheet to the workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The new sheet.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the sheet. Must be unique, less than 31 characters, and may not contain the following characters: \ / * [ ] : ? |
+| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
+
+<a name="Workbook+definedName"></a>
+
+#### workbook.definedName(name, refersTo) ⇒ [<code>Workbook</code>](#Workbook)
+Set a defined name scoped to the workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The defined name. |
+| refersTo | <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column) | What the name refers to. |
+
+<a name="Workbook+deleteSheet"></a>
+
+#### workbook.deleteSheet(sheet) ⇒ [<code>Workbook</code>](#Workbook)
+Delete a sheet from the workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheet | [<code>Sheet</code>](#Sheet) \| <code>string</code> \| <code>number</code> | The sheet or name of sheet or index of sheet to move. |
+
+<a name="Workbook+find"></a>
+
+#### workbook.find(pattern, [replacement]) ⇒ <code>boolean</code>
+Find the given pattern in the workbook and optionally replace it.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: <code>boolean</code> - A flag indicating if the pattern was found.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pattern | <code>string</code> \| <code>RegExp</code> | The pattern to look for. Providing a string will result in a case-insensitive substring search. Use a RegExp for more sophisticated searches. |
+| [replacement] | <code>string</code> \| <code>function</code> | The text to replace or a String.replace callback function. If pattern is a string, all occurrences of the pattern in each cell will be replaced. |
+
+<a name="Workbook+moveSheet"></a>
+
+#### workbook.moveSheet(sheet, [indexOrBeforeSheet]) ⇒ [<code>Workbook</code>](#Workbook)
+Move a sheet to a new position.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheet | [<code>Sheet</code>](#Sheet) \| <code>string</code> \| <code>number</code> | The sheet or name of sheet or index of sheet to move. |
+| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
+
+<a name="Workbook+outputAsync"></a>
+
+#### workbook.outputAsync([opts]) ⇒ <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code>
+Generates the workbook output.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code> - The data.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [opts] | <code>Object</code> | Options |
+| [opts.type] | <code>string</code> | The type of the data to return: base64, binarystring, uint8array, arraybuffer, blob, nodebuffer. Defaults to 'nodebuffer' in Node.js and 'blob' in browsers. |
+| [opts.password] | <code>string</code> | The password to use to encrypt the workbook. |
+
+<a name="Workbook+sheet"></a>
+
+#### workbook.sheet(sheetNameOrIndex) ⇒ [<code>Sheet</code>](#Sheet) \| <code>undefined</code>
+Gets the sheet with the provided name or index (0-based).
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Sheet</code>](#Sheet) \| <code>undefined</code> - The sheet or undefined if not found.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheetNameOrIndex | <code>string</code> \| <code>number</code> | The sheet name or index. |
+
+<a name="Workbook+sheets"></a>
+
+#### workbook.sheets() ⇒ [<code>Array.&lt;Sheet&gt;</code>](#Sheet)
+Get an array of all the sheets in the workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Array.&lt;Sheet&gt;</code>](#Sheet) - The sheets.  
+<a name="Workbook+property"></a>
+
+#### workbook.property(properties) ⇒ [<code>Workbook</code>](#Workbook)
+Sets multiple properties.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>object.&lt;string, \*&gt;</code> | Object whose keys are the property names and values are the values to set. |
+
+<a name="Workbook+properties"></a>
+
+#### workbook.properties() ⇒ <code>CoreProperties</code>
+Get access to core properties object
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: <code>CoreProperties</code> - The core properties.  
+<a name="Workbook+toFileAsync"></a>
+
+#### workbook.toFileAsync(path, [opts]) ⇒ <code>Promise.&lt;undefined&gt;</code>
+Write the workbook to file. (Not supported in browsers.)
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: <code>Promise.&lt;undefined&gt;</code> - A promise.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| path | <code>string</code> | The path of the file to write. |
+| [opts] | <code>Object</code> | Options |
+| [opts.password] | <code>string</code> | The password to encrypt the workbook. |
+
+<a name="Workbook+getSheetRIdByName"></a>
+
+#### workbook.getSheetRIdByName(sheetName) ⇒ <code>undefined</code> \| <code>number</code>
+Return the number in r:id by sheet name defined in workbook.xml
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: <code>undefined</code> \| <code>number</code> - Sheet Id.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheetName | <code>string</code> | Sheet name. |
+
+<a name="Workbook+theme"></a>
+
+#### workbook.theme() ⇒ [<code>Theme</code>](#Theme)
+Get the theme of this workbook.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Theme</code>](#Theme) - The theme object.  
+<a name="Workbook+cloneSheet"></a>
+
+#### workbook.cloneSheet(from, name, [indexOrBeforeSheet]) ⇒ [<code>Sheet</code>](#Sheet)
+Add a new sheet to the workbook.**WARN:** this function has limits:  if you clone a sheet with some images or other things link outside the Sheet object, these things in the cloned sheet will be locked when you open in MS Excel app.
+
+**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
+**Returns**: [<code>Sheet</code>](#Sheet) - The new sheet.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| from | [<code>Sheet</code>](#Sheet) | The sheet to be cloned. |
+| name | <code>string</code> | The name of the new sheet. Must be unique, less than 31 characters, and may not contain the following characters: \ / * [ ] : ? |
+| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
 
 <a name="Cell"></a>
 
@@ -1062,7 +1481,13 @@ A cell
 
 * [Cell](#Cell)
     * _instance_
-        * [.active()](#Cell+active) ⇒ <code>boolean</code>
+        * [.getValue()](#Cell+getValue) ⇒ <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| <code>undefined</code> \| [<code>RichText</code>](#RichText)
+        * [.setValue(value, [clear])](#Cell+setValue) ⇒ <code>Array.&lt;{}&gt;</code>
+        * [.setFormula(formula, [calculate])](#Cell+setFormula) ⇒ <code>Array.&lt;{}&gt;</code>
+        * [.recalculate()](#Cell+recalculate) ⇒ <code>Array.&lt;{}&gt;</code>
+        * [._evaluateFormula()](#Cell+_evaluateFormula) ⇒ <code>\*</code>
+        * [.getStyle(name)](#Cell+getStyle) ⇒ <code>\*</code>
+        * [.setStyle(name, value)](#Cell+setStyle) ⇒ [<code>Cell</code>](#Cell)
         * [.active(active)](#Cell+active) ⇒ [<code>Cell</code>](#Cell)
         * [.address([opts])](#Cell+address) ⇒ <code>string</code>
         * [.column()](#Cell+column) ⇒ [<code>Column</code>](#Column)
@@ -1070,14 +1495,12 @@ A cell
         * [.columnName()](#Cell+columnName) ⇒ <code>number</code>
         * [.columnNumber()](#Cell+columnNumber) ⇒ <code>number</code>
         * [.find(pattern, [replacement])](#Cell+find) ⇒ <code>boolean</code>
-        * [.formula()](#Cell+formula) ⇒ <code>string</code>
-        * [.formula(formula)](#Cell+formula) ⇒ [<code>Cell</code>](#Cell)
         * [.formula(formula, result)](#Cell+formula) ⇒ [<code>Cell</code>](#Cell)
-        * [.hyperlink()](#Cell+hyperlink) ⇒ <code>string</code> \| <code>undefined</code>
-        * [.hyperlink(hyperlink)](#Cell+hyperlink) ⇒ [<code>Cell</code>](#Cell)
         * [.hyperlink(opts)](#Cell+hyperlink) ⇒ [<code>Cell</code>](#Cell)
-        * [.dataValidation()](#Cell+dataValidation) ⇒ <code>object</code> \| <code>undefined</code>
         * [.dataValidation(dataValidation)](#Cell+dataValidation) ⇒ [<code>Cell</code>](#Cell)
+        * [.merged()](#Cell+merged) ⇒ <code>boolean</code> \| [<code>Reference</code>](#Reference)
+        * [.isMasterMergedCell([merged])](#Cell+isMasterMergedCell) ⇒ <code>boolean</code>
+        * [.masterMergedCell([merged])](#Cell+masterMergedCell) ⇒ [<code>Cell</code>](#Cell) \| <code>undefined</code>
         * [.tap(callback)](#Cell+tap) ⇒ [<code>Cell</code>](#Cell)
         * [.thru(callback)](#Cell+thru) ⇒ <code>\*</code>
         * [.rangeTo(cell)](#Cell+rangeTo) ⇒ [<code>Range</code>](#Range)
@@ -1085,31 +1508,91 @@ A cell
         * [.row()](#Cell+row) ⇒ [<code>Row</code>](#Row)
         * [.rowNumber()](#Cell+rowNumber) ⇒ <code>number</code>
         * [.sheet()](#Cell+sheet) ⇒ [<code>Sheet</code>](#Sheet)
-        * [.style(name)](#Cell+style) ⇒ <code>\*</code>
-        * [.style(names)](#Cell+style) ⇒ <code>object.&lt;string, \*&gt;</code>
-        * [.style(name, value)](#Cell+style) ⇒ [<code>Cell</code>](#Cell)
-        * [.style(name)](#Cell+style) ⇒ [<code>Range</code>](#Range)
-        * [.style(styles)](#Cell+style) ⇒ [<code>Cell</code>](#Cell)
         * [.style(style)](#Cell+style) ⇒ [<code>Cell</code>](#Cell)
-        * [.setValue(value)](#Cell+setValue) ⇒ [<code>Cell</code>](#Cell)
-        * [.getValue()](#Cell+getValue) ⇒ <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| <code>undefined</code>
-        * [.value()](#Cell+value) ⇒ <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| [<code>RichText</code>](#RichText) \| <code>undefined</code>
-        * [.value(value)](#Cell+value) ⇒ [<code>Cell</code>](#Cell)
         * [.value()](#Cell+value) ⇒ [<code>Range</code>](#Range)
         * [.workbook()](#Cell+workbook) ⇒ [<code>Workbook</code>](#Workbook)
         * [.addHorizontalPageBreak()](#Cell+addHorizontalPageBreak) ⇒ [<code>Cell</code>](#Cell)
         * [.sharedFormula()](#Cell+sharedFormula) ⇒ <code>string</code>
+        * [.dependencies()](#Cell+dependencies) ⇒ [<code>Array.&lt;ReferenceLiteral&gt;</code>](#ReferenceLiteral)
+        * [.isSharedFormula()](#Cell+isSharedFormula) ⇒ <code>boolean</code>
+        * [.isMasterShardFormula()](#Cell+isMasterShardFormula) ⇒ <code>boolean</code>
+        * [.getMasterSharedFormulaCell()](#Cell+getMasterSharedFormulaCell) ⇒ [<code>Cell</code>](#Cell) \| <code>undefined</code>
     * _inner_
         * [~tapCallback](#Cell..tapCallback) ⇒ <code>undefined</code>
         * [~thruCallback](#Cell..thruCallback) ⇒ <code>\*</code>
 
-<a name="Cell+active"></a>
+<a name="Cell+getValue"></a>
 
-#### cell.active() ⇒ <code>boolean</code>
-Gets a value indicating whether the cell is the active cell in the sheet.
+#### cell.getValue() ⇒ <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| <code>undefined</code> \| [<code>RichText</code>](#RichText)
+Gets the value of the cell.
 
 **Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>boolean</code> - True if active, false otherwise.  
+**Returns**: <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| <code>undefined</code> \| [<code>RichText</code>](#RichText) - The value of the cell.  
+<a name="Cell+setValue"></a>
+
+#### cell.setValue(value, [clear]) ⇒ <code>Array.&lt;{}&gt;</code>
+Sets the value of the cell.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>Array.&lt;{}&gt;</code> - The cells updated  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | [<code>RichText</code>](#RichText) \| <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>null</code> \| <code>undefined</code> |  | The value to set. |
+| [clear] | <code>boolean</code> | <code>true</code> | If clear this cell. |
+
+<a name="Cell+setFormula"></a>
+
+#### cell.setFormula(formula, [calculate]) ⇒ <code>Array.&lt;{}&gt;</code>
+Sets the formula of this cell.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>Array.&lt;{}&gt;</code> - The cells updated  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| formula | <code>string</code> |  | The formula to set. |
+| [calculate] | <code>boolean</code> | <code>true</code> | Should the formula be calculated. |
+
+<a name="Cell+recalculate"></a>
+
+#### cell.recalculate() ⇒ <code>Array.&lt;{}&gt;</code>
+Perform re-calculation, but not rebuild reference table
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>Array.&lt;{}&gt;</code> - A list of cells that updated.  
+<a name="Cell+_evaluateFormula"></a>
+
+#### cell.\_evaluateFormula() ⇒ <code>\*</code>
+Evaluate the cell's formula.Note: This method does not save the formula to this cell.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>\*</code> - The result of the formula  
+<a name="Cell+getStyle"></a>
+
+#### cell.getStyle(name) ⇒ <code>\*</code>
+Get cell's style.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>\*</code> - Style  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Style name |
+
+<a name="Cell+setStyle"></a>
+
+#### cell.setStyle(name, value) ⇒ [<code>Cell</code>](#Cell)
+Set cell style
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: [<code>Cell</code>](#Cell) - The cell  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Style name |
+| value | <code>\*</code> | Style |
+
 <a name="Cell+active"></a>
 
 #### cell.active(active) ⇒ [<code>Cell</code>](#Cell)
@@ -1181,25 +1664,6 @@ Find the given pattern in the cell and optionally replace it.
 
 <a name="Cell+formula"></a>
 
-#### cell.formula() ⇒ <code>string</code>
-Gets the formula in the cell. Note that if a formula was set as part of a range, the getter will return 'SHARED'. This is a limitation that may be addressed in a future release.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>string</code> - The formula in the cell.  
-<a name="Cell+formula"></a>
-
-#### cell.formula(formula) ⇒ [<code>Cell</code>](#Cell)
-Sets the formula in the cell. The previous formula result will be removed.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| formula | <code>string</code> \| <code>undefined</code> \| <code>null</code> | The formula to set. |
-
-<a name="Cell+formula"></a>
-
 #### cell.formula(formula, result) ⇒ [<code>Cell</code>](#Cell)
 **Kind**: instance method of [<code>Cell</code>](#Cell)  
 **Returns**: [<code>Cell</code>](#Cell) - The cell  
@@ -1208,25 +1672,6 @@ Sets the formula in the cell. The previous formula result will be removed.
 | --- | --- | --- |
 | formula | <code>string</code> | The formula to set. |
 | result | <code>string</code> \| <code>number</code> \| <code>boolean</code> \| <code>Date</code> | The formula result. |
-
-<a name="Cell+hyperlink"></a>
-
-#### cell.hyperlink() ⇒ <code>string</code> \| <code>undefined</code>
-Gets the hyperlink attached to the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>string</code> \| <code>undefined</code> - The hyperlink or undefined if not set.  
-<a name="Cell+hyperlink"></a>
-
-#### cell.hyperlink(hyperlink) ⇒ [<code>Cell</code>](#Cell)
-Set or clear the hyperlink on the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| hyperlink | <code>string</code> \| [<code>Cell</code>](#Cell) \| <code>undefined</code> | The hyperlink to set or undefined to clear. |
 
 <a name="Cell+hyperlink"></a>
 
@@ -1246,13 +1691,6 @@ Set the hyperlink options on the cell.
 
 <a name="Cell+dataValidation"></a>
 
-#### cell.dataValidation() ⇒ <code>object</code> \| <code>undefined</code>
-Gets the data validation object attached to the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>object</code> \| <code>undefined</code> - The data validation or undefined if not set.  
-<a name="Cell+dataValidation"></a>
-
 #### cell.dataValidation(dataValidation) ⇒ [<code>Cell</code>](#Cell)
 Set or clear the data validation object of the cell.
 
@@ -1262,6 +1700,37 @@ Set or clear the data validation object of the cell.
 | Param | Type | Description |
 | --- | --- | --- |
 | dataValidation | <code>object</code> \| <code>undefined</code> | Object or null to clear. |
+
+<a name="Cell+merged"></a>
+
+#### cell.merged() ⇒ <code>boolean</code> \| [<code>Reference</code>](#Reference)
+Gets a value indicating whether the cells in the range are merged.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>boolean</code> \| [<code>Reference</code>](#Reference) - If it is merged, return a reference indicating where it merges, otherwise                             return false.  
+<a name="Cell+isMasterMergedCell"></a>
+
+#### cell.isMasterMergedCell([merged]) ⇒ <code>boolean</code>
+Gets if this cell is the master merged cell.Node: If this cell is not part of a merged cell, return false.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>boolean</code> - - If the cell is master merged cell.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [merged] | <code>Object</code> | Result from Cell.merged(), supply this can speed up performance. |
+
+<a name="Cell+masterMergedCell"></a>
+
+#### cell.masterMergedCell([merged]) ⇒ [<code>Cell</code>](#Cell) \| <code>undefined</code>
+Gets the master merged cell.Note: Return undefined if this cell is not part of the merged cell.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: [<code>Cell</code>](#Cell) \| <code>undefined</code> - - The master merged cell.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [merged] | <code>Object</code> | Result from Cell.merged(), supply this can speed up performance. |
 
 <a name="Cell+tap"></a>
 
@@ -1335,68 +1804,6 @@ Gets the parent sheet.
 **Returns**: [<code>Sheet</code>](#Sheet) - The parent sheet.  
 <a name="Cell+style"></a>
 
-#### cell.style(name) ⇒ <code>\*</code>
-Gets an individual style.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>\*</code> - The style.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The name of the style. |
-
-<a name="Cell+style"></a>
-
-#### cell.style(names) ⇒ <code>object.&lt;string, \*&gt;</code>
-Gets multiple styles.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>object.&lt;string, \*&gt;</code> - Object whose keys are the style names and values are the styles.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| names | <code>Array.&lt;string&gt;</code> | The names of the style. |
-
-<a name="Cell+style"></a>
-
-#### cell.style(name, value) ⇒ [<code>Cell</code>](#Cell)
-Sets an individual style.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The name of the style. |
-| value | <code>\*</code> | The value to set. |
-
-<a name="Cell+style"></a>
-
-#### cell.style(name) ⇒ [<code>Range</code>](#Range)
-Sets the styles in the range starting with the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Range</code>](#Range) - The range that was set.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The name of the style. |
-|  | <code>Array.&lt;Array.&lt;\*&gt;&gt;</code> | 2D array of values to set. |
-
-<a name="Cell+style"></a>
-
-#### cell.style(styles) ⇒ [<code>Cell</code>](#Cell)
-Sets multiple styles.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| styles | <code>object.&lt;string, \*&gt;</code> | Object whose keys are the style names and values are the styles to set. |
-
-<a name="Cell+style"></a>
-
 #### cell.style(style) ⇒ [<code>Cell</code>](#Cell)
 Sets to a specific style
 
@@ -1406,44 +1813,6 @@ Sets to a specific style
 | Param | Type | Description |
 | --- | --- | --- |
 | style | [<code>Style</code>](#new_Style_new) | Style object given from stylesheet.createStyle |
-
-<a name="Cell+setValue"></a>
-
-#### cell.setValue(value) ⇒ [<code>Cell</code>](#Cell)
-Sets the value of the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>null</code> \| <code>undefined</code> | The value to set. |
-
-<a name="Cell+getValue"></a>
-
-#### cell.getValue() ⇒ <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| <code>undefined</code>
-Gets the value of the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| <code>undefined</code> - The value of the cell.  
-<a name="Cell+value"></a>
-
-#### cell.value() ⇒ <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| [<code>RichText</code>](#RichText) \| <code>undefined</code>
-Gets the value of the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>Date</code> \| [<code>RichText</code>](#RichText) \| <code>undefined</code> - The value of the cell.  
-<a name="Cell+value"></a>
-
-#### cell.value(value) ⇒ [<code>Cell</code>](#Cell)
-Sets the value of the cell.
-
-**Kind**: instance method of [<code>Cell</code>](#Cell)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>null</code> \| <code>undefined</code> \| [<code>RichText</code>](#RichText) | The value to set. |
 
 <a name="Cell+value"></a>
 
@@ -1478,6 +1847,28 @@ Gets the translated shared formula.Based on the approach from [https://github.c
 
 **Kind**: instance method of [<code>Cell</code>](#Cell)  
 **Returns**: <code>string</code> - Translated shared formula  
+<a name="Cell+dependencies"></a>
+
+#### cell.dependencies() ⇒ [<code>Array.&lt;ReferenceLiteral&gt;</code>](#ReferenceLiteral)
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: [<code>Array.&lt;ReferenceLiteral&gt;</code>](#ReferenceLiteral) - The dependencies of the formula in this cell.  
+<a name="Cell+isSharedFormula"></a>
+
+#### cell.isSharedFormula() ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>boolean</code> - - If this cell contains shared formula.  
+<a name="Cell+isMasterShardFormula"></a>
+
+#### cell.isMasterShardFormula() ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: <code>boolean</code> - - If this cell is a master shared formula cell.  
+<a name="Cell+getMasterSharedFormulaCell"></a>
+
+#### cell.getMasterSharedFormulaCell() ⇒ [<code>Cell</code>](#Cell) \| <code>undefined</code>
+Get the master cell that stores the shared formula.
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+**Returns**: [<code>Cell</code>](#Cell) \| <code>undefined</code> - - The master cell.  
 <a name="Cell..tapCallback"></a>
 
 #### Cell~tapCallback ⇒ <code>undefined</code>
@@ -1686,74 +2077,300 @@ Append vertical page break after the column.
 
 **Kind**: instance method of [<code>Column</code>](#Column)  
 **Returns**: [<code>Column</code>](#Column) - the column.  
-<a name="FormulaError"></a>
+<a name="DataValidations"></a>
 
-### FormulaError
-A formula error (e.g. #DIV/0!).
+### DataValidations
+A class stores dataValidations.
 
 **Kind**: global class  
 
-* [FormulaError](#FormulaError)
-    * _instance_
-        * [.error()](#FormulaError+error) ⇒ <code>string</code>
-    * _static_
-        * [.DIV0](#FormulaError.DIV0) : [<code>FormulaError</code>](#FormulaError)
-        * [.NA](#FormulaError.NA) : [<code>FormulaError</code>](#FormulaError)
-        * [.NAME](#FormulaError.NAME) : [<code>FormulaError</code>](#FormulaError)
-        * [.NULL](#FormulaError.NULL) : [<code>FormulaError</code>](#FormulaError)
-        * [.NUM](#FormulaError.NUM) : [<code>FormulaError</code>](#FormulaError)
-        * [.REF](#FormulaError.REF) : [<code>FormulaError</code>](#FormulaError)
-        * [.VALUE](#FormulaError.VALUE) : [<code>FormulaError</code>](#FormulaError)
+* [DataValidations](#DataValidations)
+    * [new DataValidations(sheet, dataValidationsNode, extNode)](#new_DataValidations_new)
+    * [.getDataValidation(address, [parseFormula])](#DataValidations+getDataValidation) ⇒ <code>undefined</code> \| <code>Object</code>
+    * [.setDataValidation(address, dataValidation)](#DataValidations+setDataValidation) ⇒ <code>undefined</code>
+    * [.validate(cell, input, [isFormula])](#DataValidations+validate) ⇒ <code>Object</code>
+    * [.parseFormula(formula)](#DataValidations+parseFormula) ⇒ <code>\*</code>
+    * [.parse(address)](#DataValidations+parse) ⇒ <code>Object</code>
+    * [.get(refString)](#DataValidations+get) ⇒ <code>Object</code> \| <code>undefined</code>
+    * [.set(refString, dataValidation)](#DataValidations+set) ⇒ <code>undefined</code>
+    * [.delete(refString)](#DataValidations+delete) ⇒ <code>undefined</code>
+    * [.toXml()](#DataValidations+toXml) ⇒ <code>Object</code>
 
-<a name="FormulaError+error"></a>
+<a name="new_DataValidations_new"></a>
 
-#### formulaError.error() ⇒ <code>string</code>
-Get the error code.
+#### new DataValidations(sheet, dataValidationsNode, extNode)
 
-**Kind**: instance method of [<code>FormulaError</code>](#FormulaError)  
-**Returns**: <code>string</code> - The error code.  
-<a name="FormulaError.DIV0"></a>
+| Param | Type | Description |
+| --- | --- | --- |
+| sheet | [<code>Sheet</code>](#Sheet) | The sheet. |
+| dataValidationsNode | <code>Object</code> | The dataValidation node. |
+| extNode | <code>Object</code> | The extension data validation node. |
 
-#### FormulaError.DIV0 : [<code>FormulaError</code>](#FormulaError)
-\#DIV/0! error.
+<a name="DataValidations+getDataValidation"></a>
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
-<a name="FormulaError.NA"></a>
+#### dataValidations.getDataValidation(address, [parseFormula]) ⇒ <code>undefined</code> \| <code>Object</code>
+Get a data validation on the given address.
 
-#### FormulaError.NA : [<code>FormulaError</code>](#FormulaError)
-\#N/A error.
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+**Returns**: <code>undefined</code> \| <code>Object</code> - - The data validation object.  
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
-<a name="FormulaError.NAME"></a>
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| address | <code>string</code> |  | The address of a cell or range. |
+| [parseFormula] | <code>boolean</code> | <code>true</code> | Whether parsing the formulas. If true, the returned object contains                                  formula1Result amd formula2Result. |
 
-#### FormulaError.NAME : [<code>FormulaError</code>](#FormulaError)
-\#NAME? error.
+<a name="DataValidations+setDataValidation"></a>
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
-<a name="FormulaError.NULL"></a>
+#### dataValidations.setDataValidation(address, dataValidation) ⇒ <code>undefined</code>
+Set a data validation on the given address.
 
-#### FormulaError.NULL : [<code>FormulaError</code>](#FormulaError)
-\#NULL! error.
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
-<a name="FormulaError.NUM"></a>
+| Param | Type | Description |
+| --- | --- | --- |
+| address | <code>string</code> | The address of a cell or range. |
+| dataValidation | <code>undefined</code> \| <code>Object</code> | The data validation object. |
 
-#### FormulaError.NUM : [<code>FormulaError</code>](#FormulaError)
-\#NUM! error.
+<a name="DataValidations+validate"></a>
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
-<a name="FormulaError.REF"></a>
+#### dataValidations.validate(cell, input, [isFormula]) ⇒ <code>Object</code>
+Validate a input.
 
-#### FormulaError.REF : [<code>FormulaError</code>](#FormulaError)
-\#REF! error.
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+**Returns**: <code>Object</code> - An object that contains Whether the input is valid.  
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
-<a name="FormulaError.VALUE"></a>
+| Param | Type | Description |
+| --- | --- | --- |
+| cell | [<code>Cell</code>](#Cell) | The cell to validate. |
+| input | <code>string</code> \| <code>boolean</code> \| <code>number</code> \| <code>undefined</code> \| <code>null</code> | The input to validate. |
+| [isFormula] | <code>boolean</code> | If true, the input is a formula. |
 
-#### FormulaError.VALUE : [<code>FormulaError</code>](#FormulaError)
-\#VALUE! error.
+**Example**  
+```js
+validate(cell, '1+1', true)     validate(cell, '111')
+```
+<a name="DataValidations+parseFormula"></a>
 
-**Kind**: static property of [<code>FormulaError</code>](#FormulaError)  
+#### dataValidations.parseFormula(formula) ⇒ <code>\*</code>
+Parse a formula.
+
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+**Returns**: <code>\*</code> - The formula result  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| formula | <code>string</code> \| <code>number</code> | The formula to parse. |
+
+<a name="DataValidations+parse"></a>
+
+#### dataValidations.parse(address) ⇒ <code>Object</code>
+Parse a reference, i.e. D19, A1:C9, Sheet2!A1, A:C, 1:6...
+
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+**Returns**: <code>Object</code> - The reference object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| address | <code>string</code> | The reference string to parse. |
+
+<a name="DataValidations+get"></a>
+
+#### dataValidations.get(refString) ⇒ <code>Object</code> \| <code>undefined</code>
+Retrieve a dataValidation node.
+
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+**Returns**: <code>Object</code> \| <code>undefined</code> - A dataValidation node.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference string to parse. |
+
+<a name="DataValidations+set"></a>
+
+#### dataValidations.set(refString, dataValidation) ⇒ <code>undefined</code>
+Add dataValidation. If exists, replace it.
+
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference string to add. |
+| dataValidation | <code>Object</code> | The inner dataValidation node. |
+
+<a name="DataValidations+delete"></a>
+
+#### dataValidations.delete(refString) ⇒ <code>undefined</code>
+Remove a dataValidation.
+
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference you want to remove. |
+
+<a name="DataValidations+toXml"></a>
+
+#### dataValidations.toXml() ⇒ <code>Object</code>
+Return an xml form object.
+
+**Kind**: instance method of [<code>DataValidations</code>](#DataValidations)  
+**Returns**: <code>Object</code> - two Xml object.  
+<a name="Hyperlinks"></a>
+
+### Hyperlinks
+A class stores hyperlinks.
+
+**Kind**: global class  
+
+* [Hyperlinks](#Hyperlinks)
+    * [new Hyperlinks(sheet, hyperlinksNode)](#new_Hyperlinks_new)
+    * [.parse(address)](#Hyperlinks+parse) ⇒ <code>Object</code>
+    * [.get(refString)](#Hyperlinks+get) ⇒ <code>Object</code> \| <code>undefined</code>
+    * [.set(refString, hyperlink)](#Hyperlinks+set) ⇒ <code>undefined</code>
+    * [.delete(refString)](#Hyperlinks+delete) ⇒ <code>undefined</code>
+    * [.toXml()](#Hyperlinks+toXml) ⇒ <code>Object</code>
+
+<a name="new_Hyperlinks_new"></a>
+
+#### new Hyperlinks(sheet, hyperlinksNode)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheet | [<code>Sheet</code>](#Sheet) | The sheet. |
+| hyperlinksNode | <code>Object</code> | The hyperlinks node. |
+
+<a name="Hyperlinks+parse"></a>
+
+#### hyperlinks.parse(address) ⇒ <code>Object</code>
+Parse a reference, i.e. D19, A1:C9, Sheet2!A1, A:C, 1:6...
+
+**Kind**: instance method of [<code>Hyperlinks</code>](#Hyperlinks)  
+**Returns**: <code>Object</code> - The reference object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| address | <code>string</code> | The reference string to parse. |
+
+<a name="Hyperlinks+get"></a>
+
+#### hyperlinks.get(refString) ⇒ <code>Object</code> \| <code>undefined</code>
+Retrieve a hyperlink node.
+
+**Kind**: instance method of [<code>Hyperlinks</code>](#Hyperlinks)  
+**Returns**: <code>Object</code> \| <code>undefined</code> - A hyperlink node.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference string to parse. |
+
+<a name="Hyperlinks+set"></a>
+
+#### hyperlinks.set(refString, hyperlink) ⇒ <code>undefined</code>
+Add hyperlink. If exists, replace it.
+
+**Kind**: instance method of [<code>Hyperlinks</code>](#Hyperlinks)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference string to add. |
+| hyperlink | <code>Object</code> | The inner hyperlink node. |
+
+<a name="Hyperlinks+delete"></a>
+
+#### hyperlinks.delete(refString) ⇒ <code>undefined</code>
+Remove a hyperlink.
+
+**Kind**: instance method of [<code>Hyperlinks</code>](#Hyperlinks)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference you want to remove. |
+
+<a name="Hyperlinks+toXml"></a>
+
+#### hyperlinks.toXml() ⇒ <code>Object</code>
+Return an xml form object.
+
+**Kind**: instance method of [<code>Hyperlinks</code>](#Hyperlinks)  
+**Returns**: <code>Object</code> - Xml object.  
+<a name="MergeCells"></a>
+
+### MergeCells
+A class stores merge cells.
+
+**Kind**: global class  
+
+* [MergeCells](#MergeCells)
+    * [new MergeCells(sheet, nodes)](#new_MergeCells_new)
+    * [.parse(address)](#MergeCells+parse) ⇒ <code>Object</code>
+    * [.get(refString)](#MergeCells+get) ⇒ <code>Object</code> \| <code>undefined</code>
+    * [.set(refString, mergeCell)](#MergeCells+set) ⇒ <code>undefined</code>
+    * [.delete(refString)](#MergeCells+delete) ⇒ <code>undefined</code>
+    * [.toXml()](#MergeCells+toXml) ⇒ <code>Object</code>
+
+<a name="new_MergeCells_new"></a>
+
+#### new MergeCells(sheet, nodes)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sheet | [<code>Sheet</code>](#Sheet) | The sheet. |
+| nodes | <code>Object</code> | The mergeCells node. |
+
+<a name="MergeCells+parse"></a>
+
+#### mergeCells.parse(address) ⇒ <code>Object</code>
+Parse a reference, i.e. D19, A1:C9, Sheet2!A1, A:C, 1:6...
+
+**Kind**: instance method of [<code>MergeCells</code>](#MergeCells)  
+**Returns**: <code>Object</code> - The reference object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| address | <code>string</code> | The reference string to parse. |
+
+<a name="MergeCells+get"></a>
+
+#### mergeCells.get(refString) ⇒ <code>Object</code> \| <code>undefined</code>
+Retrieve a mergeCell node.
+
+**Kind**: instance method of [<code>MergeCells</code>](#MergeCells)  
+**Returns**: <code>Object</code> \| <code>undefined</code> - A hyperlink node.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference string to parse. |
+
+<a name="MergeCells+set"></a>
+
+#### mergeCells.set(refString, mergeCell) ⇒ <code>undefined</code>
+Add mergeCell. If exists, replace it.
+
+**Kind**: instance method of [<code>MergeCells</code>](#MergeCells)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference string to add. |
+| mergeCell | <code>Object</code> | The inner mergeCell node. |
+
+<a name="MergeCells+delete"></a>
+
+#### mergeCells.delete(refString) ⇒ <code>undefined</code>
+Remove a mergeCell.
+
+**Kind**: instance method of [<code>MergeCells</code>](#MergeCells)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refString | <code>string</code> | The reference you want to remove. |
+
+<a name="MergeCells+toXml"></a>
+
+#### mergeCells.toXml() ⇒ <code>Object</code>
+Return an xml form object.
+
+**Kind**: instance method of [<code>MergeCells</code>](#MergeCells)  
+**Returns**: <code>Object</code> - Xml object.  
 <a name="PageBreaks"></a>
 
 ### PageBreaks
@@ -1824,7 +2441,7 @@ A range of cells.
         * [.formula()](#Range+formula) ⇒ <code>string</code> \| <code>undefined</code>
         * [.formula(formula)](#Range+formula) ⇒ [<code>Range</code>](#Range)
         * [.map(callback)](#Range+map) ⇒ <code>Array.&lt;Array.&lt;\*&gt;&gt;</code>
-        * [.merged()](#Range+merged) ⇒ <code>boolean</code>
+        * [.merged()](#Range+merged) ⇒ <code>boolean</code> \| [<code>Reference</code>](#Reference)
         * [.merged(merged)](#Range+merged) ⇒ [<code>Range</code>](#Range)
         * [.dataValidation()](#Range+dataValidation) ⇒ <code>object</code> \| <code>undefined</code>
         * [.dataValidation(dataValidation)](#Range+dataValidation) ⇒ [<code>Range</code>](#Range)
@@ -1956,11 +2573,11 @@ Creates a 2D array of values by running each cell through a callback.
 
 <a name="Range+merged"></a>
 
-#### range.merged() ⇒ <code>boolean</code>
+#### range.merged() ⇒ <code>boolean</code> \| [<code>Reference</code>](#Reference)
 Gets a value indicating whether the cells in the range are merged.
 
 **Kind**: instance method of [<code>Range</code>](#Range)  
-**Returns**: <code>boolean</code> - The value.  
+**Returns**: <code>boolean</code> \| [<code>Reference</code>](#Reference) - If it is merged, return a reference indicating where it merges, otherwise                             return false.  
 <a name="Range+merged"></a>
 
 #### range.merged(merged) ⇒ [<code>Range</code>](#Range)
@@ -2648,66 +3265,50 @@ A worksheet.
 **Kind**: global class  
 
 * [Sheet](#Sheet)
-    * [.active()](#Sheet+active) ⇒ <code>boolean</code>
+    * [.getCell(rowNum, colNum)](#Sheet+getCell) ⇒ [<code>Cell</code>](#Cell)
     * [.active(active)](#Sheet+active) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.activeCell()](#Sheet+activeCell) ⇒ [<code>Cell</code>](#Cell)
-    * [.activeCell(cell)](#Sheet+activeCell) ⇒ [<code>Sheet</code>](#Sheet)
     * [.activeCell(rowNumber, columnNameOrNumber)](#Sheet+activeCell) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.cell(address)](#Sheet+cell) ⇒ [<code>Cell</code>](#Cell)
     * [.cell(rowNumber, columnNameOrNumber)](#Sheet+cell) ⇒ [<code>Cell</code>](#Cell)
     * [.column(columnNameOrNumber)](#Sheet+column) ⇒ [<code>Column</code>](#Column)
-    * [.definedName(name)](#Sheet+definedName) ⇒ <code>undefined</code> \| <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column)
     * [.definedName(name, refersTo)](#Sheet+definedName) ⇒ [<code>Workbook</code>](#Workbook)
     * [.delete()](#Sheet+delete) ⇒ [<code>Workbook</code>](#Workbook)
     * [.find(pattern, [replacement])](#Sheet+find) ⇒ [<code>Array.&lt;Cell&gt;</code>](#Cell)
-    * [.gridLinesVisible()](#Sheet+gridLinesVisible) ⇒ <code>boolean</code>
     * [.gridLinesVisible(selected)](#Sheet+gridLinesVisible) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.hidden()](#Sheet+hidden) ⇒ <code>boolean</code> \| <code>string</code>
     * [.hidden(hidden)](#Sheet+hidden) ⇒ [<code>Sheet</code>](#Sheet)
     * [.move([indexOrBeforeSheet])](#Sheet+move) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.name()](#Sheet+name) ⇒ <code>string</code>
-    * [.name(name)](#Sheet+name) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.range(address)](#Sheet+range) ⇒ [<code>Range</code>](#Range)
-    * [.range(startCell, endCell)](#Sheet+range) ⇒ [<code>Range</code>](#Range)
+    * [.name([name])](#Sheet+name) ⇒ [<code>Sheet</code>](#Sheet) \| <code>string</code>
     * [.range(startRowNumber, startColumnNameOrNumber, endRowNumber, endColumnNameOrNumber)](#Sheet+range) ⇒ [<code>Range</code>](#Range)
-    * [.autoFilter()](#Sheet+autoFilter) ⇒ [<code>Sheet</code>](#Sheet)
     * [.autoFilter(range)](#Sheet+autoFilter) ⇒ [<code>Sheet</code>](#Sheet)
     * [.row(rowNumber)](#Sheet+row) ⇒ [<code>Row</code>](#Row)
-    * [.tabColor()](#Sheet+tabColor) ⇒ <code>undefined</code> \| <code>Color</code>
     * [.tabColor()](#Sheet+tabColor) ⇒ <code>Color</code> \| <code>string</code> \| <code>number</code>
-    * [.tabSelected()](#Sheet+tabSelected) ⇒ <code>boolean</code>
     * [.tabSelected(selected)](#Sheet+tabSelected) ⇒ [<code>Sheet</code>](#Sheet)
     * [.usedRange()](#Sheet+usedRange) ⇒ [<code>Range</code>](#Range) \| <code>undefined</code>
     * [.workbook()](#Sheet+workbook) ⇒ [<code>Workbook</code>](#Workbook)
     * [.pageBreaks()](#Sheet+pageBreaks) ⇒ <code>Object</code>
     * [.verticalPageBreaks()](#Sheet+verticalPageBreaks) ⇒ [<code>PageBreaks</code>](#PageBreaks)
     * [.horizontalPageBreaks()](#Sheet+horizontalPageBreaks) ⇒ [<code>PageBreaks</code>](#PageBreaks)
-    * [.hyperlink(address)](#Sheet+hyperlink) ⇒ <code>string</code> \| <code>undefined</code>
-    * [.hyperlink(address, hyperlink, [internal])](#Sheet+hyperlink) ⇒ [<code>Sheet</code>](#Sheet)
     * [.hyperlink(address, opts)](#Sheet+hyperlink) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.printOptions(attributeName)](#Sheet+printOptions) ⇒ <code>boolean</code>
     * [.printOptions(attributeName, attributeEnabled)](#Sheet+printOptions) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.printGridLines()](#Sheet+printGridLines) ⇒ <code>boolean</code>
     * [.printGridLines(enabled)](#Sheet+printGridLines) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.pageMargins(attributeName)](#Sheet+pageMargins) ⇒ <code>number</code>
     * [.pageMargins(attributeName, attributeStringValue)](#Sheet+pageMargins) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.pageMarginsPreset()](#Sheet+pageMarginsPreset) ⇒ <code>string</code>
-    * [.pageMarginsPreset(presetName)](#Sheet+pageMarginsPreset) ⇒ [<code>Sheet</code>](#Sheet)
     * [.pageMarginsPreset(presetName, presetAttributes)](#Sheet+pageMarginsPreset) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.panes()](#Sheet+panes) ⇒ [<code>PaneOptions</code>](#PaneOptions)
     * [.panes(paneOptions)](#Sheet+panes) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.freezePanes(xSplit, ySplit)](#Sheet+freezePanes) ⇒ [<code>Sheet</code>](#Sheet)
     * [.freezePanes(topLeftCell)](#Sheet+freezePanes) ⇒ [<code>Sheet</code>](#Sheet)
     * [.splitPanes(xSplit, ySplit)](#Sheet+splitPanes) ⇒ [<code>Sheet</code>](#Sheet)
     * [.resetPanes()](#Sheet+resetPanes) ⇒ [<code>Sheet</code>](#Sheet)
 
-<a name="Sheet+active"></a>
+<a name="Sheet+getCell"></a>
 
-#### sheet.active() ⇒ <code>boolean</code>
-Gets a value indicating whether the sheet is the active sheet in the workbook.
+#### sheet.getCell(rowNum, colNum) ⇒ [<code>Cell</code>](#Cell)
+Get cell using 1-based index.
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>boolean</code> - True if active, false otherwise.  
+
+| Param | Type |
+| --- | --- |
+| rowNum | <code>number</code> | 
+| colNum | <code>number</code> | 
+
 <a name="Sheet+active"></a>
 
 #### sheet.active(active) ⇒ [<code>Sheet</code>](#Sheet)
@@ -2722,25 +3323,6 @@ Make the sheet the active sheet in the workkbok.
 
 <a name="Sheet+activeCell"></a>
 
-#### sheet.activeCell() ⇒ [<code>Cell</code>](#Cell)
-Get the active cell in the sheet.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Cell</code>](#Cell) - The active cell.  
-<a name="Sheet+activeCell"></a>
-
-#### sheet.activeCell(cell) ⇒ [<code>Sheet</code>](#Sheet)
-Set the active cell in the workbook.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The sheet.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cell | <code>string</code> \| [<code>Cell</code>](#Cell) | The cell or address of cell to activate. |
-
-<a name="Sheet+activeCell"></a>
-
 #### sheet.activeCell(rowNumber, columnNameOrNumber) ⇒ [<code>Sheet</code>](#Sheet)
 Set the active cell in the workbook by row and column.
 
@@ -2751,18 +3333,6 @@ Set the active cell in the workbook by row and column.
 | --- | --- | --- |
 | rowNumber | <code>number</code> | The row number of the cell. |
 | columnNameOrNumber | <code>string</code> \| <code>number</code> | The column name or number of the cell. |
-
-<a name="Sheet+cell"></a>
-
-#### sheet.cell(address) ⇒ [<code>Cell</code>](#Cell)
-Gets the cell with the given address.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Cell</code>](#Cell) - The cell.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| address | <code>string</code> | The address of the cell. |
 
 <a name="Sheet+cell"></a>
 
@@ -2788,18 +3358,6 @@ Gets a column in the sheet.
 | Param | Type | Description |
 | --- | --- | --- |
 | columnNameOrNumber | <code>string</code> \| <code>number</code> | The name or number of the column. |
-
-<a name="Sheet+definedName"></a>
-
-#### sheet.definedName(name) ⇒ <code>undefined</code> \| <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column)
-Gets a defined name scoped to the sheet.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>undefined</code> \| <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column) - What the defined name refers to or undefined if not found. Will return the string formula if not a Row, Column, Cell, or Range.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The defined name. |
 
 <a name="Sheet+definedName"></a>
 
@@ -2836,13 +3394,6 @@ Find the given pattern in the sheet and optionally replace it.
 
 <a name="Sheet+gridLinesVisible"></a>
 
-#### sheet.gridLinesVisible() ⇒ <code>boolean</code>
-Gets a value indicating whether this sheet's grid lines are visible.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>boolean</code> - True if selected, false if not.  
-<a name="Sheet+gridLinesVisible"></a>
-
 #### sheet.gridLinesVisible(selected) ⇒ [<code>Sheet</code>](#Sheet)
 Sets whether this sheet's grid lines are visible.
 
@@ -2853,13 +3404,6 @@ Sets whether this sheet's grid lines are visible.
 | --- | --- | --- |
 | selected | <code>boolean</code> | True to make visible, false to hide. |
 
-<a name="Sheet+hidden"></a>
-
-#### sheet.hidden() ⇒ <code>boolean</code> \| <code>string</code>
-Gets a value indicating if the sheet is hidden or not.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>boolean</code> \| <code>string</code> - True if hidden, false if visible, and 'very' if very hidden.  
 <a name="Sheet+hidden"></a>
 
 #### sheet.hidden(hidden) ⇒ [<code>Sheet</code>](#Sheet)
@@ -2886,47 +3430,15 @@ Move the sheet.
 
 <a name="Sheet+name"></a>
 
-#### sheet.name() ⇒ <code>string</code>
-Get the name of the sheet.
+#### sheet.name([name]) ⇒ [<code>Sheet</code>](#Sheet) \| <code>string</code>
+Get or Set the name of the sheet.*Note: this method does not rename references to the sheet so formulas, etc. can be broken. Use with caution!*
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>string</code> - The sheet name.  
-<a name="Sheet+name"></a>
-
-#### sheet.name(name) ⇒ [<code>Sheet</code>](#Sheet)
-Set the name of the sheet. *Note: this method does not rename references to the sheet so formulas, etc. can be broken. Use with caution!*
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The sheet.  
+**Returns**: [<code>Sheet</code>](#Sheet) \| <code>string</code> - The sheet if set sheet name;                     The sheet name if get sheet name.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>string</code> | The name to set to the sheet. |
-
-<a name="Sheet+range"></a>
-
-#### sheet.range(address) ⇒ [<code>Range</code>](#Range)
-Gets a range from the given range address.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Range</code>](#Range) - The range.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| address | <code>string</code> | The range address (e.g. 'A1:B3'). |
-
-<a name="Sheet+range"></a>
-
-#### sheet.range(startCell, endCell) ⇒ [<code>Range</code>](#Range)
-Gets a range from the given cells or cell addresses.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Range</code>](#Range) - The range.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| startCell | <code>string</code> \| [<code>Cell</code>](#Cell) | The starting cell or cell address (e.g. 'A1'). |
-| endCell | <code>string</code> \| [<code>Cell</code>](#Cell) | The ending cell or cell address (e.g. 'B3'). |
+| [name] | <code>string</code> | The name to set to the sheet. |
 
 <a name="Sheet+range"></a>
 
@@ -2943,13 +3455,6 @@ Gets a range from the given row numbers and column names or numbers.
 | endRowNumber | <code>number</code> | The ending cell row number. |
 | endColumnNameOrNumber | <code>string</code> \| <code>number</code> | The ending cell column name or number. |
 
-<a name="Sheet+autoFilter"></a>
-
-#### sheet.autoFilter() ⇒ [<code>Sheet</code>](#Sheet)
-Unsets sheet autoFilter.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Sheet</code>](#Sheet) - This sheet.  
 <a name="Sheet+autoFilter"></a>
 
 #### sheet.autoFilter(range) ⇒ [<code>Sheet</code>](#Sheet)
@@ -2976,25 +3481,11 @@ Gets the row with the given number.
 
 <a name="Sheet+tabColor"></a>
 
-#### sheet.tabColor() ⇒ <code>undefined</code> \| <code>Color</code>
-Get the tab color. (See style [Color](#color).)
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>undefined</code> \| <code>Color</code> - The color or undefined if not set.  
-<a name="Sheet+tabColor"></a>
-
 #### sheet.tabColor() ⇒ <code>Color</code> \| <code>string</code> \| <code>number</code>
 Sets the tab color. (See style [Color](#color).)
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
 **Returns**: <code>Color</code> \| <code>string</code> \| <code>number</code> - color - Color of the tab. If string, will set an RGB color. If number, will set a theme color.  
-<a name="Sheet+tabSelected"></a>
-
-#### sheet.tabSelected() ⇒ <code>boolean</code>
-Gets a value indicating whether this sheet is selected.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>boolean</code> - True if selected, false if not.  
 <a name="Sheet+tabSelected"></a>
 
 #### sheet.tabSelected(selected) ⇒ [<code>Sheet</code>](#Sheet)
@@ -3044,32 +3535,6 @@ Gets the horizontal page breaks.
 **Returns**: [<code>PageBreaks</code>](#PageBreaks) - horizontal PageBreaks.  
 <a name="Sheet+hyperlink"></a>
 
-#### sheet.hyperlink(address) ⇒ <code>string</code> \| <code>undefined</code>
-Get the hyperlink attached to the cell with the given address.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>string</code> \| <code>undefined</code> - The hyperlink or undefined if not set.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| address | <code>string</code> | The address of the hyperlinked cell. |
-
-<a name="Sheet+hyperlink"></a>
-
-#### sheet.hyperlink(address, hyperlink, [internal]) ⇒ [<code>Sheet</code>](#Sheet)
-Set the hyperlink on the cell with the given address.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The sheet.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| address | <code>string</code> | The address of the hyperlinked cell. |
-| hyperlink | <code>string</code> | The hyperlink to set or undefined to clear. |
-| [internal] | <code>boolean</code> | The flag to force hyperlink to be internal. If true, then autodetect is skipped. |
-
-<a name="Sheet+hyperlink"></a>
-
 #### sheet.hyperlink(address, opts) ⇒ [<code>Sheet</code>](#Sheet)
 Set the hyperlink on the cell with the given address and options.
 
@@ -3087,17 +3552,6 @@ Set the hyperlink on the cell with the given address and options.
 
 <a name="Sheet+printOptions"></a>
 
-#### sheet.printOptions(attributeName) ⇒ <code>boolean</code>
-Get the print option given a valid print option attribute.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attributeName | <code>string</code> | Attribute name of the printOptions.   gridLines - Used in conjunction with gridLinesSet. If both gridLines and gridlinesSet are true, then grid lines shall print. Otherwise, they shall not (i.e., one or both have false values).   gridLinesSet - Used in conjunction with gridLines. If both gridLines and gridLinesSet are true, then grid lines shall print. Otherwise, they shall not (i.e., one or both have false values).   headings - Print row and column headings.   horizontalCentered - Center on page horizontally when printing.   verticalCentered - Center on page vertically when printing. |
-
-<a name="Sheet+printOptions"></a>
-
 #### sheet.printOptions(attributeName, attributeEnabled) ⇒ [<code>Sheet</code>](#Sheet)
 Set the print option given a valid print option attribute and a value.
 
@@ -3111,12 +3565,6 @@ Set the print option given a valid print option attribute and a value.
 
 <a name="Sheet+printGridLines"></a>
 
-#### sheet.printGridLines() ⇒ <code>boolean</code>
-Get the print option for the gridLines attribute value.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-<a name="Sheet+printGridLines"></a>
-
 #### sheet.printGridLines(enabled) ⇒ [<code>Sheet</code>](#Sheet)
 Set the print option for the gridLines attribute value.
 
@@ -3126,18 +3574,6 @@ Set the print option for the gridLines attribute value.
 | Param | Type | Description |
 | --- | --- | --- |
 | enabled | <code>undefined</code> \| <code>boolean</code> | If `undefined` or `false` then attribute is removed, otherwise gridLines is enabled. |
-
-<a name="Sheet+pageMargins"></a>
-
-#### sheet.pageMargins(attributeName) ⇒ <code>number</code>
-Get the page margin given a valid attribute name.If the value is not yet defined, then it will return the current preset value.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>number</code> - the attribute value.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attributeName | <code>string</code> | Attribute name of the pageMargins.     left - Left Page Margin in inches.     right - Right page margin in inches.     top - Top Page Margin in inches.     buttom - Bottom Page Margin in inches.     footer - Footer Page Margin in inches.     header - Header Page Margin in inches. |
 
 <a name="Sheet+pageMargins"></a>
 
@@ -3154,25 +3590,6 @@ Set the page margin (or override the preset) given an attribute name and a value
 
 <a name="Sheet+pageMarginsPreset"></a>
 
-#### sheet.pageMarginsPreset() ⇒ <code>string</code>
-Page margins preset is a set of page margins associated with a name.The page margin preset acts as a fallback when not explicitly defined by `Sheet.pageMargins`.If a sheet already contains page margins, it attempts to auto-detect, otherwise they are defined as the template preset.If no page margins exist, then the preset is undefined and will not be included in the output of `Sheet.toXmls`.Available presets include: normal, wide, narrow, template.Get the page margins preset name. The registered name of a predefined set of attributes.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: <code>string</code> - The preset name.  
-<a name="Sheet+pageMarginsPreset"></a>
-
-#### sheet.pageMarginsPreset(presetName) ⇒ [<code>Sheet</code>](#Sheet)
-Set the page margins preset by name, clearing any existing/temporary attribute values.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The sheet.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| presetName | <code>undefined</code> \| <code>string</code> | The preset name. If `undefined`, page margins will not be included in the output of `Sheet.toXmls`. |
-
-<a name="Sheet+pageMarginsPreset"></a>
-
 #### sheet.pageMarginsPreset(presetName, presetAttributes) ⇒ [<code>Sheet</code>](#Sheet)
 Set a new page margins preset by name and attributes object.
 
@@ -3186,13 +3603,6 @@ Set a new page margins preset by name and attributes object.
 
 <a name="Sheet+panes"></a>
 
-#### sheet.panes() ⇒ [<code>PaneOptions</code>](#PaneOptions)
-Gets sheet view pane options
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>PaneOptions</code>](#PaneOptions) - sheet view pane options  
-<a name="Sheet+panes"></a>
-
 #### sheet.panes(paneOptions) ⇒ [<code>Sheet</code>](#Sheet)
 Sets sheet view pane options
 
@@ -3202,19 +3612,6 @@ Sets sheet view pane options
 | Param | Type | Description |
 | --- | --- | --- |
 | paneOptions | [<code>PaneOptions</code>](#PaneOptions) \| <code>null</code> \| <code>undefined</code> | sheet view pane options |
-
-<a name="Sheet+freezePanes"></a>
-
-#### sheet.freezePanes(xSplit, ySplit) ⇒ [<code>Sheet</code>](#Sheet)
-Freezes Panes for this sheet.
-
-**Kind**: instance method of [<code>Sheet</code>](#Sheet)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| xSplit | <code>number</code> | the number of columns visible in the top pane. 0 (zero) if none. |
-| ySplit | <code>number</code> | the number of rows visible in the left pane. 0 (zero) if none. |
 
 <a name="Sheet+freezePanes"></a>
 
@@ -3248,325 +3645,25 @@ resets to default sheet view panes.
 
 **Kind**: instance method of [<code>Sheet</code>](#Sheet)  
 **Returns**: [<code>Sheet</code>](#Sheet) - The sheet  
-<a name="Theme"></a>
-
-### Theme
-A readonly theme.
-
-**Kind**: global class  
-
-* [Theme](#Theme)
-    * [new Theme(node)](#new_Theme_new)
-    * [.themeColor(index, tint)](#Theme+themeColor) ⇒ <code>string</code>
-
-<a name="new_Theme_new"></a>
-
-#### new Theme(node)
-Creates a new instance of Theme. (Read only)
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| node | <code>Object</code> | The node. |
-
-<a name="Theme+themeColor"></a>
-
-#### theme.themeColor(index, tint) ⇒ <code>string</code>
-Get the rgb theme color
-
-**Kind**: instance method of [<code>Theme</code>](#Theme)  
-**Returns**: <code>string</code> - color  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| index | <code>number</code> | theme color index |
-| tint | <code>number</code> \| <code>undefined</code> \| <code>null</code> | tint value |
-
-<a name="Workbook"></a>
-
-### Workbook
-A workbook.
-
-**Kind**: global class  
-
-* [Workbook](#Workbook)
-    * [.activeSheet()](#Workbook+activeSheet) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.activeSheet(sheet)](#Workbook+activeSheet) ⇒ [<code>Workbook</code>](#Workbook)
-    * [.addSheet(name, [indexOrBeforeSheet])](#Workbook+addSheet) ⇒ [<code>Sheet</code>](#Sheet)
-    * [.definedName(name)](#Workbook+definedName) ⇒ <code>undefined</code> \| <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column)
-    * [.definedName(name, refersTo)](#Workbook+definedName) ⇒ [<code>Workbook</code>](#Workbook)
-    * [.deleteSheet(sheet)](#Workbook+deleteSheet) ⇒ [<code>Workbook</code>](#Workbook)
-    * [.find(pattern, [replacement])](#Workbook+find) ⇒ <code>boolean</code>
-    * [.moveSheet(sheet, [indexOrBeforeSheet])](#Workbook+moveSheet) ⇒ [<code>Workbook</code>](#Workbook)
-    * [.outputAsync([type])](#Workbook+outputAsync) ⇒ <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code>
-    * [.outputAsync([opts])](#Workbook+outputAsync) ⇒ <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code>
-    * [.sheet(sheetNameOrIndex)](#Workbook+sheet) ⇒ [<code>Sheet</code>](#Sheet) \| <code>undefined</code>
-    * [.sheets()](#Workbook+sheets) ⇒ [<code>Array.&lt;Sheet&gt;</code>](#Sheet)
-    * [.property(name)](#Workbook+property) ⇒ <code>\*</code>
-    * [.property(names)](#Workbook+property) ⇒ <code>object.&lt;string, \*&gt;</code>
-    * [.property(name, value)](#Workbook+property) ⇒ [<code>Workbook</code>](#Workbook)
-    * [.property(properties)](#Workbook+property) ⇒ [<code>Workbook</code>](#Workbook)
-    * [.properties()](#Workbook+properties) ⇒ <code>CoreProperties</code>
-    * [.toFileAsync(path, [opts])](#Workbook+toFileAsync) ⇒ <code>Promise.&lt;undefined&gt;</code>
-    * [.theme()](#Workbook+theme) ⇒ [<code>Theme</code>](#Theme)
-    * [.cloneSheet(from, name, [indexOrBeforeSheet])](#Workbook+cloneSheet) ⇒ [<code>Sheet</code>](#Sheet)
-
-<a name="Workbook+activeSheet"></a>
-
-#### workbook.activeSheet() ⇒ [<code>Sheet</code>](#Sheet)
-Get the active sheet in the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The active sheet.  
-<a name="Workbook+activeSheet"></a>
-
-#### workbook.activeSheet(sheet) ⇒ [<code>Workbook</code>](#Workbook)
-Set the active sheet in the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| sheet | [<code>Sheet</code>](#Sheet) \| <code>string</code> \| <code>number</code> | The sheet or name of sheet or index of sheet to activate. The sheet must not be hidden. |
-
-<a name="Workbook+addSheet"></a>
-
-#### workbook.addSheet(name, [indexOrBeforeSheet]) ⇒ [<code>Sheet</code>](#Sheet)
-Add a new sheet to the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The new sheet.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The name of the sheet. Must be unique, less than 31 characters, and may not contain the following characters: \ / * [ ] : ? |
-| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
-
-<a name="Workbook+definedName"></a>
-
-#### workbook.definedName(name) ⇒ <code>undefined</code> \| <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column)
-Gets a defined name scoped to the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>undefined</code> \| <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column) - What the defined name refers to or undefined if not found. Will return the string formula if not a Row, Column, Cell, or Range.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The defined name. |
-
-<a name="Workbook+definedName"></a>
-
-#### workbook.definedName(name, refersTo) ⇒ [<code>Workbook</code>](#Workbook)
-Set a defined name scoped to the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The defined name. |
-| refersTo | <code>string</code> \| [<code>Cell</code>](#Cell) \| [<code>Range</code>](#Range) \| [<code>Row</code>](#Row) \| [<code>Column</code>](#Column) | What the name refers to. |
-
-<a name="Workbook+deleteSheet"></a>
-
-#### workbook.deleteSheet(sheet) ⇒ [<code>Workbook</code>](#Workbook)
-Delete a sheet from the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| sheet | [<code>Sheet</code>](#Sheet) \| <code>string</code> \| <code>number</code> | The sheet or name of sheet or index of sheet to move. |
-
-<a name="Workbook+find"></a>
-
-#### workbook.find(pattern, [replacement]) ⇒ <code>boolean</code>
-Find the given pattern in the workbook and optionally replace it.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>boolean</code> - A flag indicating if the pattern was found.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| pattern | <code>string</code> \| <code>RegExp</code> | The pattern to look for. Providing a string will result in a case-insensitive substring search. Use a RegExp for more sophisticated searches. |
-| [replacement] | <code>string</code> \| <code>function</code> | The text to replace or a String.replace callback function. If pattern is a string, all occurrences of the pattern in each cell will be replaced. |
-
-<a name="Workbook+moveSheet"></a>
-
-#### workbook.moveSheet(sheet, [indexOrBeforeSheet]) ⇒ [<code>Workbook</code>](#Workbook)
-Move a sheet to a new position.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| sheet | [<code>Sheet</code>](#Sheet) \| <code>string</code> \| <code>number</code> | The sheet or name of sheet or index of sheet to move. |
-| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
-
-<a name="Workbook+outputAsync"></a>
-
-#### workbook.outputAsync([type]) ⇒ <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code>
-Generates the workbook output.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code> - The data.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [type] | <code>string</code> | The type of the data to return: base64, binarystring, uint8array, arraybuffer, blob, nodebuffer. Defaults to 'nodebuffer' in Node.js and 'blob' in browsers. |
-
-<a name="Workbook+outputAsync"></a>
-
-#### workbook.outputAsync([opts]) ⇒ <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code>
-Generates the workbook output.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>string</code> \| <code>Uint8Array</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Buffer</code> - The data.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [opts] | <code>Object</code> | Options |
-| [opts.type] | <code>string</code> | The type of the data to return: base64, binarystring, uint8array, arraybuffer, blob, nodebuffer. Defaults to 'nodebuffer' in Node.js and 'blob' in browsers. |
-| [opts.password] | <code>string</code> | The password to use to encrypt the workbook. |
-
-<a name="Workbook+sheet"></a>
-
-#### workbook.sheet(sheetNameOrIndex) ⇒ [<code>Sheet</code>](#Sheet) \| <code>undefined</code>
-Gets the sheet with the provided name or index (0-based).
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Sheet</code>](#Sheet) \| <code>undefined</code> - The sheet or undefined if not found.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| sheetNameOrIndex | <code>string</code> \| <code>number</code> | The sheet name or index. |
-
-<a name="Workbook+sheets"></a>
-
-#### workbook.sheets() ⇒ [<code>Array.&lt;Sheet&gt;</code>](#Sheet)
-Get an array of all the sheets in the workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Array.&lt;Sheet&gt;</code>](#Sheet) - The sheets.  
-<a name="Workbook+property"></a>
-
-#### workbook.property(name) ⇒ <code>\*</code>
-Gets an individual property.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>\*</code> - The property.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The name of the property. |
-
-<a name="Workbook+property"></a>
-
-#### workbook.property(names) ⇒ <code>object.&lt;string, \*&gt;</code>
-Gets multiple properties.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>object.&lt;string, \*&gt;</code> - Object whose keys are the property names and values are the properties.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| names | <code>Array.&lt;string&gt;</code> | The names of the properties. |
-
-<a name="Workbook+property"></a>
-
-#### workbook.property(name, value) ⇒ [<code>Workbook</code>](#Workbook)
-Sets an individual property.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | The name of the property. |
-| value | <code>\*</code> | The value to set. |
-
-<a name="Workbook+property"></a>
-
-#### workbook.property(properties) ⇒ [<code>Workbook</code>](#Workbook)
-Sets multiple properties.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Workbook</code>](#Workbook) - The workbook.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>object.&lt;string, \*&gt;</code> | Object whose keys are the property names and values are the values to set. |
-
-<a name="Workbook+properties"></a>
-
-#### workbook.properties() ⇒ <code>CoreProperties</code>
-Get access to core properties object
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>CoreProperties</code> - The core properties.  
-<a name="Workbook+toFileAsync"></a>
-
-#### workbook.toFileAsync(path, [opts]) ⇒ <code>Promise.&lt;undefined&gt;</code>
-Write the workbook to file. (Not supported in browsers.)
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: <code>Promise.&lt;undefined&gt;</code> - A promise.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| path | <code>string</code> | The path of the file to write. |
-| [opts] | <code>Object</code> | Options |
-| [opts.password] | <code>string</code> | The password to encrypt the workbook. |
-
-<a name="Workbook+theme"></a>
-
-#### workbook.theme() ⇒ [<code>Theme</code>](#Theme)
-Get the theme of this workbook.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Theme</code>](#Theme) - The theme object.  
-<a name="Workbook+cloneSheet"></a>
-
-#### workbook.cloneSheet(from, name, [indexOrBeforeSheet]) ⇒ [<code>Sheet</code>](#Sheet)
-Add a new sheet to the workbook.**WARN:** this function has limits:  if you clone a sheet with some images or other things link outside the Sheet object, these things in the cloned sheet will be locked when you open in MS Excel app.
-
-**Kind**: instance method of [<code>Workbook</code>](#Workbook)  
-**Returns**: [<code>Sheet</code>](#Sheet) - The new sheet.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| from | [<code>Sheet</code>](#Sheet) | The sheet to be cloned. |
-| name | <code>string</code> | The name of the new sheet. Must be unique, less than 31 characters, and may not contain the following characters: \ / * [ ] : ? |
-| [indexOrBeforeSheet] | <code>number</code> \| <code>string</code> \| [<code>Sheet</code>](#Sheet) | The index to move the sheet to or the sheet (or name of sheet) to move this sheet before. Omit this argument to move to the end of the workbook. |
-
 <a name="XlsxPopulate"></a>
 
 ### XlsxPopulate : <code>object</code>
 **Kind**: global namespace  
 
 * [XlsxPopulate](#XlsxPopulate) : <code>object</code>
-    * [.Promise](#XlsxPopulate.Promise) : <code>Promise</code>
     * [.MIME_TYPE](#XlsxPopulate.MIME_TYPE) : <code>string</code>
     * [.FormulaError](#XlsxPopulate.FormulaError) : [<code>FormulaError</code>](#FormulaError)
     * [.RichText](#XlsxPopulate.RichText) : [<code>RichText</code>](#RichText)
+    * [.FormulaParser](#XlsxPopulate.FormulaParser)
     * [.dateToNumber(date)](#XlsxPopulate.dateToNumber) ⇒ <code>number</code>
     * [.fromBlankAsync()](#XlsxPopulate.fromBlankAsync) ⇒ [<code>Promise.&lt;Workbook&gt;</code>](#Workbook)
     * [.fromDataAsync(data, [opts])](#XlsxPopulate.fromDataAsync) ⇒ [<code>Promise.&lt;Workbook&gt;</code>](#Workbook)
     * [.fromFileAsync(path, [opts])](#XlsxPopulate.fromFileAsync) ⇒ [<code>Promise.&lt;Workbook&gt;</code>](#Workbook)
     * [.numberToDate(number)](#XlsxPopulate.numberToDate) ⇒ <code>Date</code>
 
-<a name="XlsxPopulate.Promise"></a>
-
-#### XlsxPopulate.Promise : <code>Promise</code>
-The Promise library.
-
-**Kind**: static property of [<code>XlsxPopulate</code>](#XlsxPopulate)  
 <a name="XlsxPopulate.MIME_TYPE"></a>
 
-#### XlsxPopulate.MIME_TYPE : <code>string</code>
+#### XlsxPopulate.MIME\_TYPE : <code>string</code>
 The XLSX mime type.
 
 **Kind**: static property of [<code>XlsxPopulate</code>](#XlsxPopulate)  
@@ -3580,6 +3677,12 @@ Formula error class.
 
 #### XlsxPopulate.RichText : [<code>RichText</code>](#RichText)
 RichTexts class
+
+**Kind**: static property of [<code>XlsxPopulate</code>](#XlsxPopulate)  
+<a name="XlsxPopulate.FormulaParser"></a>
+
+#### XlsxPopulate.FormulaParser
+A formula parser library.https://github.com/LesterLyu/fast-formula-parser
 
 **Kind**: static property of [<code>XlsxPopulate</code>](#XlsxPopulate)  
 <a name="XlsxPopulate.dateToNumber"></a>
@@ -3643,10 +3746,14 @@ Convert an Excel number to a date.
 
 <a name="_"></a>
 
-### _
+### \_
 OOXML uses the CFB file format with Agile Encryption. The details of the encryption are here:https://msdn.microsoft.com/en-us/library/dd950165(v=office.12).aspxHelpful guidance also take from this Github project:https://github.com/nolze/ms-offcrypto-tool
 
 **Kind**: global constant  
+<a name="MODE"></a>
+
+### MODE : <code>Object</code>
+**Kind**: global typedef  
 <a name="PaneOptions"></a>
 
 ### PaneOptions : <code>Object</code>
@@ -3662,5 +3769,19 @@ https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.p
 | topLeftCell | <code>string</code> |  | Top Left Visible Cell. Location of the top left visible cell in the bottom right pane (when in Left-To-Right mode). |
 | xSplit | <code>number</code> |  | (Horizontal Split Position) Horizontal position of the split, in 1/20th of a point; 0 (zero) if none. If the pane is frozen, this value indicates the number of columns visible in the top pane. |
 | ySplit | <code>number</code> |  | (Vertical Split Position) Vertical position of the split, in 1/20th of a point; 0 (zero) if none. If the pane is frozen, this value indicates the number of rows visible in the left pane. |
+
+<a name="ReferenceLiteral"></a>
+
+### ReferenceLiteral : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| sheet | <code>string</code> | The sheet name. |
+| [row] | <code>number</code> | The row number. (1-based indexing) |
+| [col] | <code>number</code> | The column number. (1-based indexing) |
+| [from] | <code>Object</code> | Range from. |
+| [to] | <code>Object</code> | Range to. |
 
 

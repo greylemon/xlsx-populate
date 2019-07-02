@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="myFunction()">Click me</button>
+
+<p>Goes to F12 developer tools, loaded workbook is stored in `workbook` as a global variable.</p>
+
+<script src="xlsx-populate.min.js" charset="utf-8"></script>
+<script>
+function myFunction() {
+	const input = document.createElement('input');
+    input.type = 'file';
+
+    input.onchange = e => {
+      const file = e.target.files[0];
+      console.log("loading " + file.name);
+      XlsxPopulate.fromDataAsync(file)
+        .then(workbook => {
+			window.workbook = workbook;
+			console.log(workbook);
+			console.log('Type `workbook` here.')
+		});
+    };
+
+    input.click();
+	
+}
+
+</script>
+
+</body>
+</html>
