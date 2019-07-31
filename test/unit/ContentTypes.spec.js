@@ -1,16 +1,11 @@
 "use strict";
-
-const proxyquire = require("proxyquire");
+const ContentTypes = require('../../lib/workbooks/ContentTypes');
 const expect = require('chai').expect;
 
 describe("ContentTypes", () => {
-    let ContentTypes, contentTypes, contentTypesNode;
+    let contentTypes, contentTypesNode;
 
     beforeEach(() => {
-        ContentTypes = proxyquire("../../lib/workbooks/ContentTypes", {
-            '@noCallThru': true
-        });
-
         contentTypesNode = {
             name: "Types",
             attributes: {
@@ -47,7 +42,7 @@ describe("ContentTypes", () => {
     describe("add", () => {
         it("should add a new part", () => {
             contentTypes.add("NEW_PART_NAME", "NEW_CONTENT_TYPE");
-            expect(contentTypesNode.children[3]).toEqualJson({
+            expect(contentTypesNode.children[3]).to.deep.eq({
                 name: "Override",
                 attributes: {
                     PartName: "NEW_PART_NAME",
@@ -59,18 +54,18 @@ describe("ContentTypes", () => {
 
     describe("findByPartName", () => {
         it("should return the part if matched", () => {
-            expect(contentTypes.findByPartName("/xl/worksheets/sheet1.xml")).toBe(contentTypesNode.children[2]);
-            expect(contentTypes.findByPartName("/xl/workbook.xml")).toBe(contentTypesNode.children[1]);
+            expect(contentTypes.findByPartName("/xl/worksheets/sheet1.xml")).to.eq(contentTypesNode.children[2]);
+            expect(contentTypes.findByPartName("/xl/workbook.xml")).to.eq(contentTypesNode.children[1]);
         });
 
         it("should return undefined if not matched", () => {
-            expect(contentTypes.findByPartName("foo")).toBeUndefined();
+            expect(contentTypes.findByPartName("foo")).to.eq(undefined);
         });
     });
 
     describe("toXml", () => {
         it("should return the node as is", () => {
-            expect(contentTypes.toXml()).toBe(contentTypesNode);
+            expect(contentTypes.toXml()).to.eq(contentTypesNode);
         });
     });
 });

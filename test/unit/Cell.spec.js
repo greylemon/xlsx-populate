@@ -1,414 +1,339 @@
 "use strict";
 
 const Cell = require("../../lib/worksheets/Cell");
+const Column = require("../../lib/worksheets/Column");
 const FormulaError = require('../../lib/FormulaError');
 const RichTexts = require('../../lib/worksheets/RichText');
+const XlsxPopulate = require('../../lib/XlsxPopulate');
 const expect = require('chai').expect;
 
 describe("Cell", () => {
-    let cell, cellNode, row, sheet, workbook, sharedStrings, styleSheet, style, range;
+    let cell, cellNode, row, sheet, workbook, sharedStrings, styleSheet, style;
+    let b2, a1, c7, formulaCell, sharedFormulaCell, e3, e4, hyperlinkCell,
+        dataValidationCell;
 
-    beforeEach(() => {
-        // const Style = class {};
-        // if (!Style.name) Style.name = "Style";
-        // Style.prototype.id = jasmine.createSpy("Style.id").and.returnValue(4);
-        // Style.prototype.style = jasmine.createSpy("Style.style").and.callFake(name => `STYLE:${name}`);
-        // style = new Style();
-        //
-        // styleSheet = jasmine.createSpyObj("styleSheet", ["createStyle"]);
-        // styleSheet.createStyle.and.returnValue(style);
-        //
-        // sharedStrings = jasmine.createSpyObj("sharedStrings", ['getIndexForString', 'getStringByIndex']);
-        // sharedStrings.getIndexForString.and.returnValue(7);
-        // sharedStrings.getStringByIndex.and.returnValue("STRING");
-        //
-        // workbook = jasmine.createSpyObj("workbook", ["sharedStrings", "styleSheet"]);
-        // workbook.sharedStrings.and.returnValue(sharedStrings);
-        // workbook.styleSheet.and.returnValue(styleSheet);
-        //
-        // range = jasmine.createSpyObj('range', ['value', 'style']);
-        //
-        // sheet = jasmine.createSpyObj('sheet', ['createStyle', 'activeCell', 'updateMaxSharedFormulaId', 'name', 'column',
-        //     'clearCellsUsingSharedFormula', 'cell', 'range', 'hyperlink', 'dataValidation', 'verticalPageBreaks', 'setSharedFormulaRefCell']);
-        // sheet.activeCell.and.returnValue("ACTIVE CELL");
-        // sheet.name.and.returnValue("NAME");
-        // sheet.column.and.returnValue("COLUMN");
-        // sheet.hyperlink.and.returnValue("HYPERLINK");
-        // sheet.range.and.returnValue(range);
-        // sheet.dataValidation.and.returnValue("DATAVALIDATION");
-        //
-        // row = jasmine.createSpyObj('row', ['sheet', 'workbook', 'rowNumber', 'addPageBreak']);
-        // row.sheet.and.returnValue(sheet);
-        // row.workbook.and.returnValue(workbook);
-        // row.rowNumber.and.returnValue(7);
-
-        cellNode = {
-            name: 'c',
-            attributes: {
-                r: "C7"
-            },
-            children: []
-        };
-
-        cell = new Cell(row, cellNode);
+    beforeEach(async () => {
+        workbook = await XlsxPopulate.fromFileAsync('../files/cell.xlsx');
+        sheet = workbook.sheet(0);
+        b2 = sheet.cell('B2');
+        a1 = sheet.cell('A1');
+        cell = c7 = sheet.cell('C7');
+        formulaCell = sheet.cell('D2');
+        sharedFormulaCell = sheet.cell('E2');
+        e3 = sheet.cell('E3');
+        e4 = sheet.cell('E4');
+        hyperlinkCell = sheet.cell('F1');
+        dataValidationCell = sheet.cell('G1');
     });
-
-    /* PUBLIC */
 
     describe("active", () => {
         it("should return true/false", () => {
-            expect(cell.active()).toBe(false);
-            sheet.activeCell.and.returnValue(cell);
-            expect(cell.active()).toBe(true);
+            expect(a1.active()).to.eq(false);
+            expect(b2.active()).to.eq(true);
         });
 
         it("should set the sheet active cell", () => {
-            expect(cell.active(true)).toBe(cell);
-            expect(sheet.activeCell).toHaveBeenCalledWith(cell);
+            expect(a1.active(true)).to.eq(a1);
+            expect(a1.active(true)).to.eq(a1);
         });
 
         it("should throw an error if attempting to deactivate", () => {
-            expect(() => cell.active(false)).toThrow();
+            expect(() => cell.active(false)).to.throw();
         });
     });
 
     describe("address", () => {
         it("should return the address", () => {
-            spyOn(cell, "rowNumber").and.returnValue(7);
-            spyOn(cell, "columnNumber").and.returnValue(3);
-
-            expect(cell.address()).toBe('C7');
-            expect(cell.address({ rowAnchored: true })).toBe('C$7');
-            expect(cell.address({ columnAnchored: true })).toBe('$C7');
-            expect(cell.address({ includeSheetName: true })).toBe("'NAME'!C7");
-            expect(cell.address({ includeSheetName: true, rowAnchored: true, columnAnchored: true })).toBe("'NAME'!$C$7");
-            expect(cell.address({ anchored: true })).toBe("$C$7");
+            expect(cell.address()).to.eq('C7');
+            expect(cell.address({ rowAnchored: true })).to.eq('C$7');
+            expect(cell.address({ columnAnchored: true })).to.eq('$C7');
+            expect(cell.address({ includeSheetName: true })).to.eq("'Sheet1'!C7");
+            expect(cell.address({
+                includeSheetName: true,
+                rowAnchored: true,
+                columnAnchored: true
+            })).to.eq("'Sheet1'!$C$7");
+            expect(cell.address({ anchored: true })).to.eq("$C$7");
         });
     });
 
     describe("column", () => {
         it("should return the parent column", () => {
-            expect(cell.column()).toBe("COLUMN");
-            expect(sheet.column).toHaveBeenCalledWith(3);
+            expect(cell.column()).instanceOf(Column);
+            expect(cell.column().columnNumber()).to.eq(3);
         });
     });
 
     describe("clear", () => {
         it("should clear the cell contents", () => {
-            cell._value = "VALUE";
-            cell._formulaType = "FORMULA_TYPE";
-            cell._formula = "FORMULA";
-            cell._sharedFormulaId = "SHARED_FORMULA_ID";
+            expect(formulaCell.clear()).to.eq(formulaCell);
+            expect(formulaCell._value).to.eq(undefined);
+            expect(formulaCell._formulaType).to.eq(undefined);
+            expect(formulaCell._formula).to.eq(undefined);
+            expect(formulaCell._sharedFormulaId).to.eq(undefined);
 
-            expect(cell.clear()).toBe(cell);
-
-            expect(cell._value).toBeUndefined();
-            expect(cell._formulaType).toBeUndefined();
-            expect(cell._formula).toBeUndefined();
-            expect(cell._sharedFormulaId).toBeUndefined();
-
-            expect(sheet.clearCellsUsingSharedFormula).not.toHaveBeenCalled();
         });
 
         it("should clear the cell with shared ref", () => {
-            cell._value = "VALUE";
-            cell._formulaType = "FORMULA_TYPE";
-            cell._formula = "FORMULA";
-            cell._sharedFormulaId = "SHARED_FORMULA_ID";
-            cell._formulaRef = "FORMULA_REF";
-
-            expect(cell.clear()).toBe(cell);
-
-            expect(cell._value).toBeUndefined();
-            expect(cell._formulaType).toBeUndefined();
-            expect(cell._formula).toBeUndefined();
-            expect(cell._sharedFormulaId).toBeUndefined();
-            expect(cell._formulaRef).toBeUndefined();
-
-            expect(sheet.clearCellsUsingSharedFormula).toHaveBeenCalledWith("SHARED_FORMULA_ID");
+            expect(sharedFormulaCell.clear()).to.eq(sharedFormulaCell);
+            expect(sharedFormulaCell._value).to.eq(undefined);
+            expect(sharedFormulaCell._formulaType).to.eq(undefined);
+            expect(sharedFormulaCell._formula).to.eq(undefined);
+            expect(sharedFormulaCell._sharedFormulaId).to.eq(undefined);
+            expect(sharedFormulaCell._formulaRef).to.eq(undefined);
         });
     });
 
     describe("columnName", () => {
         it("should return the column name", () => {
-            spyOn(cell, "columnNumber").and.returnValue(3);
-            expect(cell.columnName()).toBe("C");
+            expect(cell.columnName()).to.eq("C");
         });
     });
 
     describe("columnNumber", () => {
         it("should return the column number", () => {
-            cell._columnNumber = 3;
-            expect(cell.columnNumber()).toBe(3);
+            expect(cell.columnNumber()).to.eq(3);
         });
     });
 
     describe("formula", () => {
         it("should return undefined if formula not set", () => {
-            expect(cell.formula()).toBeUndefined();
+            expect(cell.formula()).to.eq(undefined);
         });
 
         it("should return the formula if set", () => {
-            cell._formula = "FORMULA";
-            expect(cell.formula()).toBe("FORMULA");
+            expect(formulaCell.formula()).to.eq("SUM(1+3)");
         });
 
         it("should return the shared formula if the ref cell", () => {
-            cell._formula = "FORMULA";
-            cell._formulaType = "shared";
-            cell._formulaRef = "REF";
-            expect(cell.formula()).toBe("FORMULA");
+            expect(sharedFormulaCell.formula()).to.eq("SUM(A1:A2)");
+            expect(e3.formula()).to.eq("SUM(A2:A3)");
+            expect(e4.formula()).to.eq("SUM(A3:A4)");
         });
 
         it("should clear the formula", () => {
-            cell._formula = "FORMULA";
-            cell._formulaType = "TYPE";
+            cell.formula("SUM(1+1)");
+            expect(cell.formula(undefined)).to.eq(cell);
 
-            expect(cell.formula(undefined)).toBe(cell);
-
-            expect(cell._formula).toBeUndefined();
-            expect(cell._formulaType).toBeUndefined();
+            expect(cell._formula).to.eq(undefined);
+            expect(cell._formulaType).to.eq(undefined);
         });
 
         it("should set the formula and clear the value", () => {
-            cell._value = "VALUE";
+            cell.formula("SUM(1+1)");
+            expect(cell.formula("SUM(1+2)")).to.eq(cell);
 
-            expect(cell.formula("FORMULA")).toBe(cell);
-
-            expect(cell._value).toBeUndefined();
-            expect(cell._formula).toBe("FORMULA");
-            expect(cell._formulaType).toBe('normal');
+            expect(cell._value).to.eq(3);
+            expect(cell._formula).to.eq("SUM(1+2)");
+            expect(cell._formulaType).to.eq('normal');
         });
     });
 
     describe("hyperlink", () => {
         it("should get the hyperlink from the sheet", () => {
-            expect(cell.hyperlink()).toBe("HYPERLINK");
-            expect(sheet.hyperlink).toHaveBeenCalledWith("C7");
+            expect(hyperlinkCell.hyperlink().retrieve()).to.eq(a1);
         });
 
         it("should set the hyperlink on the sheet", () => {
-            expect(cell.hyperlink("HYPERLINK")).toBe(cell);
-            expect(sheet.hyperlink).toHaveBeenCalledWith("C7", "HYPERLINK");
+            cell.hyperlink(a1);
+            expect(cell.hyperlink().retrieve()).to.eq(a1);
         });
 
         it("should set the hyperlink with tooltip on the sheet", () => {
-            const opts = { hyperlink: "HYPERLINK", tooltip: "TOOLTIP" };
-            expect(cell.hyperlink(opts)).toBe(cell);
-            expect(sheet.hyperlink).toHaveBeenCalledWith("C7", opts);
+            const opts = { hyperlink: "www.google.ca", tooltip: "TOOLTIP" };
+            expect(cell.hyperlink(opts)).to.eq(cell);
+            expect(cell.hyperlink()).to.deep.eq({
+                hyperlink: "www.google.ca",
+                tooltip: "TOOLTIP"
+            });
+        });
+
+        it("should set the hyperlink with email", () => {
+            const opts = { email: "example@mail.com", emailSubject: 'subject', tooltip: "TOOLTIP" };
+            expect(cell.hyperlink(opts)).to.eq(cell);
+            expect(cell.hyperlink()).to.deep.eq({
+                hyperlink: "mailto:example@mail.com?subject=subject",
+                tooltip: "TOOLTIP"
+            });
+        });
+
+        it("should clear hyperlink", () => {
+            const opts = { hyperlink: "www.google.ca", tooltip: "TOOLTIP" };
+            cell.hyperlink(opts);
+            cell.hyperlink(undefined);
+            expect(cell.hyperlink()).to.eq(undefined);
         });
     });
 
     describe('dataValidation', () => {
         it('should return the cell', () => {
-            expect(cell.dataValidation('testing, testing2')).toBe(cell);
-            expect(sheet.dataValidation).toHaveBeenCalledWith('C7', 'testing, testing2');
+            const validation = {
+                formula1: '"testing, testing2"',
+                type: 'list'
+            };
+            expect(cell.dataValidation(validation)).to.eq(cell);
+            expect(cell.dataValidation().formula1).to.deep.eq(validation.formula1);
+            expect(cell.dataValidation().formula1Result).to.deep.eq(['testing', 'testing2']);
         });
 
         it('should return the cell', () => {
-            expect(cell.dataValidation({ type: 'list',
+            const validations = {
+                type: 'list',
                 allowBlank: false,
                 showInputMessage: false,
-                prompt: '',
-                promptTitle: '',
+                prompt: 'hh',
+                promptTitle: 'title',
                 showErrorMessage: false,
-                error: '',
-                errorTitle: '',
-                operator: '',
-                formula1: 'test1, test2, test3',
-                formula2: ''
-            })).toBe(cell);
-
-            expect(sheet.dataValidation).toHaveBeenCalledWith('C7', { type: 'list',
-                allowBlank: false,
-                showInputMessage: false,
-                prompt: '',
-                promptTitle: '',
-                showErrorMessage: false,
-                error: '',
-                errorTitle: '',
-                operator: '',
-                formula1: 'test1, test2, test3',
-                formula2: ''
+                error: 'err',
+                errorTitle: 'err title',
+                formula1: '"test1, test2, test3"'
+            };
+            expect(cell.dataValidation(validations)).to.eq(cell);
+            const result = cell.dataValidation();
+            Object.keys(validations).forEach(key => {
+                expect(result[key]).to.eq(validations[key], key);
             });
         });
 
         it("should get the dataValidation from the cell", () => {
-            expect(cell.dataValidation()).toBe("DATAVALIDATION");
-            expect(sheet.dataValidation).toHaveBeenCalledWith("C7");
+            expect(dataValidationCell.dataValidation().formula1Result).to.deep.eq([
+                1, 2, 3, 4, 5
+            ]);
         });
     });
 
     describe("find", () => {
-        beforeEach(() => {
-            spyOn(cell, 'value');
-        });
-
         it("should return true if substring found and false otherwise", () => {
-            cell.value.and.returnValue("Foo bar baz");
-            expect(cell.find('bar')).toBe(true);
-            expect(cell.find('BAR')).toBe(true);
-            expect(cell.find('goo')).toBe(false);
-            expect(cell.value).not.toHaveBeenCalledWith(jasmine.anything());
+            expect(cell.find('data')).to.eq(true);
+            expect(cell.find('cell')).to.eq(true);
+            expect(cell.find('goo')).to.eq(false);
         });
 
         it("should return true if regex matches and false otherwise", () => {
-            cell.value.and.returnValue("Foo bar baz");
-            expect(cell.find(/\w{3}/)).toBe(true);
-            expect(cell.find(/\w{4}/)).toBe(false);
-            expect(cell.find(/Foo/)).toBe(true);
-            expect(cell.value).not.toHaveBeenCalledWith(jasmine.anything());
+            cell.value("Foo bar baz");
+            expect(cell.find(/\w{3}/)).to.eq(true);
+            expect(cell.find(/\w{4}/)).to.eq(false);
+            expect(cell.find(/Foo/)).to.eq(true);
         });
 
         it("should not replace if replacement is nil", () => {
-            cell.value.and.returnValue("Foo bar baz");
-            expect(cell.find("foo", undefined)).toBe(true);
-            expect(cell.value).not.toHaveBeenCalledWith(jasmine.anything());
-            expect(cell.find("bar", null)).toBe(true);
-            expect(cell.value).not.toHaveBeenCalledWith(jasmine.anything());
+            cell.value("Foo bar baz");
+            expect(cell.find("foo", undefined)).to.eq(true);
+            expect(cell.value()).to.eq('Foo bar baz');
+            expect(cell.find("bar", null)).to.eq(true);
+            expect(cell.value()).to.eq('Foo bar baz');
         });
 
         it("should replace all occurences of substring", () => {
-            cell.value.and.returnValue("Foo bar baz foo");
-            expect(cell.find('foo', 'XXX')).toBe(true);
-            expect(cell.value).toHaveBeenCalledWith('XXX bar baz XXX');
-            cell.value.calls.reset();
-
-            cell.value.and.returnValue("Foo bar baz foo");
-            expect(cell.find('foot', 'XXX')).toBe(false);
-            expect(cell.value).not.toHaveBeenCalledWith(jasmine.any(String));
+            cell.value("Foo bar baz");
+            expect(cell.find('foo', 'XXX')).to.eq(true);
+            expect(cell.value()).to.eq('XXX bar baz');
+            cell.value("Foo bar baz foo");
+            expect(cell.find('foot', 'XXX')).to.eq(false);
         });
 
         it("should replace regex matches", () => {
-            cell.value.and.returnValue("Foo bar baz foo");
-            expect(cell.find(/[a-z]{3}/, 'XXX')).toBe(true);
-            expect(cell.value).toHaveBeenCalledWith('Foo XXX baz foo');
+            cell.value("Foo bar baz foo");
+            expect(cell.find(/[a-z]{3}/, 'XXX')).to.eq(true);
+            expect(cell.value()).to.eq('Foo XXX baz foo');
         });
 
         it("should replace regex matches", () => {
-            cell.value.and.returnValue("Foo bar baz foo");
-            const replacer = jasmine.createSpy('replacer').and.returnValue("REPLACEMENT");
-            expect(cell.find(/(\w)(o{2})/g, replacer)).toBe(true);
-            expect(cell.value).toHaveBeenCalledWith('REPLACEMENT bar baz REPLACEMENT');
-            expect(replacer).toHaveBeenCalledWith('Foo', 'F', 'oo', 0, 'Foo bar baz foo');
-            expect(replacer).toHaveBeenCalledWith('foo', 'f', 'oo', 12, 'Foo bar baz foo');
-        });
-    });
-
-    describe("tap", () => {
-        it("should call the callback and return the cell", () => {
-            const callback = jasmine.createSpy('callback').and.returnValue("RETURN");
-            expect(cell.tap(callback)).toBe(cell);
-            expect(callback).toHaveBeenCalledWith(cell);
-        });
-    });
-
-    describe("thru", () => {
-        it("should call the callback and return the callback return value", () => {
-            const callback = jasmine.createSpy('callback').and.returnValue("RETURN");
-            expect(cell.thru(callback)).toBe("RETURN");
-            expect(callback).toHaveBeenCalledWith(cell);
+            cell.value("Foo bar baz foo");
+            let times = 0;
+            const replacer = (...args) => {
+                if (times === 0) expect(args).to.deep.eq(['Foo', 'F', 'oo', 0, 'Foo bar baz foo']);
+                else expect(args).to.deep.eq(['foo', 'f', 'oo', 12, 'Foo bar baz foo']);
+                times++;
+                return 'REPLACEMENT';
+            };
+            expect(cell.find(/(\w)(o{2})/g, replacer)).to.eq(true);
+            expect(cell.value()).to.eq('REPLACEMENT bar baz REPLACEMENT');
         });
     });
 
     describe("rangeTo", () => {
         it("should create a range", () => {
-            expect(cell.rangeTo("OTHER")).toBe(range);
-            expect(sheet.range).toHaveBeenCalledWith(cell, "OTHER");
+            const range = cell.rangeTo(a1);
+            expect(range.startCell()).to.eq(c7);
+            expect(range.endCell()).to.eq(a1);
         });
     });
 
     describe("relativeCell", () => {
         it("should call sheet.cell with the appropriate row/column", () => {
-            sheet.cell.and.returnValue("CELL");
+            expect(cell.relativeCell(0, 0)).to.eq(c7);
 
-            expect(cell.relativeCell(0, 0)).toBe("CELL");
-            expect(sheet.cell).toHaveBeenCalledWith(7, 3);
-            sheet.cell.calls.reset();
+            expect(cell.relativeCell(-6, -2)).to.eq(a1);
 
-            expect(cell.relativeCell(-2, -1)).toBe("CELL");
-            expect(sheet.cell).toHaveBeenCalledWith(5, 2);
-            sheet.cell.calls.reset();
-
-            expect(cell.relativeCell(5, 2)).toBe("CELL");
-            expect(sheet.cell).toHaveBeenCalledWith(12, 5);
-            sheet.cell.calls.reset();
+            expect(cell.relativeCell(1, 1)).to.eq(sheet.cell('D8'));
         });
     });
 
     describe("row", () => {
         it("should return the parent row", () => {
-            expect(cell.row()).toBe(row);
+            expect(cell.row()).to.eq(sheet.row(7));
         });
     });
 
     describe("rowNumber", () => {
         it("should return the row number", () => {
-            expect(cell.rowNumber()).toBe(7);
+            expect(cell.rowNumber()).to.eq(7);
         });
     });
 
     describe("sheet", () => {
         it("should return the parent sheet", () => {
-            expect(cell.sheet()).toBe(sheet);
+            expect(cell.sheet()).to.eq(sheet);
         });
     });
 
     describe("style", () => {
         it("should create a new style with the set style ID", () => {
-            cell._styleId = 2;
-            expect(cell._style).toBeUndefined();
-            cell.style("foo");
-            expect(styleSheet.createStyle).toHaveBeenCalledWith(2);
-            expect(cell._style).toBe(style);
-        });
-
-        it("should assign a style when asked", () => {
-            expect(cell._style).toBeUndefined();
-            cell.style(style);
-            expect(cell._style).toBe(style);
-            expect(cell._styleId).toBe(style.id());
+            expect(cell._style).to.eq(undefined);
+            cell.style("bold", true);
+            expect(cell._style).to.not.eq(undefined);
         });
 
         it("should not create a style if one already exists", () => {
             cell._style = style;
-            cell.style("foo");
-            expect(styleSheet.createStyle).not.toHaveBeenCalled();
+            cell.style("bold", true);
+            const id = cell._style._id;
+            cell.style("italic", true);
+            expect(cell._style._id).to.eq(id);
         });
 
         it("should get a single style", () => {
-            expect(cell.style("foo")).toBe("STYLE:foo");
-            expect(style.style).toHaveBeenCalledWith("foo");
+            cell.style("bold", true);
+            expect(cell.style('bold')).to.eq(true);
         });
 
         it("should get multiple styles", () => {
-            expect(cell.style(["foo", "bar", "baz"])).toEqualJson({
-                foo: "STYLE:foo", bar: "STYLE:bar", baz: "STYLE:baz"
+            cell.style("bold", true);
+            cell.style("italic", true);
+            cell.style("underline", true);
+            expect(cell.style(["bold", "italic", "underline"])).to.deep.eq({
+                bold: true, italic: true, underline: true
             });
-            expect(style.style).toHaveBeenCalledWith("foo");
-            expect(style.style).toHaveBeenCalledWith("bar");
-            expect(style.style).toHaveBeenCalledWith("baz");
-        });
-
-        it("should set a single style", () => {
-            expect(cell.style("foo", "value")).toBe(cell);
-            expect(style.style).toHaveBeenCalledWith("foo", "value");
         });
 
         it("should set the values in the range", () => {
-            spyOn(cell, "relativeCell");
-            cell.style("foo", [[1, 2], [3, 4], [5, 6]]);
-            expect(cell.relativeCell).toHaveBeenCalledWith(2, 1);
-            expect(range.style).toHaveBeenCalledWith("foo", [[1, 2], [3, 4], [5, 6]]);
+            cell.style("bold", [[true, true], [false, false], [false, true]]);
+            expect(cell.relativeCell(0, 0).style('bold')).to.eq(true);
+            expect(cell.relativeCell(0, 1).style('bold')).to.eq(true);
+            expect(cell.relativeCell(1, 0).style('bold')).to.eq(false);
+            expect(cell.relativeCell(1, 1).style('bold')).to.eq(false);
+            expect(cell.relativeCell(2, 0).style('bold')).to.eq(false);
+            expect(cell.relativeCell(2, 1).style('bold')).to.eq(true);
         });
 
         it("should set multiple styles", () => {
             expect(cell.style({
-                foo: "FOO", bar: "BAR", baz: "BAZ"
-            })).toBe(cell);
-            expect(style.style).toHaveBeenCalledWith("foo", "FOO");
-            expect(style.style).toHaveBeenCalledWith("bar", "BAR");
-            expect(style.style).toHaveBeenCalledWith("baz", "BAZ");
+                bold: true, italic: true, underline: true
+            })).to.eq(cell);
+            expect(cell.style('bold')).to.eq(true);
+            expect(cell.style('italic')).to.eq(true);
+            expect(cell.style('underline')).to.eq(true);
         });
     });
 
@@ -418,21 +343,21 @@ describe("Cell", () => {
         });
 
         it("should get the value", () => {
-            expect(cell.value()).toBeUndefined();
+            expect(cell.value()).to.eq(undefined);
             cell._value = "foo";
-            expect(cell.value()).toBe('foo');
+            expect(cell.value()).to.eq('foo');
         });
 
         it("should clear the cell", () => {
             cell._value = "foo";
             cell.value(undefined);
-            expect(cell._value).toBeUndefined();
+            expect(cell._value).to.eq(undefined);
             expect(cell.clear).toHaveBeenCalledWith();
         });
 
         it("should clear the cell and set the value", () => {
             cell.value(5.6);
-            expect(cell._value).toBe(5.6);
+            expect(cell._value).to.eq(5.6);
             expect(cell.clear).toHaveBeenCalledWith();
         });
 
@@ -446,13 +371,13 @@ describe("Cell", () => {
 
     describe("workbook", () => {
         it("should return the workbook from the row", () => {
-            expect(cell.workbook()).toBe(workbook);
+            expect(cell.workbook()).to.eq(workbook);
         });
     });
 
     describe('addHorizontalPageBreak', () => {
         it("should add a rowBreak and return the cell", () => {
-            expect(cell.addHorizontalPageBreak()).toBe(cell);
+            expect(cell.addHorizontalPageBreak()).to.eq(cell);
         });
     });
 
@@ -463,20 +388,20 @@ describe("Cell", () => {
             cell._formulaType = 'shared';
             cell._formulaRef = 'REF';
             cell._formula = "FORMULA";
-            expect(cell.getSharedRefFormula()).toBe("FORMULA");
+            expect(cell.getSharedRefFormula()).to.eq("FORMULA");
         });
 
         it("should return undefined if not a ref cell", () => {
             cell._formulaType = 'shared';
             cell._formula = "FORMULA";
-            expect(cell.getSharedRefFormula()).toBeUndefined();
+            expect(cell.getSharedRefFormula()).to.eq(undefined);
         });
 
         it("should return undefined if not a shared cell", () => {
             cell._formulaType = 'array';
             cell._formulaRef = 'REF';
             cell._formula = "FORMULA";
-            expect(cell.getSharedRefFormula()).toBeUndefined();
+            expect(cell.getSharedRefFormula()).to.eq(undefined);
         });
     });
 
@@ -485,12 +410,12 @@ describe("Cell", () => {
             cell._formulaType = "shared";
             cell._sharedFormulaId = 6;
 
-            expect(cell.sharesFormula(6)).toBe(true);
-            expect(cell.sharesFormula(3)).toBe(false);
+            expect(cell.sharesFormula(6)).to.eq(true);
+            expect(cell.sharesFormula(3)).to.eq(false);
         });
 
         it("should return false if it doesn't share any formula", () => {
-            expect(cell.sharesFormula(6)).toBe(false);
+            expect(cell.sharesFormula(6)).to.eq(false);
         });
     });
 
@@ -499,10 +424,10 @@ describe("Cell", () => {
             spyOn(cell, "clear");
             cell.setSharedFormula(3, "A1*A2", "A1:C1");
             expect(cell.clear).toHaveBeenCalledWith();
-            expect(cell._formulaType).toBe("shared");
-            expect(cell._sharedFormulaId).toBe(3);
-            expect(cell._formula).toBe("A1*A2");
-            expect(cell._formulaRef).toBe("A1:C1");
+            expect(cell._formulaType).to.eq("shared");
+            expect(cell._sharedFormulaId).to.eq(3);
+            expect(cell._formula).to.eq("A1*A2");
+            expect(cell._formulaRef).to.eq("A1:C1");
         });
     });
 
@@ -512,7 +437,7 @@ describe("Cell", () => {
         });
 
         it("should set the cell address", () => {
-            expect(cell.toXml().attributes.r).toBe("C7");
+            expect(cell.toXml().attributes.r).to.eq("C7");
         });
 
         it("should set the formula", () => {
@@ -645,12 +570,12 @@ describe("Cell", () => {
 
         it("should set the defined style id", () => {
             cell._styleId = "STYLE_ID";
-            expect(cell.toXml().attributes.s).toBe("STYLE_ID");
+            expect(cell.toXml().attributes.s).to.eq("STYLE_ID");
         });
 
         it("should set the id from the style", () => {
             cell._style = style;
-            expect(cell.toXml().attributes.s).toBe(4);
+            expect(cell.toXml().attributes.s).to.eq(4);
         });
 
         it("should handle an empty cell", () => {
@@ -695,14 +620,14 @@ describe("Cell", () => {
         it("should parse the node", () => {
             const node = {};
             cell._init(node);
-            expect(cell._columnNumber).toBeUndefined();
+            expect(cell._columnNumber).to.eq(undefined);
             expect(cell._parseNode).toHaveBeenCalledWith(node);
         });
 
         it("should init a cell without a node", () => {
             cell._init(5, 3);
-            expect(cell._columnNumber).toBe(5);
-            expect(cell._styleId).toBe(3);
+            expect(cell._columnNumber).to.eq(5);
+            expect(cell._styleId).to.eq(3);
             expect(cell._parseNode).not.toHaveBeenCalled();
         });
     });
@@ -724,13 +649,13 @@ describe("Cell", () => {
 
         it("should parse the column number", () => {
             cell._parseNode(node);
-            expect(cell._columnNumber).toBe(4);
+            expect(cell._columnNumber).to.eq(4);
         });
 
         it("should store the style ID", () => {
             node.attributes.s = "STYLE_ID";
             cell._parseNode(node);
-            expect(cell._styleId).toBe("STYLE_ID");
+            expect(cell._styleId).to.eq("STYLE_ID");
         });
 
         it("should parse a normal formula", () => {
@@ -741,11 +666,11 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._formulaType).toBe("normal");
-            expect(cell._formula).toBe("FORMULA");
-            expect(cell._formulaRef).toBeUndefined();
-            expect(cell._sharedFormulaId).toBeUndefined();
-            expect(cell._remainingFormulaAttributes).toBeUndefined();
+            expect(cell._formulaType).to.eq("normal");
+            expect(cell._formula).to.eq("FORMULA");
+            expect(cell._formulaRef).to.eq(undefined);
+            expect(cell._sharedFormulaId).to.eq(undefined);
+            expect(cell._remainingFormulaAttributes).to.eq(undefined);
             expect(sheet.updateMaxSharedFormulaId).not.toHaveBeenCalled();
         });
 
@@ -761,11 +686,11 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._formulaType).toBe("shared");
-            expect(cell._formula).toBe("FORMULA");
-            expect(cell._formulaRef).toBe("REF");
-            expect(cell._sharedFormulaId).toBe("SHARED_INDEX");
-            expect(cell._remainingFormulaAttributes).toBeUndefined();
+            expect(cell._formulaType).to.eq("shared");
+            expect(cell._formula).to.eq("FORMULA");
+            expect(cell._formulaRef).to.eq("REF");
+            expect(cell._sharedFormulaId).to.eq("SHARED_INDEX");
+            expect(cell._remainingFormulaAttributes).to.eq(undefined);
             expect(sheet.updateMaxSharedFormulaId).toHaveBeenCalledWith("SHARED_INDEX");
         });
 
@@ -781,10 +706,10 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._formulaType).toBe("TYPE");
-            expect(cell._formula).toBeUndefined();
-            expect(cell._formulaRef).toBeUndefined();
-            expect(cell._sharedFormulaId).toBeUndefined();
+            expect(cell._formulaType).to.eq("TYPE");
+            expect(cell._formula).to.eq(undefined);
+            expect(cell._formulaRef).to.eq(undefined);
+            expect(cell._sharedFormulaId).to.eq(undefined);
             expect(cell._remainingFormulaAttributes).toEqualJson({
                 foo: "foo",
                 bar: "bar"
@@ -800,7 +725,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe("STRING");
+            expect(cell._value).to.eq("STRING");
             expect(sharedStrings.getStringByIndex).toHaveBeenCalledWith(5);
         });
 
@@ -809,7 +734,7 @@ describe("Cell", () => {
             node.children = [];
 
             cell._parseNode(node);
-            expect(cell._value).toBe("");
+            expect(cell._value).to.eq("");
         });
 
         it("should parse simple string values", () => {
@@ -820,7 +745,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe("SIMPLE STRING");
+            expect(cell._value).to.eq("SIMPLE STRING");
         });
 
         it("should parse inline string values", () => {
@@ -834,7 +759,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe("INLINE_STRING");
+            expect(cell._value).to.eq("INLINE_STRING");
         });
 
         it("should parse inline string rich text values", () => {
@@ -868,7 +793,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe(true);
+            expect(cell._value).to.eq(true);
         });
 
         it("should parse false values", () => {
@@ -879,7 +804,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe(false);
+            expect(cell._value).to.eq(false);
         });
 
         it("should parse error values", () => {
@@ -890,7 +815,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe("ERROR");
+            expect(cell._value).to.eq("ERROR");
             expect(FormulaError.getError).toHaveBeenCalledWith("#ERR");
         });
 
@@ -901,14 +826,14 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe(-1.67);
-            expect(cell._remainingAttributes).toBeUndefined();
-            expect(cell._remainingChildren).toBeUndefined();
+            expect(cell._value).to.eq(-1.67);
+            expect(cell._remainingAttributes).to.eq(undefined);
+            expect(cell._remainingChildren).to.eq(undefined);
         });
 
         it("should handle empty cells", () => {
             cell._parseNode(node);
-            expect(cell._value).toBeUndefined();
+            expect(cell._value).to.eq(undefined);
         });
 
         it("should preserve unknown attributes and children", () => {
@@ -924,7 +849,7 @@ describe("Cell", () => {
             }];
 
             cell._parseNode(node);
-            expect(cell._value).toBe(0);
+            expect(cell._value).to.eq(0);
             expect(cell._remainingAttributes).toEqualJson({
                 foo: "foo",
                 bar: "bar"

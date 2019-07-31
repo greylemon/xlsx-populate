@@ -1,16 +1,12 @@
 "use strict";
 
-const proxyquire = require("proxyquire");
+const SharedStrings = require('../../lib/workbooks/SharedStrings');
 const expect = require('chai').expect;
 
 describe("SharedStrings", () => {
-    let SharedStrings, sharedStrings, sharedStringsNode;
+    let sharedStrings, sharedStringsNode;
 
     beforeEach(() => {
-        SharedStrings = proxyquire("../../lib/workbooks/SharedStrings", {
-            '@noCallThru': true
-        });
-
         sharedStringsNode = {
             name: "sst",
             attributes: {
@@ -50,26 +46,26 @@ describe("SharedStrings", () => {
         });
 
         it("should return the index if the string already exists", () => {
-            expect(sharedStrings.getIndexForString("foo")).toBe(0);
-            expect(sharedStrings.getIndexForString("bar")).toBe(1);
-            expect(sharedStrings.getIndexForString([{ name: "r", children: [{}] }, { name: "r", children: [{}] }])).toBe(2);
+            expect(sharedStrings.getIndexForString("foo")).to.eq(0);
+            expect(sharedStrings.getIndexForString("bar")).to.eq(1);
+            expect(sharedStrings.getIndexForString([{ name: "r", children: [{}] }, { name: "r", children: [{}] }])).to.eq(2);
         });
 
         it("should create a new entry if the string doesn't exist", () => {
-            expect(sharedStrings.getIndexForString("baz")).toBe(3);
-            expect(sharedStrings._stringArray).toEqualJson([
+            expect(sharedStrings.getIndexForString("baz")).to.eq(3);
+            expect(sharedStrings._stringArray).to.deep.eq([
                 "foo",
                 "bar",
                 [{ name: "r", children: [{}] }, { name: "r", children: [{}] }],
                 "baz"
             ]);
-            expect(sharedStrings._indexMap).toEqualJson({
+            expect(sharedStrings._indexMap).to.deep.eq({
                 foo: 0,
                 bar: 1,
                 '[{"name":"r","children":[{}]},{"name":"r","children":[{}]}]': 2,
                 baz: 3
             });
-            expect(sharedStringsNode.children[sharedStringsNode.children.length - 1]).toEqualJson({
+            expect(sharedStringsNode.children[sharedStringsNode.children.length - 1]).to.deep.eq({
                 name: "si",
                 children: [
                     {
@@ -82,20 +78,20 @@ describe("SharedStrings", () => {
         });
 
         it("should create a new array entry if the array doesn't exist", () => {
-            expect(sharedStrings.getIndexForString([{ name: "r", children: [{}] }])).toBe(3);
-            expect(sharedStrings._stringArray).toEqualJson([
+            expect(sharedStrings.getIndexForString([{ name: "r", children: [{}] }])).to.eq(3);
+            expect(sharedStrings._stringArray).to.deep.eq([
                 "foo",
                 "bar",
                 [{ name: "r", children: [{}] }, { name: "r", children: [{}] }],
                 [{ name: "r", children: [{}] }]
             ]);
-            expect(sharedStrings._indexMap).toEqualJson({
+            expect(sharedStrings._indexMap).to.deep.eq({
                 foo: 0,
                 bar: 1,
                 '[{"name":"r","children":[{}]},{"name":"r","children":[{}]}]': 2,
                 '[{"name":"r","children":[{}]}]': 3
             });
-            expect(sharedStringsNode.children[sharedStringsNode.children.length - 1]).toEqualJson({
+            expect(sharedStringsNode.children[sharedStringsNode.children.length - 1]).to.deep.eq({
                 name: "si",
                 children: [{ name: "r", children: [{}] }]
             });
@@ -105,16 +101,16 @@ describe("SharedStrings", () => {
     describe("getStringByIndex", () => {
         it("should return the string at a given index", () => {
             sharedStrings._stringArray = ["foo", "bar", "baz"];
-            expect(sharedStrings.getStringByIndex(0)).toBe("foo");
-            expect(sharedStrings.getStringByIndex(1)).toBe("bar");
-            expect(sharedStrings.getStringByIndex(2)).toBe("baz");
-            expect(sharedStrings.getStringByIndex(3)).toBeUndefined();
+            expect(sharedStrings.getStringByIndex(0)).to.eq("foo");
+            expect(sharedStrings.getStringByIndex(1)).to.eq("bar");
+            expect(sharedStrings.getStringByIndex(2)).to.eq("baz");
+            expect(sharedStrings.getStringByIndex(3)).to.eq(undefined);
         });
     });
 
     describe("toXml", () => {
         it("should return the node as is", () => {
-            expect(sharedStrings.toXml()).toBe(sharedStringsNode);
+            expect(sharedStrings.toXml()).to.deep.eq(sharedStringsNode);
         });
     });
 
@@ -131,13 +127,13 @@ describe("SharedStrings", () => {
             sharedStrings._indexMap = {};
             sharedStrings._cacheExistingSharedStrings();
 
-            expect(sharedStrings._stringArray).toEqualJson([
+            expect(sharedStrings._stringArray).to.deep.eq([
                 "foo",
                 "bar",
                 [{ name: "r", children: [{}] }, { name: "r", children: [{}] }],
                 "baz"
             ]);
-            expect(sharedStrings._indexMap).toEqualJson({
+            expect(sharedStrings._indexMap).to.deep.eq({
                 foo: 0,
                 bar: 1,
                 '[{"name":"r","children":[{}]},{"name":"r","children":[{}]}]': 2,
@@ -149,7 +145,7 @@ describe("SharedStrings", () => {
     describe("_init", () => {
         it("should create the node if needed", () => {
             sharedStrings._init(null);
-            expect(sharedStrings._node).toEqualJson({
+            expect(sharedStrings._node).to.deep.eq({
                 name: "sst",
                 attributes: {
                     xmlns: "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
@@ -159,7 +155,7 @@ describe("SharedStrings", () => {
         });
 
         it("should clear the counts", () => {
-            expect(sharedStrings._node.attributes).toEqualJson({
+            expect(sharedStrings._node.attributes).to.deep.eq({
                 xmlns: "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
             });
         });
