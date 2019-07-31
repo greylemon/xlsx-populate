@@ -308,4 +308,19 @@ describe("RichText", () => {
             });
         });
     });
+    it('should preserve leading space', () => {
+        const rt = new RichText();
+        rt.add(' hello').add(' I');
+        expect(rt.text()).to.eq(" hello I");
+        expect(rt.get(0)._valueNode.attributes['xml:space']).to.eq('preserve');
+        expect(rt.get(1)._valueNode.attributes['xml:space']).to.eq('preserve');
+    });
+
+    it('it should save unsupported node', done => {
+        XlsxPoplate.fromFileAsync('../files/issue-230.xlsx')
+            .then(wb => {
+                expect(wb.sheet(0).cell('A1').value()._remainingNodes.length).to.eq(5);
+                done();
+            });
+    });
 });
