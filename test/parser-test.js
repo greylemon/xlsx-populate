@@ -5,8 +5,9 @@ const XlsxPopulate = require('../lib/XlsxPopulate');
 let files = [];
 const extensions = ['.xlsx', '.xlsm', '.xlsb'];
 
-describe('Read test', () => {
-    const fileNames = fs.readdirSync('./excels');
+describe('Read test', function () {
+    this.timeout(10000);
+    const fileNames = fs.readdirSync('./excels/');
     fileNames.forEach(file => {
         const i = file.lastIndexOf('.');
         if (i < 0) return;
@@ -16,19 +17,13 @@ describe('Read test', () => {
     });
     // files = ['formula-test.xlsx', 'TF33674675.xlsx'];
     files.forEach(file => {
-        it(`should read ${file}`, done => {
-            XlsxPopulate.fromFileAsync('./excels/' + file)
-                .then(workbook => {
-                    // workbook.sheet(0).cell(1, 1).style('bold');
-                    // workbook.sheet(0).row(1).delete();
-                    return workbook;
-                })
-                .then(workbook => {
-                    workbook.toFileAsync(`./excels/out/${file.slice(0, file.lastIndexOf('.'))}.out${file.slice(file.lastIndexOf('.'))}`)
-                        .then(() => {
-                            done();
-                        });
-                });
+        it(`should read ${file}`, async () => {
+            const workbook = await XlsxPopulate.fromFileAsync('./excels/' + file);
+            const outputName1 = `./excels/out/${file.slice(0, file.lastIndexOf('.'))}.out${file.slice(file.lastIndexOf('.'))}`;
+            const outputName2 = `./excels/out/${file.slice(0, file.lastIndexOf('.'))}.out2${file.slice(file.lastIndexOf('.'))}`;
+            await workbook.toFileAsync(outputName1);
+            const workbook2 = await XlsxPopulate.fromFileAsync(outputName1);
+            await workbook2.toFileAsync(outputName2);
         });
     });
 });
