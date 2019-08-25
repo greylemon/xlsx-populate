@@ -1,6 +1,5 @@
 "use strict";
 
-const _ = require('lodash');
 const proxyquire = require("proxyquire");
 const expect = require('chai').expect;
 
@@ -43,7 +42,7 @@ describe("Row", () => {
         sheet.workbook.and.returnValue(workbook);
         sheet.horizontalPageBreaks.and.returnValue(horizontalPageBreaks);
         sheet.existingColumnStyleId.and.callFake(columnNumber => columnNumber === 4 ? "STYLE_ID" : undefined);
-        sheet.forEachExistingColumnNumber.and.callFake(callback => _.forEach([1, 2, 4], callback));
+        sheet.forEachExistingColumnNumber.and.callFake(callback => [1, 2, 4].forEach(callback));
 
         rowNode = {
             name: 'row',
