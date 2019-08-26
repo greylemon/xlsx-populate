@@ -25,7 +25,7 @@ describe('Read test', function () {
             const outputName1 = `./excels/out/${file.slice(0, file.lastIndexOf('.'))}.out${file.slice(file.lastIndexOf('.'))}`;
             const outputName2 = `./excels/out/${file.slice(0, file.lastIndexOf('.'))}.out2${file.slice(file.lastIndexOf('.'))}`;
             await workbook.toFileAsync(outputName1);
-            // await workbook.toFileAsync(outputName2);
+            await workbook.toFileAsync(outputName2);
             // const workbook2 = await XlsxPopulate.fromFileAsync(outputName1);
             // await workbook2.toFileAsync(outputName2);
         });
